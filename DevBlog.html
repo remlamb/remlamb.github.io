@@ -1,0 +1,296 @@
+     <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/apidoc.css?"">
+     <STYLE>
+     strong {
+        color: #47478C;
+      }
+     </STYLE>
+
+                          **Miaou Engine DevBlog :**
+
+Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a short DevBlog of my physics engine called Miaou Engine
+which I made during my games programming formation at the [SAE School](https://www.sae.edu/ch-ge/games-programming-diploma-bachelor).
+
+
+
+## **What's the goal of the Engine ?**
+
+!!! Note: Goal :
+    * Recap of linear algebra
+    * Understand the basics of physics
+    * Use Tracy to track the performance of our code
+    * Understand where and how to optimise code
+
+
+## **Availble Demo Scene**
+<div style="margin-left: 20px;">
+### Planets Scene
+<div style="text-align:center;">
+![](img\planet.gif)</div>
+<br><br>
+<div style="margin-left: 40px;">
+<i>  The Planets Scene provides a visual representation of the interaction between celestial bodies, illustrating the influence of gravitational forces on planetary motion. <br>
+The yellow star in the centre represents the sun, the other points are the planets.
+</i>
+</div>
+
+### Trigger Scene
+<div style="text-align:center;">
+![](img\trigger.gif)</div>
+<br><br>
+<div style="margin-left: 40px;">
+<i> The Trigger Scene provides a visual representation of trigger collisions and their effects on object properties. <br>
+Here objects will change colour depending on whether they overlap or not. Red means they do not overlap and green means they do.</i>
+
+### Collision Scene
+<div style="text-align:center;">
+![](img\collision.gif)</div>
+<br><br>
+<div style="margin-left: 40px;">
+ <i> The Collision Scene provides a practical illustration of collision detection and response in a 2D world using a QuadTree. <br>
+Collision response mean that Circles adapt their velocity after the contact with an other Circles. <br>
+Also two circles that collide will take on the same new color.</i>
+</div>
+
+### Collision between Circle and Rectangle Scene
+<div style="text-align:center;">
+![](img\collisioncomplexe.gif)</div>
+<br><br>
+<div style="margin-left: 40px;">
+ <i>The Collision between Circle and Rectangle Scene provides a practical illustration of collision detection and response in a 2D world using a QuadTree. <br>
+Scene is showcasing the interaction between different entities shapes.<br>
+Two objects that collide will take on the same new color.</i>
+
+</div>
+
+### Static Scene
+<div style="text-align:center;">
+![](img\static.gif)</div>
+<br><br>
+<div style="margin-left: 40px;">
+<i> The Static Scene provides a practical illustration of collision detection and response in a 2D world with static and dynamic elements. <br>
+Circles adapt their velocity into contact with the static Rectangle, Contact response is based on the collider restitution.</i>
+</div>
+</div>
+
+## **Contact Detection**
+<div style="margin-left: 20px;">
+### Naive implementation
+<div style="margin-left: 40px;">
+  The naive implementation of detecting contact between elements was to compare each element created with the other elements. <br>
+  This was very costly as we were checking for collisions that were clearly impossible, for example if 2 elements were on opposite sides of the window.
+  </div>
+
+### What's a QuadTree ?
+<div style="margin-left: 40px;">
+  The quadtree will divide the world into 4 smaller quads, where there is more chance to have collisions only between the elements in the new quad.<br>
+  The time complexity of the problem will go through O(n) -> Olog(n) with this method as we divided the space for possible collision.<br>
+  To avoid a problem where an object can be in the 4 new quad, we put it in the root position.<br>
+  We use this system in recursion to reduce the possible pair we want to find, we set a depth element to control the max subdivision in quad we want to have. <br>
+
+We used a simplified version of the collider to get information about the position of each collider in the world. <br>
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  struct SimplifedCollider
+      {
+          Engine::ColliderRef colliderRef;
+          Math::RectangleF aabb;
+      };
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <br>
+
+A Node has an array of children, and a vector (AllocatedVector here for memory tracking, which we'll see later) of the colliders present in the Node.
+<br>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  struct QuadNode
+    {
+        ...
+        std::array<QuadNode*, 4> children{nullptr, nullptr, nullptr, nullptr};
+        AllocatedVector<SimplifedCollider> colliders{};
+        ...
+    };
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <br>
+
+  The tree has a node vector and a possible pair vector which is filled in after the tree is created during the frame.Then the nodes are traversed to determine whether colliders can collide.    <br>
+  There is also a limit to the number of colliders possible in a node before it is subdivided, as well as a limit to the depth, meaning the number of sudivisions possible from node 0, which we call root.
+    <br>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    class QuadTree
+      {
+          ...
+          AllocatedVector<QuadNode> nodes{StandardAllocator<QuadNode>{heapAllocator}};
+          AllocatedVector <ColliderPair> nodeColliderPairs{
+                  StandardAllocator <ColliderPair > {heapAllocator}};
+
+          static const auto MaxColliderInNode = 4;
+          static const auto MaxDepth = 6;
+          ...
+        };
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  </div>
+### Frame Analysis
+<div style="margin-left: 40px;">
+We can use Tracy to compare frame times with and without the quadtree.
+  ![Tracy Stats without Quadtree](img\withoutQuad.png)
+  ![Tracy Stats with Quadtree](img\withQuad.png)
+
+Tracy already gives us the mean, median and standard deviation of the target function.<br>
+Here we've taken the part where we calculate the possible pairs with the quadtree created earlier.<br>
+I've chosen this section rather than the whole Update part, to highlight the area of the code we're trying to optimise.<br>
+You can see that all the stats have been reduced.<br><br>
+
+I also ran a t-test to look more closely at the statistics for this part of the optimisation.<br>
+<i>For a total of 200 elements for each population we got : </i><br>
+
+
+ResolveNarrowPhase | WithoutQuadTree | WithQuadTree  |
+  ------------------|-----------------|---------------|
+ Mean (ns)          |     36852,34171 |   10541,89447 |
+ Variance (ns)      |       134053595 |   27894466,13 |
+
+ <i>Note : We can see variation between this mean and the one in the tracy screen because i used a different record for both.</i><br>
+ For the T-test we need to see if our P(T <= t) two-tail is lower than our p set at 5%
+
+ ResolveNarrowPhase |  |
+   ------------------|-----------------|
+P(T<=t) two-tail          |     2,76668853343804E-86 |
+t Critical two-tail      |       1,96859628388271 |
+
+As this is true we can calculate some new stats that show our optimisation with the test
+
+ResolveNarrowPhase  |                  |
+  ------------------|-----------------|
+ MeanDifference (ns)|     26310,44724 |
+ StandardError (ns) |     902,1138246 |
+ ErrorMargin (ns)   |     1775,897923 |
+
+ ResolveNarrowPhase : Limit Confidence    |                  |
+   ------------------|-----------------|
+  LowerLimit (ns)    |     24534,54931 |
+  Greater Limit (ns) |     27212,56106 |
+
+Mean difference represents the time in average that we gain each frame with this optimisation.
+</div>
+
+### Memory Problem ?
+<div style="margin-left: 40px;">
+!!! Error: Memory Leak
+    A quick aside on an huge error I made. <br>
+    When I implemented my quad tree I used this array of ptr in the quad node struct.<br>
+    In the Subdivide function I used to call new operator in order to create the children of
+    each node.<br>
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    struct QuadNode
+        {
+            ...
+              std::array<QuadNode*, 4> children{};
+            ...
+            void Subdivide();
+        };
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <br>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    void Subdivide()
+    {
+      ...
+          children[0] = new QuadNode(Math::RectangleF(leftMiddle, topMiddle));;
+          children[1] = new QuadNode(Math::RectangleF(center, topRightCorner));;
+          children[2] = new QuadNode(Math::RectangleF(bottomLeftCorner, center));;
+          children[3] = new QuadNode(Math::RectangleF(bottomMiddle, rightMiddle));;
+    }
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    As I don't delete the ptr I create a huge Memory Leak : <br> <br>
+    ![Programme memory used at start](img\0sMemoryLeak.png)
+    ![Programme memory after 10s](img\10sMemoryLeak.png)
+
+    Every frame I called up a new operator, which is why the memory kept growing.<br>
+    I first fixed it with a single ptr.<br>
+
+  </div>
+      ### Memory Tracking
+      <div style="margin-left: 40px;">
+        For the part where we create the children of the nodes, I opted for another solution in the end.<br>
+        Instead of allocating memory for children when we create a new node, I create all the possible node, and so chlidren, in the first frame of the program using a simple function that calls
+         the depth limit that we created beforehand<br>
+
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+           std::size_t maxChildrenPossible = 0;
+          for(int i = 0; i <= MaxDepth; i++)
+          {
+              maxChildrenPossible += Math::Pow(4, i);
+          }
+          nodes.resize(maxChildrenPossible, QuadNode({heapAllocator}));
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+         In Tracy that represents this memory pattern at the start of the program.<br>
+
+         ![InitTreeMemory](img\initTree.png)
+
+         Unfortunately I forgot to take a screen of the update pattern without the allocation in the init, but the difference was that there were also allocations for the new nodes. <br>
+         Now it looks like This :<br>
+
+
+        ![UpdateMemory](img\updateMemory.png)
+
+        the allocations at the start of the frame are due to the colliders added to the collider vectors of the nodes. <br>
+
+        Allocations in the narrow phase represent movements between pairs that are currently in contact or not, and are stored in an unordered_set. <br>
+        Pairs are added to the set if there is a collision and removed from it if the collision has ended. <br>
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+            //THIS IS PSEUDO-CODE TO MAKE IT EASIER TO READ.
+              for (auto &pair: ColliderPairsFromQuadTree)
+             {
+                ...
+                 const auto pairIterator = unordered_setOfColliderPairs.find(pair);
+                 if (pairIterator !=  unordered_setOfColliderPairs.end())
+                 {
+                     if (IsContact(colliderA, colliderB))
+                     {
+                       ...
+                         contact.Resolve();
+                     }
+                     else
+                     {
+                         OnTriggerExit Or OnCollisionExit
+                         //HERE WE REMOVE A PAIR FROM THE unordered_set
+                         unordered_setOfColliderPairs.erase(pairIterator);
+                     }
+                 }
+                 else{
+                     if(IsContact(colliderA, colliderB))
+                     {
+                        ...
+                        contact.Resolve();
+                        OnTriggerEnter Or OnCollisionEnter
+                        //HERE WE ADD A PAIR IN THE unordered_set
+                        unordered_setOfColliderPairs.insert(pair);
+                     }
+                 }
+             }
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      </div>
+
+
+  </div>
+
+  </div>
+
+    ## **Thank You**
+
+    <div style="margin-left: 40px;">
+      Thank you for reading, <br>
+      and I hope you enjoy the Miaou Engine !
+    </div>
+
+
+
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'medium'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
