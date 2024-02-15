@@ -1,0 +1,615 @@
+
+<meta charset="utf-8" emacsmode="-*- markdown -*-">
+<link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/apidoc.css?"">
+    <title>My Journey with OpenGL :</title>
+                          <span style="font-size:40px;">**My Journey with OpenGL :**</span>
+
+<br>
+<div style="margin-left: 20px;">
+Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a quick preview of the concept present in my 3D rendered Scene made with OpenGL.
+</div>
+
+## **First quick Reminder : **
+<div style="margin-left: 20px;">
+### What's a Mesh ?
+<div style="margin-left: 20px;">
+  A mesh is a 3D object, generally an array of data containing the positions of vertices.
+
+  The vertices are the points that make up the shape of the object. We need the geometric position of these points to translate them into our scene.
+
+  For OpenGL, meshes are created from several triangles.
+</div>
+</div>
+
+
+<div style="margin-left: 20px;">
+### What's OpenGL ?
+<div style="margin-left: 20px;">
+OpenGL (Open Graphics Library) is an API (application programming interface) used for 2D and 3D rendering in graphics applications.
+OpenGL interacts with our graphics card.
+
+For my scene I use OpenGL ES 3.0, ES stands for Embedded system.
+It's a mix between OpenGL 3 and OpenGL 4.3
+OpenGL ES 3.0 is compatible with multiple platforms.
+
+Used for this graphics loop: initialising things, clearing our screen, drawing, swapping buffers, clearing and destroying everything.
+OpenGL is in charge of rasterization, the system that converts our mesh vertices into pixels for our screen.
+</div>
+</div>
+
+## **Final Scene**
+<div style="margin-left: 20px;">
+
+Here are the different key principles applied in my scene.
+
+Some elements have values that can be modified directly in the 3d scene using an imgui window. <br>
+I've created 3 predefined presets that change the atmosphere of the scene. <br>
+Feel free to try some cool settings <br>
+
+### Elements
+* HDR Texture
+* OBJ Model
+* ShadowMap
+* Deferred Shading and SSAO
+* PBR with IBL
+* Instancing
+* Cubemap
+* PostProcessing Bloom and Filter
+
+<div style="text-align:center;">
+    <img src="img/Preview1.png" style="width:600px;">
+    <br><i>using Solid Blue Preset</i><br>
+    <img src="img/Preview2.png" style="width:600px;">
+    <br><i>using Ambiant Purple Preset</i><br>
+    <img src="img/Preview3.png" style="width:600px;">
+    <br><i>using Powerfull Pink Preset</i><br>
+  </div>
+
+<br>
+<div style="margin-left: 40px;">
+<i>  I will talk about each part in the order of the drawing in the pipeline.
+</i>
+</div>
+</div>
+
+## **Loading**
+
+
+<div style="margin-left: 20px;">
+### HDR Texture
+
+<div style="margin-left: 40px;">
+  HDR Texture or High Dynamic Range are textures that store a much wider dynamic range of luminosity. They capture details especially when it's very bright.<br>
+
+  For us, the major change was to write their data as floats. And to modify the format references for the openGL texture binding system.<br>
+
+  And for rendering, we had to put them back into a visual reference that our monitors could understand, thanks to tone mapping. The value must be between 0.0 and 1.0 (Low Dynamic Range).<br>
+
+  Tone mapping that I apply at the end to my framebuffer which handles PostProcessing
+
+  </div>
+</div>
+
+<div style="margin-left: 20px;">
+### OBJ Model
+
+<div style="text-align:center;">
+<img src="img/mesh_cat.png" style="width:200px;">
+</div>
+
+<div style="margin-left: 40px;">
+  The image above shows the rendering of my chat mesh on RenderDoc.<br>
+
+  To achieve this, we used Assimp, a cross-platform open-source library that reads data from our 3D model, here rendered in .OBJ format.<br>
+  .obj is a file that stores information such as vertex positions, normals, etc.<br>
+
+  We store them to translate them to openGL.<br>
+
+  </div>
+</div>
+
+## **Shadow Map**
+<div style="margin-left: 20px;">
+### Depth Map
+
+<div style="margin-left: 40px;">
+  Firstly, shadows are a consequence of light.<br>
+  There are several types of light caster, but here we're just going to talk about directional light.<br>
+  In fact, in my scene, only the directional light emits shadows. It's supposed to represent the sunlight that's drawn in my skybox.<br>
+
+  The depth map is a texture designed to display the depth of the elements according to the point of view of the light producing the shadows.<br>
+
+  We give our objects this texture so that we can apply the shadow during the drawing phase.<br>
+
+
+
+
+<div style="text-align:center;">
+<img src="img/depthmap.png" style="width:400px;">
+<br><i>Exemple of a dethmap</i><br>
+</div>
+
+<div style="text-align:center;">
+<img src="img/shadow.png" style="width:200px;">
+<br><i>We can see the shadow of the table on the floor</i><br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+float ShadowCalculation(vec4 fragPosLightSpace)
+{
+
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    projCoords = projCoords * 0.5 + 0.5;
+    if (projCoords.z > 1.0) {
+        return 0.0;
+    }
+
+    // get closest depth value from light's perspective
+    float closestDepth = texture(shadowMap, projCoords.xy).r;
+
+    float currentDepth = projCoords.z;
+
+    vec3 lightDir = -directionalLightDirection; //normalize(lightPos - fragPos);
+    float bias = 0.006;
+    float shadow = 0.0;
+    vec2 texelSize = vec2(1.0) / vec2(textureSize(shadowMap, 0));
+
+    for(int x = -1; x <= 1; ++x){
+        for(int y = -1; y <= 1; ++y){
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r;
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+        }
+    }
+    shadow /= 9.0;
+    return shadow;
+}
+
+
+
+...
+vec4 FragPosLightSpace = lightSpaceMatrix * fragWorldPos;
+float shadow = ShadowCalculation(FragPosLightSpace);
+Lo += (1.0 - shadow) * (kD * albedo / PI + specular) * radiance * NdotL;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</div>
+</div>
+</div>
+
+
+## **Deferred Shading and SSAO**
+<div style="margin-left: 20px;">
+### GBuffer ?
+
+
+<div style="margin-left: 20px;">
+  The G-Buffer for Geometry buffer is a frame buffer that stores information about the objects in the scene.<br>
+
+Here I'm storing positions in the gPosition texture, normals in the gNormal texture and colours in the gAlbedo texture.<br>
+We'll see how to use the PBR later, but I need other information to render an object.<br>
+To avoid creating a new texture I store these values in the Alpha value of the textures in my GBuffer.<br>
+
+
+
+  <div style="text-align:center;">
+  <img src="img/gPosition.png" style="width:400px;">
+  <br><i>gPosition Texture</i><br>
+    </div>
+  <div style="text-align:center;">
+  <img src="img/gNormal.png" style="width:400px;">
+  <br><i>gNormal Texture</i><br>
+    </div>
+  <div style="text-align:center;">
+  <img src="img/gAlbedo.png" style="width:400px;">
+  <br><i>gAlbedo Texture</i><br>
+  </div>
+
+
+  Note: My instantiated grass is not in this buffer because it uses a blending system for its transparency which is not compatible with defered shading.<br>
+
+  With this system, the Gbuffer just needs to receive the geometry from the objects and then render it using the light pass.<br>
+
+
+</div>
+  </div>
+
+  <div style="margin-left: 20px;">
+  ### SSAO
+
+<div style="margin-left: 20px;">
+  SSAO or Screen Space Ambient Occlusion is a way of adding a shadow effect in occluded areas.<br>
+SSAO adds a sense of realism and depth, and is coupled with the AO value or texture that we'll look at later in the PBR section.<br>
+
+The SSAOMap is calculated using the position between objects and their depth.<br>
+
+We use a kernel noise texture in the ssao map creation to take the values for the surrounding position. This is useful for avoiding patterns that are too uniform.<br>
+
+<div style="text-align:center;">
+<img src="img/Noise.png" style="width:100px;">
+  <br><i>Noise</i><br>
+</div>
+
+After having this SSAOMap we blur it for a more pleasant rendering. <br>
+  </div>
+
+
+
+  <div style="text-align:center;">
+  <img src="img/SSAOMap.png" style="width:400px;">
+    <br><i>SSAO Map without blur</i><br>
+  </div>
+  </div>
+
+
+  ## **PBR and Lightning**
+  <div style="margin-left: 20px;">
+  ### PBR
+
+  <div style="margin-left: 20px;">
+
+    The biggest part of the programme is the laws governing the rendering system.<br>
+
+    The scene uses PBR or Physically Based Rendering.<br>
+    The aim is to simulate the behaviour of light on objects and their surfaces as realistically as possible.<br>
+    Objects have given textures to represent their behaviour when exposed to light.<br>
+
+    Roughness: the higher this value, the more light is diffused in multiple directions. A low value corresponds to a smooth surface.<br>
+    Metalic: the higher the value, the more the object will reflect light.<br>
+    AO: to simulate object shadows in certain hollows<br>
+
+    <i>As seen above, the AO adds a depth effect to the object itself.  </i><br>
+
+    <i>You can experiment on these three concepts on the flower in my scene by tweaking the values.</i><br>
+
+
+
+  <div style="text-align:center;">
+  <img src="img/Roughness.png" style="width:600px;">
+    <br><i>Roughness visual proprieties</i><br>
+  </div>
+  <div style="text-align:center;">
+  <img src="img/Metalic.png" style="width:600px;">
+  <br><i>Metalic visual proprieties</i><br>
+  </div>
+
+  PBR also includes the principle of energy conservation.<br>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // material properties
+      vec3 albedo = texture(gAlbedo, TexCoords).rgb;
+      float metallic = texture(gPosition, TexCoords).a;
+      float roughness = texture(gNormal, TexCoords).a;
+      float ao = texture(gAlbedo, TexCoords).a;
+      float ssao = texture(SSAOMap, TexCoords).r;
+      float combined_ao = ssao * ao;
+
+      // input lighting data
+      vec3 N = mat3(inverseViewMatrix) * texture(gNormal, TexCoords).rgb; ;
+      vec3 V = normalize(camPos - WorldPos);
+      vec3 R = reflect(-V, N);
+
+      // calculate reflectance at normal incidence;
+      vec3 F0 = vec3(0.04);
+      F0 = mix(F0, albedo, metallic);
+
+      // reflectance equation
+      vec3 Lo = vec3(0.0);
+
+      // calculate per-light radiance
+      vec3 L = normalize(-directionalLightDirection);
+      vec3 H = normalize(V + L);
+      //float distance = length(lightPositions[i] - WorldPos);
+      //float attenuation = 1.0 / (distance * distance);
+      vec3 radiance = directionalLightColor;
+
+      // Cook-Torrance BRDF
+      float NDF = DistributionGGX(N, H, roughness);
+      float G   = GeometrySmith(N, V, L, roughness);
+      vec3 F    = fresnelSchlick(max(dot(H, V), 0.0), F0);
+
+      vec3 numerator    = NDF * G * F;
+      float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.0001;
+
+      vec3 kS = F;
+      vec3 kD = vec3(1.0) - kS;
+      kD *= 1.0 - metallic;
+      float NdotL = max(dot(N, L), 0.0);
+      ...
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    </div>
+  </div>
+
+    <div style="margin-left: 20px;">
+    ### IBL
+
+
+    <div style="margin-left: 20px;">
+    IBL or Image Based Lightning<br>
+    We use the PBR values and the brdf LUT to simulate the reflection or not of the skybox on objects.<br>
+    For this we introduce some new Texture : <br>
+
+
+    <div style="display:flex; justify-content:center;">
+        <img src="img/cubemaptextureX.png" style="width:200px; margin-right:20px;">
+        <img src="img/Prefiltermap.png" style="width:200px; margin-right:20px;">
+        <img src="img/irradianceMap.png" style="width:200px;">
+    </div>
+
+    From left to right : A Part of my skybox, we will learn more in the Cubemap section. a Prefilter Map and a Irradiance Map<br>
+    For this effect to work, we need an HDR skybox texture. <br>
+    Now that we have information on the intensity of light in our sky. We can approximate which areas are the most intense. <br>
+
+    A brdf lookup texture : <br>
+    <div style="text-align:center;">
+    <img src="img/brdf.png" style="width:200px;">
+    </div>
+    <br>
+    This is a texture that represents how light propagates around the object.<br>
+    This is an approximation because as we see earlier the original function is an integral.<br>
+
+    <div style="text-align:center;">
+    <img src="img/reflectance_equation.png" style="width:600px;">
+    </div>
+        This is the integral, we try to approximate : Cook-Torrance Reflectance Equation.<br>
+    <div style="text-align:center;">
+    <img src="img/split_equation.png" style="width:600px;">
+    </div>
+      We split it in two, first part is for the diffuse and second for the specular.<br>
+
+    Admire the work with the reflection of the skybox on the golden tea set or by setting the flower values to high metalic and low roughness thanks to the IBL.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // ambient lighting (we now use IBL as the ambient term)
+       F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
+
+       kS = F;
+       kD = 1.0 - kS;
+       kD *= 1.0 - metallic;
+
+       vec3 irradiance = texture(irradianceMap, N).rgb;
+       vec3 diffuse      = irradiance * albedo;
+
+       // sample both the pre-filter map and the BRDF lut and combine them together as per the Split-Sum approximation to get the IBL specular part.
+       const float MAX_REFLECTION_LOD = 4.0;
+       vec3 prefilteredColor = textureLod(prefilterMap, R,  roughness * MAX_REFLECTION_LOD).rgb;
+       vec2 brdf  = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
+       specular = prefilteredColor * (F * brdf.x + brdf.y);
+
+       vec3 ambient = (kD * diffuse + specular) * combined_ao;
+
+       vec3 color = ambient + Lo;
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  </div>
+  </div>
+    <div style="margin-left: 20px;">
+    ### Another Light !
+        <div style="margin-left: 20px;">
+I add a simple light point, with custom color to add a better atmosphere to the scene but it also show how the PBR can render cool reflection with multiple light source<br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for(int i = 0; i < 1; ++i)
+{
+    // calculate per-light radiance
+    L = normalize(lightPositions[i] - WorldPos);
+    H = normalize(V + L);
+    float distance = length(lightPositions[i] - WorldPos);
+    float attenuation = 1.0 / (distance * distance);
+    radiance = lightColors[i] * attenuation;
+
+    // Cook-Torrance BRDF
+    NDF = DistributionGGX(N, H, roughness);
+    G   = GeometrySmith(N, V, L, roughness);
+    F    = fresnelSchlick(max(dot(H, V), 0.0), F0);
+
+    numerator    = NDF * G * F;
+    denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.0001;
+    specular = numerator / denominator;
+
+     // kS is equal to Fresnel
+     kS = F;
+     kD = vec3(1.0) - kS;
+    kD *= 1.0 - metallic;
+    NdotL = max(dot(N, L), 0.0);
+
+    // add to outgoing radiance Lo
+    Lo += (kD * albedo / PI + specular) * radiance * NdotL;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    <div style="text-align:center;">
+    <img src="img/pointlight.png" style="width:400px;">
+    </div>
+
+        </div>
+    </div>
+
+
+    ## **Instancing**
+    <div style="margin-left: 20px;">
+    ### How to draw multiple object at once
+    <div style="margin-left: 20px;">
+      In order to optimize, instead of drawing a mesh 4000 times that draws a clump of grass.<br>
+      I store all the position values of my meshes to make a single draw call for my 4000 elements.<br>
+      I also tried to add a wind movement effect through the vertex buffer.<br>
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      glm::mat4* modelMatrices;
+      ...
+      for (unsigned int zIndex = 0; zIndex < amount_; zIndex++) {
+        for (unsigned int xIndex = 0; xIndex < amount_; xIndex++) {
+          glm::mat4 model = glm::mat4(1.0f);
+          ...
+          model = glm::translate(model, glm::vec3(x, y, z));
+          modelMatrices[i] = model;
+          i++;
+        }
+      }
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    <div style="text-align:center;">
+    <img src="img/instantiate.gif" style="width:600px;">
+    </div>
+    <div style="text-align:center;">
+    <img src="img/grass.png" style="width:200px;">
+    </div>
+    </div>
+    </div>
+      <div style="margin-left: 20px;">
+      ### An other Optimisation ?
+      <div style="margin-left: 20px;">
+        To optimize, I also use a global state change for opengl on some of my models, which allows only the front face of an object to be drawn.<br>
+        This is called back face culling. Front face culling also exists, but it's the opposite principle.<br>
+        For example, it's not used to render my cube map or flat objects like floor plane or grass quad.<br>
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Enable Face culling
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      </div>
+
+      ## **Cubemap**
+      <div style="margin-left: 20px;">
+      ### 6 Faces ?
+      <div style="margin-left: 20px;">
+      In the beginning, we simply gave 6 textures to openGL to get a cube that simulated a skybox. <br>
+
+
+      <div style="display:flex; justify-content:center;">
+          <img src="img/xiequ_yuan/back.png" style="width:200px; margin-right:20px;">
+          <img src="img/xiequ_yuan/bottom.png" style="width:200px; margin-right:20px;">
+          <img src="img/xiequ_yuan/front.png" style="width:200px;">
+      </div>
+
+      <div style="display:flex; justify-content:center;">
+          <img src="img/xiequ_yuan/left.png" style="width:200px; margin-right:20px;">
+          <img src="img/xiequ_yuan/right.png" style="width:200px; margin-right:20px;">
+          <img src="img/xiequ_yuan/top.png" style="width:200px;">
+      </div>
+
+      Then we used a HDR file to draw a new cubemap that give us more information.<br>
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // pbr: setup cubemap to render to and attach to framebuffer
+        // ---------------------------------------------------------
+        glGenTextures(1, &envCubemap);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
+        for (unsigned int i = 0; i < 6; ++i) {
+          glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 4096, 4096,
+                       0, GL_RGB, GL_FLOAT, nullptr);
+        }
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        // pbr: convert HDR equirectangular environment map to cubemap equivalent
+        // ----------------------------------------------------------------------
+        equirectangular_to_cubemap_pipeline.SetInt("equirectangularMap", 0);
+        equirectangular_to_cubemap_pipeline.SetMat4("projection", captureProjection);
+        hdr_cubemap.BindTextureHDR(GL_TEXTURE0);
+
+        glViewport(0, 0, 4096, 4096);
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </div>
+    </div>
+
+      ## **PostProcessing**
+      <div style="margin-left: 20px;">
+      ### Bloom effect
+      <div style="margin-left: 20px;">
+      The bloom effect is generated from the render buffer by detecting all scene values greater than 1.0, thanks to HDR.<br>
+      This texture is downscaled and then upscaled again. <br>
+      It is then applied to the final scene<br>
+
+      A [cool Article](http://gangles.ca/2008/07/18/bloom-disasters/) that show how bloom was affected elements before try to make it physically based.<br>
+
+
+      <div style="display:flex; justify-content:center;">
+          <img src="img/Render.png" style="width:400px; margin-right:20px;">
+          <img src="img/bloomsource.png" style="width:400px;">
+      </div>
+            <div style="text-align:center;">
+        <i>We can see the texture that the buffer receive and next the elements with high intensity</i><br><br>
+      </div>
+      <div style="text-align:center;">
+      <img src="img/bloom.png" style="width:400px;">
+            </div>
+            <div style="text-align:center;">
+            <i>Elements with high intensity after down and up scale</i><br><br>
+      </div>
+
+
+    </div>
+    </div>
+
+      <div style="margin-left: 20px;">
+      ### Simple Color Filter
+
+      <div style="margin-left: 20px;">
+        After applying tone mapping and gamma correction, I can activate a black and white filter.<br>
+
+        It reads the color elements of the buffer and changes them to grayscale.<br>
+
+        Cool, it looks like a Kurosawa film!<br>
+
+
+      <div style="text-align:center;">
+      <img src="img/filter.png" style="width:500px;">
+      </div>
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // tone mapping
+      result = result / (result + vec3(1.0));
+      //gamma correct
+      const float gamma = 1.8;
+      result = pow(result, vec3(1.0 / gamma));
+      FragColor = vec4(result, 1.0);
+      ...
+
+      if(BnWFilter){
+          float average = 0.2126 * FragColor.r + 0.7152 * FragColor.g + 0.0722 * FragColor.b;
+          FragColor = vec4(average, average, average, 1.0);
+        }
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </div>
+    </div>
+
+
+    ## **Conclusion**
+    <div style="margin-left: 40px;">
+      First of all, thank you for reading.  <br>
+
+          In addition to our course, several elements of the scene are realised thanks to [LearnOpenGL website](https://learnopengl.com/).
+      <div style="display:flex; justify-content:center;">
+
+          <div>
+            <p>I also used RenderDoc for graphical debugging.</p>
+            This is a powerful tool that can give us information about the current position of the mesh or any information given to and by the shader.
+            <br>Uniformity can also be visualised.
+            We can also access an edit shader directly from the RenderDoc.
+            Can preview texture on input or output from frame or gbuffer.
+            Etc...
+
+          </div>
+          <div style="text-align:center;">
+              <img src="img/theDeathOfRenderDoc.png" alt="The Death of RenderDoc" style="width:400px;">
+                            <p><i>He die for me :(</i></p>
+          </div>
+      </div>
+
+      For the future I would like to improve the render time, currently the scene takes a good 10 seconds to load the models and textures.
+      Surely optimisable with multithreading for example.
+
+      Also some of the methods are a bit outdated. Loading fbx models and implementing raytracing would be a good follow-up.
+
+            </div>
+
+<STYLE>
+    strong {
+       color: #47478C;
+     }
+</STYLE>
+
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'medium'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
