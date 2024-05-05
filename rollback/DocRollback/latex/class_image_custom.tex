@@ -1,0 +1,160 @@
+\doxysection{Image\+Custom Class Reference}
+\hypertarget{class_image_custom}{}\label{class_image_custom}\index{ImageCustom@{ImageCustom}}
+
+
+Class representing a custom image with the ability to specify pivot point.  
+
+
+
+
+{\ttfamily \#include $<$Image.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_image_custom_ac5df4b35dbc0302954529900765281c3}{Setup}} (const char \texorpdfstring{$\ast$}{*}path, float scale, \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}} mode)
+\begin{DoxyCompactList}\small\item\em Sets up the image with the specified path, scale, and pivot mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_image_custom_a515883220c286b0bc7e50835a4bb8b96}{Setup\+Icon}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}} mode)
+\begin{DoxyCompactList}\small\item\em Sets up the icon with the specified path and pivot mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_image_custom_afb05ee1e47178423eb3ed45a168530ec}{Tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Tears down the image, releasing associated resources. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_image_custom_adf92d29b17e5f418e6567bd4ab462731}{Draw}} (raylib\+::\+Vector2 position) const noexcept
+\begin{DoxyCompactList}\small\item\em Draws the image at the specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_image_custom_a4504cf6617b29b2e7261bf06fb84a68d}{Draw}} (raylib\+::\+Vector2 position, float scale) const noexcept
+\begin{DoxyCompactList}\small\item\em Draws the image at the specified position and scale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+raylib\+::\+Texture2D \mbox{\hyperlink{class_image_custom_afdd1568fc4787c11fdef81ead11f7c0a}{sprite}}
+\item 
+float \mbox{\hyperlink{class_image_custom_a57f2dd4363002446078169cfb2d99b93}{original\+Scale}}
+\item 
+\mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}} \mbox{\hyperlink{class_image_custom_af8f17ebab4a9bfb5e06cb4e8e5834a4a}{pivot}}
+\item 
+raylib\+::\+Image \mbox{\hyperlink{class_image_custom_a9ab22672a11e5b895ce0149856f94b77}{icon}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing a custom image with the ability to specify pivot point. 
+
+Member Variables\+:
+\begin{DoxyItemize}
+\item sprite\+: The texture representing the main image.
+\item original\+Scale\+: The original scale of the image.
+\item pivot\+: The pivot point of the image (Default or Center).
+\item icon\+: The image loaded as an icon. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_image_custom_adf92d29b17e5f418e6567bd4ab462731}\label{class_image_custom_adf92d29b17e5f418e6567bd4ab462731} 
+\index{ImageCustom@{ImageCustom}!Draw@{Draw}}
+\index{Draw@{Draw}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Image\+Custom\+::\+Draw (\begin{DoxyParamCaption}\item[{raylib\+::\+Vector2}]{position }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Draws the image at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to draw the image. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_image_custom_a4504cf6617b29b2e7261bf06fb84a68d}\label{class_image_custom_a4504cf6617b29b2e7261bf06fb84a68d} 
+\index{ImageCustom@{ImageCustom}!Draw@{Draw}}
+\index{Draw@{Draw}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Image\+Custom\+::\+Draw (\begin{DoxyParamCaption}\item[{raylib\+::\+Vector2}]{position,  }\item[{float}]{scale }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Draws the image at the specified position and scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to draw the image. \\
+\hline
+{\em scale} & The scale factor for the image. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_image_custom_ac5df4b35dbc0302954529900765281c3}\label{class_image_custom_ac5df4b35dbc0302954529900765281c3} 
+\index{ImageCustom@{ImageCustom}!Setup@{Setup}}
+\index{Setup@{Setup}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily void Image\+Custom\+::\+Setup (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{float}]{scale,  }\item[{\mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Sets up the image with the specified path, scale, and pivot mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the image file. \\
+\hline
+{\em scale} & The scale factor for the image. \\
+\hline
+{\em mode} & The pivot mode for the image. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_image_custom_a515883220c286b0bc7e50835a4bb8b96}\label{class_image_custom_a515883220c286b0bc7e50835a4bb8b96} 
+\index{ImageCustom@{ImageCustom}!SetupIcon@{SetupIcon}}
+\index{SetupIcon@{SetupIcon}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{SetupIcon()}{SetupIcon()}}
+{\footnotesize\ttfamily void Image\+Custom\+::\+Setup\+Icon (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{\mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Sets up the icon with the specified path and pivot mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the icon image file. \\
+\hline
+{\em mode} & The pivot mode for the icon. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_image_custom_afb05ee1e47178423eb3ed45a168530ec}\label{class_image_custom_afb05ee1e47178423eb3ed45a168530ec} 
+\index{ImageCustom@{ImageCustom}!TearDown@{TearDown}}
+\index{TearDown@{TearDown}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{TearDown()}{TearDown()}}
+{\footnotesize\ttfamily void Image\+Custom\+::\+Tear\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tears down the image, releasing associated resources. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_image_custom_a9ab22672a11e5b895ce0149856f94b77}\label{class_image_custom_a9ab22672a11e5b895ce0149856f94b77} 
+\index{ImageCustom@{ImageCustom}!icon@{icon}}
+\index{icon@{icon}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{icon}{icon}}
+{\footnotesize\ttfamily raylib\+::\+Image Image\+Custom\+::icon}
+
+\Hypertarget{class_image_custom_a57f2dd4363002446078169cfb2d99b93}\label{class_image_custom_a57f2dd4363002446078169cfb2d99b93} 
+\index{ImageCustom@{ImageCustom}!originalScale@{originalScale}}
+\index{originalScale@{originalScale}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{originalScale}{originalScale}}
+{\footnotesize\ttfamily float Image\+Custom\+::original\+Scale}
+
+\Hypertarget{class_image_custom_af8f17ebab4a9bfb5e06cb4e8e5834a4a}\label{class_image_custom_af8f17ebab4a9bfb5e06cb4e8e5834a4a} 
+\index{ImageCustom@{ImageCustom}!pivot@{pivot}}
+\index{pivot@{pivot}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{pivot}{pivot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}} Image\+Custom\+::pivot}
+
+\Hypertarget{class_image_custom_afdd1568fc4787c11fdef81ead11f7c0a}\label{class_image_custom_afdd1568fc4787c11fdef81ead11f7c0a} 
+\index{ImageCustom@{ImageCustom}!sprite@{sprite}}
+\index{sprite@{sprite}!ImageCustom@{ImageCustom}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily raylib\+::\+Texture2D Image\+Custom\+::sprite}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_image_8h}{Image.\+h}}\item 
+src/\mbox{\hyperlink{_image_8cpp}{Image.\+cpp}}\end{DoxyCompactItemize}

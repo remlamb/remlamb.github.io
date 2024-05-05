@@ -1,0 +1,110 @@
+\doxysection{Player\+Manager.\+h}
+\hypertarget{_player_manager_8h_source}{}\label{_player_manager_8h_source}\index{include/PlayerManager.h@{include/PlayerManager.h}}
+\mbox{\hyperlink{_player_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_constants_8h}{Constants.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_frame_input_8h}{FrameInput.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}World.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{raylib__wrapper_8h}{raylib\_wrapper.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceraylib}{raylib}};}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_player}{Player}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_player_a21273287bcfee53c6f184ce960c0bdd6}{is\_grounded}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_player_ab3a944ce0708310e7bbb843c0f774c50}{is\_projectile\_ready}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_player_abfb1ad9af051376b05f400d5ceef159e}{trigger\_nbr}}\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_player_a72ca093505ec16fba4c4990d4696b0a7}{life\_point}}\ =\ 5;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_player_a680bd6ae92d16514c515ac8d169457cc}{attack\_timer}}\ =\ 0.0f;}
+\DoxyCodeLine{00025\ \ \ \ \ std::uint8\_t\ \mbox{\hyperlink{struct_player_a232e3b118c7aaeed6358a43201d1daa1}{input}};}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_projectile}{Projectile}}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ Physics::BodyRef\ \mbox{\hyperlink{struct_projectile_aef8d102b2e466ca2a2e6b1ea61838531}{projectile\_body}};}
+\DoxyCodeLine{00041\ \ \ \ \ Physics::ColliderRef\ \mbox{\hyperlink{struct_projectile_a42976d6ef05157ed2e8b812020ac23c3}{projectile\_collider}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_projectile_a359af329d80ccdad2e865bcf1fe4c390}{current\_collider\_nbr}}\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_projectile_a0ba6bb378c65b9951434d222f324d031}{nbr\_launching\_player}}\ =\ 0;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_projectile_a7c6b10d5ddf577708dc9e3ddfe72bd34}{isActive}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_manager}{PlayerManager}}\ :\ \textcolor{keyword}{public}\ Physics::ContactListener\ \{}
+\DoxyCodeLine{00089\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00090\ \ \ \ \ Physics::World*\ world\_;\ \textcolor{comment}{/*\ The\ physics\ world\ for\ simulating\ game\ physics.*/}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ jump\_velocity\_\ =\ -\/580.0f;\ \textcolor{comment}{/*\ The\ velocity\ applied\ when\ a\ player\ jumps*/}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ move\_velocity\_\ =\ 500.0f;\ \textcolor{comment}{/*\ The\ velocity\ applied\ when\ a\ player\ moves*/}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ collider\_radius\_\ =\ 28.0f;\ \textcolor{comment}{/*\ The\ radius\ of\ the\ player's\ collider*/}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ grounded\_collider\_pos\_y\_\ =\ -\/20.0f;\ \textcolor{comment}{/*\ The\ Y\ position\ offset\ of\ the\ player's\ grounded\ collider*/}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ Math::Vec2F\ grounded\_collider\_dimension\_\{\ 10.0f,\ 10.0f\ \};\ \textcolor{comment}{/*The\ dimensions\ of\ the\ player's\ grounded\ collider*/}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ acceleration\_time\_\ =\ 0.04f;\ \textcolor{comment}{/*The\ time\ it\ takes\ for\ a\ player\ to\ reach\ full\ velocity\ when\ accelerating*/}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ deceleration\_time\_\ =\ 0.1f;\ \textcolor{comment}{/*The\ time\ it\ takes\ for\ a\ player\ to\ come\ to\ a\ stop\ when\ decelerating*/}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ nbr\_player\_\ =\ \mbox{\hyperlink{namespacegame_a2e8d5563a01156b72105cc313c8d0dfd}{game::max\_player}};\ \textcolor{comment}{/*The\ number\ of\ players*/}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ player1\_collider\_id\_\ =\ 1;\ \textcolor{comment}{/*The\ collider\ ID\ for\ player\ 1*/}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ player2\_collider\_id\_\ =\ 2;\ \textcolor{comment}{/*The\ collider\ ID\ for\ player\ 2*/}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ player1\_groundedcollider\_id\_\ =\ 3;\ \textcolor{comment}{/*\ The\ collider\ ID\ for\ player\ 1's\ grounded\ collider*/}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ player2\_groundedcollider\_id\_\ =\ 4;\ \textcolor{comment}{/*\ The\ collider\ ID\ for\ player\ 2's\ grounded\ collider*/}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ Math::Vec2F\ player1\_spawn\_pos\_\ =\ \{\ 250,\ 550\ \};\ \textcolor{comment}{/*The\ spawn\ position\ for\ player\ 1*/}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ Math::Vec2F\ player2\_spawn\_pos\_\ =\ \{\ \mbox{\hyperlink{namespacegame_a8cc1891f59599116d459ac22abb3c82b}{game::screen\_width}}\ -\/\ 250,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 550\ \};\ \textcolor{comment}{/*The\ spawn\ position\ for\ player\ 2*/}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ projectile\_radius\_\ =\ 24.0f;\ \textcolor{comment}{/*The\ radius\ of\ the\ projectile*/}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ projectile\_id\_\ =\ 20;\ \textcolor{comment}{/*\ The\ ID\ of\ the\ projectile\ collider*/}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ neutral\_projectile\_id\_\ =\ 18;\ \textcolor{comment}{/*The\ ID\ of\ neutral\ projectiles\ collider*/}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ Math::Vec2F\ projectile\_speed\_\ =\ Math::Vec2F(0,\ 580);\ \textcolor{comment}{/*The\ speed\ of\ the\ projectile*/}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ time\_between\_attack\ =\ 1.8f;\ \textcolor{comment}{/*The\ time\ between\ each\ attack\ action*/}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{int}\ current\_projectile\_collider\_id\_\ =\ projectile\_id\_;\ \textcolor{comment}{/*The\ ID\ of\ the\ current\ projectile\ collider,\ current\ projectile\ collider\ ID\ is\ increased\ for\ each\ collider\ created\ so\ each\ projectile\ are\ unique\ before\ being\ neutral*/}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::int16\_t\ \mbox{\hyperlink{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f}{max\_projectile\_}}\ =\ 80;\ \textcolor{comment}{/*The\ maximum\ number\ of\ projectiles\ allowed\ in\ the\ game*/}}
+\DoxyCodeLine{00122\ \ \ \ \ std::array<Projectile,\ max\_projectile\_>\ \mbox{\hyperlink{class_player_manager_a3f3c0350cb5996671518eda7fc3722fa}{projectiles\_}}\{\};\ \textcolor{comment}{/*Array\ of\ Projectile\ structs\ representing\ projectiles*/}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_manager_ae9cfc960bb60045516a19df070281c96}{gravity\_}}\ =\ 1000;\ \textcolor{comment}{/*The\ gravity\ force\ applied\ to\ players*/}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_manager_a74bd74f4543f35f4179bda138071f2ac}{rope\_gravity\_}}\ =\ 10;\ \textcolor{comment}{/*The\ gravity\ force\ applied\ to\ player\ on\ ropes*/}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::array<Player,\ nbr\_player\_>\ \mbox{\hyperlink{class_player_manager_a72ebf2e62e0f20d3e884d0d47ea0076e}{players}};\ \textcolor{comment}{/*Array\ of\ Player\ structs\ representing\ player\ entities*/}}
+\DoxyCodeLine{00127\ \ \ \ \ std::array<Physics::BodyRef,\ nbr\_player\_>\ \mbox{\hyperlink{class_player_manager_a94b8bfc45277cded5e90864b02761768}{players\_BodyRefs\_}};\ \textcolor{comment}{/*Array\ of\ player\ body\ references*/}}
+\DoxyCodeLine{00128\ \ \ \ \ std::array<Physics::ColliderRef,\ nbr\_player\_>\ \mbox{\hyperlink{class_player_manager_ad43741261f7b053edddabba24a059b6d}{players\_CollidersRefs\_}};\ \textcolor{comment}{/*Array\ of\ player\ collider\ references*/}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ std::array<Physics::BodyRef,\ nbr\_player\_>\ \mbox{\hyperlink{class_player_manager_a14a7eb88b460eb3ae45440fab7cbaca8}{players\_grounded\_BodyRefs\_}};\ \textcolor{comment}{/*Array\ of\ grounded\ player\ body\ references*/}}
+\DoxyCodeLine{00131\ \ \ \ \ std::array<Physics::ColliderRef,\ nbr\_player\_>\ \mbox{\hyperlink{class_player_manager_a05bcf46384a8cf0963c2fdc2d29dc526}{players\_grounded\_CollidersRefs\_}};\ \textcolor{comment}{/*Array\ of\ grounded\ player\ collider\ references*/}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{class_player_manager_a629775380c8ead1b71abb3970bf0678f}{PlayerManager}}(Physics::World*\ world\_);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_aeef261dc9ba3ec83fec68d0013b02387}{SetUp}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a52c97db81d46cf9d1da6e6cace3215fd}{Update}}();}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a83170de4a8a8c13393f749fcf1b3dc26}{ResetState}}();}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_afcd928a73d60d7af0565c62408192c3e}{Jump}}(\textcolor{keywordtype}{int}\ playerIdx);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a26204d9ad952fd4066a2d955d591f723}{Move}}(\textcolor{keywordtype}{bool}\ rightDirection,\ \textcolor{keywordtype}{int}\ playerIdx);}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a3adb7b0c030cb9cec25e220753763faa}{Decelerate}}(\textcolor{keywordtype}{int}\ playerIdx);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a3419fc3843f4284392979a3abedbfb68}{Attack}}(\textcolor{keywordtype}{int}\ player\_idx);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00186\ \ \ \ \ Math::Vec2F\ \mbox{\hyperlink{class_player_manager_a0aad056f4e56fafeffac580d35361faf}{GetPlayerPosition}}(\textcolor{keywordtype}{int}\ idx)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a32939aec07c16902039c5ef3ce097830}{OnTriggerEnter}}(Physics::Collider\ colliderA,}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ Physics::Collider\ colliderB)\ \textcolor{keyword}{noexcept}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a7957bd74d0b2f7abe01233319e4d5b89}{OnTriggerExit}}(Physics::Collider\ colliderA,}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ Physics::Collider\ colliderB)\ \textcolor{keyword}{noexcept}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a1c0ed336ac50acded32919c8d0d1c3e5}{OnCollisionEnter}}(Physics::Collider\ colliderA,}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ Physics::Collider\ colliderB)\ \textcolor{keyword}{noexcept}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a8d511a09c22e515fa0a8a40f25bcca11}{OnCollisionExit}}(Physics::Collider\ colliderA,}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ Physics::Collider\ colliderB)\ \textcolor{keyword}{noexcept}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_afad2eb0eb6c99bbf06b3c6f152ee9602}{InitProjectiles}}();}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_ac6d85f2c16ce87c1ec23ec6f76033446}{GetNewProjectile}}(\textcolor{keywordtype}{int}\ player\_idx);}
+\DoxyCodeLine{00240\ \ \ \ \ Math::Vec2F\ \mbox{\hyperlink{class_player_manager_a32e00aecda80bc0f7ca487bfdd9a2efb}{GetProjectilePosition}}(\textcolor{keywordtype}{int}\ idx)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a715c92b4a249896c261711c09761a459}{ResetProjectiles}}();}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_manager_a0bb9ec0f86cdb2784ae6697f6e5f2206}{ProjectileTriggerDetection}}(Physics::Collider\ colliderA,}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ Physics::Collider\ colliderB,}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_projectile}{Projectile}}\&\ projectile);}
+\DoxyCodeLine{00255\ \};}
+
+\end{DoxyCode}

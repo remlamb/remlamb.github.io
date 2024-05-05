@@ -1,0 +1,25 @@
+\doxysection{Image.\+h}
+\hypertarget{_image_8h_source}{}\label{_image_8h_source}\index{include/Image.h@{include/Image.h}}
+\mbox{\hyperlink{_image_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{raylib__wrapper_8h}{raylib\_wrapper.h}}"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}\ \{\ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778ba7a1920d61156abc05a60135aefe8bc67}{Default}},\ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778ba4f1f6016fc9f3f2353c0cc7c67b292bd}{Center}}\ \};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_image_custom}{ImageCustom}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ raylib::Texture2D\ \mbox{\hyperlink{class_image_custom_afdd1568fc4787c11fdef81ead11f7c0a}{sprite}};\ \ \textcolor{comment}{/*\ The\ texture\ sprite\ of\ the\ image.*/}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_image_custom_a57f2dd4363002446078169cfb2d99b93}{originalScale}};\ \textcolor{comment}{/*\ The\ original\ scale\ of\ the\ image.*/}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}\ \mbox{\hyperlink{class_image_custom_af8f17ebab4a9bfb5e06cb4e8e5834a4a}{pivot}};\ \textcolor{comment}{/*\ The\ pivot\ point\ of\ the\ image.*/}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ raylib::Image\ \mbox{\hyperlink{class_image_custom_a9ab22672a11e5b895ce0149856f94b77}{icon}};\ \ \ \textcolor{comment}{/*\ The\ window\ icon\ image.*/}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_custom_ac5df4b35dbc0302954529900765281c3}{Setup}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keywordtype}{float}\ scale,\ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}\ mode);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_custom_a515883220c286b0bc7e50835a4bb8b96}{SetupIcon}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \mbox{\hyperlink{_image_8h_a5cccc5401f9a29ad4a8a15baa6d0778b}{Pivot}}\ mode);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_custom_afb05ee1e47178423eb3ed45a168530ec}{TearDown}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_custom_adf92d29b17e5f418e6567bd4ab462731}{Draw}}(raylib::Vector2\ position)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_custom_a4504cf6617b29b2e7261bf06fb84a68d}{Draw}}(raylib::Vector2\ position,\ \textcolor{keywordtype}{float}\ scale)\textcolor{keyword}{const}\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00054\ \};}
+
+\end{DoxyCode}

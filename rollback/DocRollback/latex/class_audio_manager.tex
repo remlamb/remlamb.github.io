@@ -1,0 +1,129 @@
+\doxysection{Audio\+Manager Class Reference}
+\hypertarget{class_audio_manager}{}\label{class_audio_manager}\index{AudioManager@{AudioManager}}
+
+
+Represents the \doxylink{class_audio_manager}{Audio\+Manager} responsible for managing audio in the game.  
+
+
+
+
+{\ttfamily \#include $<$Audio\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_audio_manager_a61123a6defaf1770ea223844ba30ae9d}{Audio\+Manager}} (\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}game\+\_\+logic)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_audio_manager}{Audio\+Manager} object with a pointer to the game logic. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a9286f64fb57179ff45cd11ed0fc83a63}{Init}} () noexcept
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{class_audio_manager}{Audio\+Manager}. Loads the background music from file and sets looping. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a1aa051c871e38dc951115099030dbd58}{Deinit}} () noexcept
+\begin{DoxyCompactList}\small\item\em Deinitializes the \doxylink{class_audio_manager}{Audio\+Manager}. Unloads the background music and closes the audio device. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a8f07bcec94c6d68b3397a6c48e261b36}{Update}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Updates the \doxylink{class_audio_manager}{Audio\+Manager}. Plays or stops the music based on the current game state and volume settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_audio_manager_a6f626c5ba715d5e3506d525f2709ce1f}{is\+\_\+audio\+\_\+playing}}
+\item 
+float \mbox{\hyperlink{class_audio_manager_a517985bdc9dd67745fa25b7580bff17f}{audio\+\_\+volume}} = 0.\+5f
+\item 
+raylib\+::\+Music \mbox{\hyperlink{class_audio_manager_a8b279a4a183c022cc5bdce462deef78b}{music}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the \doxylink{class_audio_manager}{Audio\+Manager} responsible for managing audio in the game. 
+
+The \doxylink{class_audio_manager}{Audio\+Manager} class handles loading, playing, and updating background music for the game. It provides methods for initialization, deinitialization, and updating the audio based on the current game state and volume settings.
+
+
+\begin{DoxyItemize}
+\item Variables\+:
+\item is\+\_\+audio\+\_\+playing\+: Indicates whether audio is currently playing.
+\item audio\+\_\+volume\+: The volume level of the audio.
+\item music\+: The music stream object.
+\item game\+\_\+logic\+\_\+\+: Pointer to the Game\+Logic object associated with the \doxylink{class_audio_manager}{Audio\+Manager}. 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_audio_manager_a61123a6defaf1770ea223844ba30ae9d}\label{class_audio_manager_a61123a6defaf1770ea223844ba30ae9d} 
+\index{AudioManager@{AudioManager}!AudioManager@{AudioManager}}
+\index{AudioManager@{AudioManager}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{AudioManager()}{AudioManager()}}
+{\footnotesize\ttfamily Audio\+Manager\+::\+Audio\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+logic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an \doxylink{class_audio_manager}{Audio\+Manager} object with a pointer to the game logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+\_\+logic} & Pointer to the Game\+Logic object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_audio_manager_a1aa051c871e38dc951115099030dbd58}\label{class_audio_manager_a1aa051c871e38dc951115099030dbd58} 
+\index{AudioManager@{AudioManager}!Deinit@{Deinit}}
+\index{Deinit@{Deinit}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{Deinit()}{Deinit()}}
+{\footnotesize\ttfamily void Audio\+Manager\+::\+Deinit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Deinitializes the \doxylink{class_audio_manager}{Audio\+Manager}. Unloads the background music and closes the audio device. 
+
+\Hypertarget{class_audio_manager_a9286f64fb57179ff45cd11ed0fc83a63}\label{class_audio_manager_a9286f64fb57179ff45cd11ed0fc83a63} 
+\index{AudioManager@{AudioManager}!Init@{Init}}
+\index{Init@{Init}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Audio\+Manager\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Initializes the \doxylink{class_audio_manager}{Audio\+Manager}. Loads the background music from file and sets looping. 
+
+\Hypertarget{class_audio_manager_a8f07bcec94c6d68b3397a6c48e261b36}\label{class_audio_manager_a8f07bcec94c6d68b3397a6c48e261b36} 
+\index{AudioManager@{AudioManager}!Update@{Update}}
+\index{Update@{Update}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Audio\+Manager\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Updates the \doxylink{class_audio_manager}{Audio\+Manager}. Plays or stops the music based on the current game state and volume settings. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_audio_manager_a517985bdc9dd67745fa25b7580bff17f}\label{class_audio_manager_a517985bdc9dd67745fa25b7580bff17f} 
+\index{AudioManager@{AudioManager}!audio\_volume@{audio\_volume}}
+\index{audio\_volume@{audio\_volume}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{audio\_volume}{audio\_volume}}
+{\footnotesize\ttfamily float Audio\+Manager\+::audio\+\_\+volume = 0.\+5f}
+
+\Hypertarget{class_audio_manager_a6f626c5ba715d5e3506d525f2709ce1f}\label{class_audio_manager_a6f626c5ba715d5e3506d525f2709ce1f} 
+\index{AudioManager@{AudioManager}!is\_audio\_playing@{is\_audio\_playing}}
+\index{is\_audio\_playing@{is\_audio\_playing}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{is\_audio\_playing}{is\_audio\_playing}}
+{\footnotesize\ttfamily bool Audio\+Manager\+::is\+\_\+audio\+\_\+playing}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{true}}
+
+\end{DoxyCode}
+\Hypertarget{class_audio_manager_a8b279a4a183c022cc5bdce462deef78b}\label{class_audio_manager_a8b279a4a183c022cc5bdce462deef78b} 
+\index{AudioManager@{AudioManager}!music@{music}}
+\index{music@{music}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{music}{music}}
+{\footnotesize\ttfamily raylib\+::\+Music Audio\+Manager\+::music}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_audio_manager_8h}{Audio\+Manager.\+h}}\item 
+src/\mbox{\hyperlink{_audio_manager_8cpp}{Audio\+Manager.\+cpp}}\end{DoxyCompactItemize}

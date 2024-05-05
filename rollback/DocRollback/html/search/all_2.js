@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['center_0',['Center',['../_image_8h.html#a5cccc5401f9a29ad4a8a15baa6d0778ba4f1f6016fc9f3f2353c0cc7c67b292bd',1,'Image.h']]],
+  ['client_5fplayer_5fnbr_1',['client_player_nbr',['../classgame_1_1_game_logic.html#a33f2619015500ff732a506a5dc211ba6',1,'game::GameLogic']]],
+  ['code_2',['code',['../struct_network_event.html#a5615ea8b1bf84057a75546374e852bd5',1,'NetworkEvent']]],
+  ['collider_3',['collider',['../structgame_1_1collider.html',1,'game']]],
+  ['colliderref_4',['colliderRef',['../structgame_1_1collider.html#a4b2ff71bdfb3618e4b465aad06643692',1,'game::collider']]],
+  ['colliders_5f_5',['colliders_',['../classgame_1_1_game_logic.html#adba28603122b82d59a2d2f3039128e51',1,'game::GameLogic']]],
+  ['compare_6',['compare',['../class_input_1_1_frame_input.html#a411ee75494d0f0edd9f98edbc12987f9',1,'Input::FrameInput']]],
+  ['computechecksum_7',['ComputeChecksum',['../classgame_1_1_game_logic.html#af90af066dd7e9caff1bbf0ba55d0655c',1,'game::GameLogic']]],
+  ['confirmed_5fframe_8',['confirmed_frame',['../class_rollback_manager.html#a3a47a6cfa7bc4df318318b1e35186fc9',1,'RollbackManager']]],
+  ['confirmed_5fgame_5fmanager_5f_9',['confirmed_game_manager_',['../class_rollback_manager.html#ad9a490426490efce30755459aadb1117',1,'RollbackManager']]],
+  ['confirmframe_10',['ConfirmFrame',['../class_rollback_manager.html#ae3b62d8e072b50e7ae94a1941653e3f0',1,'RollbackManager']]],
+  ['connect_11',['Connect',['../class_network_logic.html#a3881a56406d1cabc27a0e26b1e099d3d',1,'NetworkLogic']]],
+  ['constants_2eh_12',['Constants.h',['../_constants_8h.html',1,'']]],
+  ['content_13',['content',['../struct_network_event.html#a0e3199716e8e53d1d2b0123385cdc3fa',1,'NetworkEvent']]],
+  ['createplatform_14',['CreatePlatform',['../classgame_1_1_game_logic.html#a1af53e2ebd5d600c3e7d7b2ccbc57d41',1,'game::GameLogic']]],
+  ['createroom_15',['CreateRoom',['../class_network_logic.html#a7cb2dd081d6b90d21577b09a9b486e16',1,'NetworkLogic']]],
+  ['current_5fcollider_5fnbr_16',['current_collider_nbr',['../struct_projectile.html#a359af329d80ccdad2e865bcf1fe4c390',1,'Projectile']]],
+  ['current_5fframe_17',['current_frame',['../class_rollback_manager.html#a0b65042482431dfa76f599a22f1f401d',1,'RollbackManager']]],
+  ['current_5fgame_5fstate_18',['current_game_state',['../classgame_1_1_game_logic.html#ad94e95698852e21f19105f0a8006b85a',1,'game::GameLogic']]],
+  ['currentloginfo_19',['currentLogInfo',['../class_network_logic.html#a805acc255bfbf9cea468632b6791064f',1,'NetworkLogic']]]
+];

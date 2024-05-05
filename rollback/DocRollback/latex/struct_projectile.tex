@@ -1,0 +1,74 @@
+\doxysection{Projectile Struct Reference}
+\hypertarget{struct_projectile}{}\label{struct_projectile}\index{Projectile@{Projectile}}
+
+
+Represents a projectile entity in the game.  
+
+
+
+
+{\ttfamily \#include $<$Player\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Physics\+::\+Body\+Ref \mbox{\hyperlink{struct_projectile_aef8d102b2e466ca2a2e6b1ea61838531}{projectile\+\_\+body}}
+\item 
+Physics\+::\+Collider\+Ref \mbox{\hyperlink{struct_projectile_a42976d6ef05157ed2e8b812020ac23c3}{projectile\+\_\+collider}}
+\item 
+int \mbox{\hyperlink{struct_projectile_a359af329d80ccdad2e865bcf1fe4c390}{current\+\_\+collider\+\_\+nbr}} = 0
+\item 
+int \mbox{\hyperlink{struct_projectile_a0ba6bb378c65b9951434d222f324d031}{nbr\+\_\+launching\+\_\+player}} = 0
+\item 
+bool \mbox{\hyperlink{struct_projectile_a7c6b10d5ddf577708dc9e3ddfe72bd34}{is\+Active}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a projectile entity in the game. 
+
+Member Variables\+:
+\begin{DoxyItemize}
+\item projectile\+\_\+body\+: Reference to the physics body of the projectile.
+\item projectile\+\_\+collider\+: Reference to the collider of the projectile.
+\item current\+\_\+collider\+\_\+nbr\+: Number representing the current collider of the projectile.
+\item nbr\+\_\+launching\+\_\+player\+: Number representing the player who launched the projectile.
+\item is\+Active\+: Flag indicating whether the projectile is active or not. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_projectile_a359af329d80ccdad2e865bcf1fe4c390}\label{struct_projectile_a359af329d80ccdad2e865bcf1fe4c390} 
+\index{Projectile@{Projectile}!current\_collider\_nbr@{current\_collider\_nbr}}
+\index{current\_collider\_nbr@{current\_collider\_nbr}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{current\_collider\_nbr}{current\_collider\_nbr}}
+{\footnotesize\ttfamily int Projectile\+::current\+\_\+collider\+\_\+nbr = 0}
+
+\Hypertarget{struct_projectile_a7c6b10d5ddf577708dc9e3ddfe72bd34}\label{struct_projectile_a7c6b10d5ddf577708dc9e3ddfe72bd34} 
+\index{Projectile@{Projectile}!isActive@{isActive}}
+\index{isActive@{isActive}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{isActive}{isActive}}
+{\footnotesize\ttfamily bool Projectile\+::is\+Active = false}
+
+\Hypertarget{struct_projectile_a0ba6bb378c65b9951434d222f324d031}\label{struct_projectile_a0ba6bb378c65b9951434d222f324d031} 
+\index{Projectile@{Projectile}!nbr\_launching\_player@{nbr\_launching\_player}}
+\index{nbr\_launching\_player@{nbr\_launching\_player}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{nbr\_launching\_player}{nbr\_launching\_player}}
+{\footnotesize\ttfamily int Projectile\+::nbr\+\_\+launching\+\_\+player = 0}
+
+\Hypertarget{struct_projectile_aef8d102b2e466ca2a2e6b1ea61838531}\label{struct_projectile_aef8d102b2e466ca2a2e6b1ea61838531} 
+\index{Projectile@{Projectile}!projectile\_body@{projectile\_body}}
+\index{projectile\_body@{projectile\_body}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{projectile\_body}{projectile\_body}}
+{\footnotesize\ttfamily Physics\+::\+Body\+Ref Projectile\+::projectile\+\_\+body}
+
+\Hypertarget{struct_projectile_a42976d6ef05157ed2e8b812020ac23c3}\label{struct_projectile_a42976d6ef05157ed2e8b812020ac23c3} 
+\index{Projectile@{Projectile}!projectile\_collider@{projectile\_collider}}
+\index{projectile\_collider@{projectile\_collider}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{projectile\_collider}{projectile\_collider}}
+{\footnotesize\ttfamily Physics\+::\+Collider\+Ref Projectile\+::projectile\+\_\+collider}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_player_manager_8h}{Player\+Manager.\+h}}\end{DoxyCompactItemize}

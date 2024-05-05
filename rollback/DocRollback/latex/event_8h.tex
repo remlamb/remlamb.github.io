@@ -1,0 +1,73 @@
+\doxysection{include/event.h File Reference}
+\hypertarget{event_8h}{}\label{event_8h}\index{include/event.h@{include/event.h}}
+{\ttfamily \#include $<$Common-\/cpp/inc/\+Containers/\+Hashtable.\+h$>$}\newline
+{\ttfamily \#include $<$Common-\/cpp/inc/defines.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_network_event}{Network\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{struct_network_event}{Network\+Event} represents an event sent over the network. The \doxylink{struct_network_event}{Network\+Event} struct encapsulates an event code and a hashtable containing event content. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}} \+: n\+Byte \{ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ae22aedaa9915a19ef49578764f6dea64}{k\+Input}} = 0
+, \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ab8744ff74f862da4fd452d51e87af8df}{k\+Frame\+Confirmation}}
+ \}
+\begin{DoxyCompactList}\small\item\em The Event\+Code enum represents different types of events that can occur in the application, such as input events or frame confirmation events. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484}{Event\+Key}} \+: n\+Byte \{ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484aaf3d3e0126a203d43dfdeec50af61926}{k\+Player\+Input}} = 0
+, \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a7bc5f88756af1080a83ac92c20e521d8}{k\+Frame\+Nbr}}
+, \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a0fbcd65d1a7d6e478d2ec3ecbf41b576}{k\+Delay}}
+, \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a50772e448ada17ddfb0b5be718c8bbb4}{k\+Check\+Sum}}
+ \}
+\begin{DoxyCompactList}\small\item\em The Event\+Key enum represents different keys used in serializing and deserializing hashtable events, such as keys for player input, frame numbers, delays, or checksums. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}\label{event_8h_ac16ec1decbf74315cfb4944c0561a5c7} 
+\index{event.h@{event.h}!EventCode@{EventCode}}
+\index{EventCode@{EventCode}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{EventCode}{EventCode}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}} \+: n\+Byte\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+The Event\+Code enum represents different types of events that can occur in the application, such as input events or frame confirmation events. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kInput@{kInput}!event.h@{event.h}}\index{event.h@{event.h}!kInput@{kInput}}}\Hypertarget{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ae22aedaa9915a19ef49578764f6dea64}\label{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ae22aedaa9915a19ef49578764f6dea64} 
+k\+Input&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kFrameConfirmation@{kFrameConfirmation}!event.h@{event.h}}\index{event.h@{event.h}!kFrameConfirmation@{kFrameConfirmation}}}\Hypertarget{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ab8744ff74f862da4fd452d51e87af8df}\label{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ab8744ff74f862da4fd452d51e87af8df} 
+k\+Frame\+Confirmation&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{event_8h_a91ddae77c529c6e3741ea8ab90004484}\label{event_8h_a91ddae77c529c6e3741ea8ab90004484} 
+\index{event.h@{event.h}!EventKey@{EventKey}}
+\index{EventKey@{EventKey}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{EventKey}{EventKey}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484}{Event\+Key}} \+: n\+Byte\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+The Event\+Key enum represents different keys used in serializing and deserializing hashtable events, such as keys for player input, frame numbers, delays, or checksums. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kPlayerInput@{kPlayerInput}!event.h@{event.h}}\index{event.h@{event.h}!kPlayerInput@{kPlayerInput}}}\Hypertarget{event_8h_a91ddae77c529c6e3741ea8ab90004484aaf3d3e0126a203d43dfdeec50af61926}\label{event_8h_a91ddae77c529c6e3741ea8ab90004484aaf3d3e0126a203d43dfdeec50af61926} 
+k\+Player\+Input&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kFrameNbr@{kFrameNbr}!event.h@{event.h}}\index{event.h@{event.h}!kFrameNbr@{kFrameNbr}}}\Hypertarget{event_8h_a91ddae77c529c6e3741ea8ab90004484a7bc5f88756af1080a83ac92c20e521d8}\label{event_8h_a91ddae77c529c6e3741ea8ab90004484a7bc5f88756af1080a83ac92c20e521d8} 
+k\+Frame\+Nbr&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kDelay@{kDelay}!event.h@{event.h}}\index{event.h@{event.h}!kDelay@{kDelay}}}\Hypertarget{event_8h_a91ddae77c529c6e3741ea8ab90004484a0fbcd65d1a7d6e478d2ec3ecbf41b576}\label{event_8h_a91ddae77c529c6e3741ea8ab90004484a0fbcd65d1a7d6e478d2ec3ecbf41b576} 
+k\+Delay&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kCheckSum@{kCheckSum}!event.h@{event.h}}\index{event.h@{event.h}!kCheckSum@{kCheckSum}}}\Hypertarget{event_8h_a91ddae77c529c6e3741ea8ab90004484a50772e448ada17ddfb0b5be718c8bbb4}\label{event_8h_a91ddae77c529c6e3741ea8ab90004484a50772e448ada17ddfb0b5be718c8bbb4} 
+k\+Check\+Sum&\\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,200 @@
+\doxysection{Input\+::Frame\+Input Class Reference}
+\hypertarget{class_input_1_1_frame_input}{}\label{class_input_1_1_frame_input}\index{Input::FrameInput@{Input::FrameInput}}
+
+
+Represents player input for a single frame.  
+
+
+
+
+{\ttfamily \#include $<$Frame\+Input.\+h$>$}
+
+Inheritance diagram for Input\+::Frame\+Input\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_input_1_1_frame_input}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input_aee7849ee473de452c50bc7802657a913}{Frame\+Input}} () noexcept=default
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input_aefdf978ebb71cae589f3a5a618b213e6}{Frame\+Input}} (Math\+::\+Vec2F dir\+\_\+to\+\_\+mouse, short \mbox{\hyperlink{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74}{frame\+\_\+nbr}}, std\+::uint8\+\_\+t \mbox{\hyperlink{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc}{input}}) noexcept
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input_a899540c3ae9d10608eb1521053731ee1}{Frame\+Input}} (\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&\&to\+Move) noexcept=default
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \& \mbox{\hyperlink{class_input_1_1_frame_input_a5d5f92cccd84895e2dc973d9d9fe3b93}{operator=}} (\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&\&to\+Move) noexcept=default
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input_a6a04a93f818aa5d87be94e34e4faee9f}{Frame\+Input}} (const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&to\+Copy) noexcept=default
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \& \mbox{\hyperlink{class_input_1_1_frame_input_a2194a3d3a2b878674d4429434df6bdb7}{operator=}} (const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&to\+Copy) noexcept=default
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input_af7f8ad2805b4c273a8dba350feb7847f}{\texorpdfstring{$\sim$}{\string~}\+Frame\+Input}} () override=default
+\item 
+Exit\+Games\+::\+Common\+::\+JString \& \mbox{\hyperlink{class_input_1_1_frame_input_a848750a4f009f972666af61f5dd245b6}{to\+String}} (Exit\+Games\+::\+Common\+::\+JString \&ret\+Str, bool with\+Types) const override
+\item 
+bool \mbox{\hyperlink{class_input_1_1_frame_input_a411ee75494d0f0edd9f98edbc12987f9}{compare}} (const Custom\+Type\+Base \&other) const override
+\item 
+void \mbox{\hyperlink{class_input_1_1_frame_input_ab2d8c35ac813f54dac85c3f61db5cfbf}{deserialize}} (const n\+Byte \texorpdfstring{$\ast$}{*}p\+Data, short length) override
+\item 
+short \mbox{\hyperlink{class_input_1_1_frame_input_a3b508ec1c427490e73a4e18d3bbf5538}{serialize}} (n\+Byte \texorpdfstring{$\ast$}{*}p\+Ret\+Val) const override
+\item 
+void \mbox{\hyperlink{class_input_1_1_frame_input_a969ada1c4902c55c64378d766329d11f}{duplicate}} (Custom\+Type\+Base \texorpdfstring{$\ast$}{*}p\+Ret\+Val) const override
+\item 
+bool \mbox{\hyperlink{class_input_1_1_frame_input_a044f88b7b1ff7d8c6d3c5e86ec2752e4}{operator==}} (const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&other) const noexcept
+\item 
+void \mbox{\hyperlink{class_input_1_1_frame_input_a7b1fecafb99faf5d2b442bda17eba5d8}{Update\+Player\+Inputs}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+short \mbox{\hyperlink{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74}{frame\+\_\+nbr}} = 0
+\item 
+std\+::uint8\+\_\+t \mbox{\hyperlink{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc}{input}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static n\+Byte \mbox{\hyperlink{class_input_1_1_frame_input_aeae628a9c0f8e5894def4d78c450dd6f}{serialization\+\_\+protocol}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents player input for a single frame. 
+
+The \doxylink{class_input_1_1_frame_input}{Frame\+Input} class inherits from Custom\+Type and encapsulates input data for a specific frame, including the frame number and input flags.
+
+Variables\+:
+\begin{DoxyItemize}
+\item frame\+\_\+nbr\+: The frame number associated with the input.
+\item input\+: Flags representing player input actions for the frame. 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_input_1_1_frame_input_aee7849ee473de452c50bc7802657a913}\label{class_input_1_1_frame_input_aee7849ee473de452c50bc7802657a913} 
+\index{Input::FrameInput@{Input::FrameInput}!FrameInput@{FrameInput}}
+\index{FrameInput@{FrameInput}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{FrameInput()}{FrameInput()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Input\+::\+Frame\+Input\+::\+Frame\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_aefdf978ebb71cae589f3a5a618b213e6}\label{class_input_1_1_frame_input_aefdf978ebb71cae589f3a5a618b213e6} 
+\index{Input::FrameInput@{Input::FrameInput}!FrameInput@{FrameInput}}
+\index{FrameInput@{FrameInput}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{FrameInput()}{FrameInput()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Input\+::\+Frame\+Input\+::\+Frame\+Input (\begin{DoxyParamCaption}\item[{Math\+::\+Vec2F}]{dir\+\_\+to\+\_\+mouse,  }\item[{short}]{frame\+\_\+nbr,  }\item[{std\+::uint8\+\_\+t}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_a899540c3ae9d10608eb1521053731ee1}\label{class_input_1_1_frame_input_a899540c3ae9d10608eb1521053731ee1} 
+\index{Input::FrameInput@{Input::FrameInput}!FrameInput@{FrameInput}}
+\index{FrameInput@{FrameInput}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{FrameInput()}{FrameInput()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Input\+::\+Frame\+Input\+::\+Frame\+Input (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&\&}]{to\+Move }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_a6a04a93f818aa5d87be94e34e4faee9f}\label{class_input_1_1_frame_input_a6a04a93f818aa5d87be94e34e4faee9f} 
+\index{Input::FrameInput@{Input::FrameInput}!FrameInput@{FrameInput}}
+\index{FrameInput@{FrameInput}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{FrameInput()}{FrameInput()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Input\+::\+Frame\+Input\+::\+Frame\+Input (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&}]{to\+Copy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_af7f8ad2805b4c273a8dba350feb7847f}\label{class_input_1_1_frame_input_af7f8ad2805b4c273a8dba350feb7847f} 
+\index{Input::FrameInput@{Input::FrameInput}!````~FrameInput@{\texorpdfstring{$\sim$}{\string~}FrameInput}}
+\index{````~FrameInput@{\texorpdfstring{$\sim$}{\string~}FrameInput}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FrameInput()}{\string~FrameInput()}}
+{\footnotesize\ttfamily Input\+::\+Frame\+Input\+::\texorpdfstring{$\sim$}{\string~}\+Frame\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_input_1_1_frame_input_a411ee75494d0f0edd9f98edbc12987f9}\label{class_input_1_1_frame_input_a411ee75494d0f0edd9f98edbc12987f9} 
+\index{Input::FrameInput@{Input::FrameInput}!compare@{compare}}
+\index{compare@{compare}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{compare()}{compare()}}
+{\footnotesize\ttfamily bool Input\+::\+Frame\+Input\+::compare (\begin{DoxyParamCaption}\item[{const Custom\+Type\+Base \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+\Hypertarget{class_input_1_1_frame_input_ab2d8c35ac813f54dac85c3f61db5cfbf}\label{class_input_1_1_frame_input_ab2d8c35ac813f54dac85c3f61db5cfbf} 
+\index{Input::FrameInput@{Input::FrameInput}!deserialize@{deserialize}}
+\index{deserialize@{deserialize}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{deserialize()}{deserialize()}}
+{\footnotesize\ttfamily void Input\+::\+Frame\+Input\+::deserialize (\begin{DoxyParamCaption}\item[{const n\+Byte \texorpdfstring{$\ast$}{*}}]{p\+Data,  }\item[{short}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+\Hypertarget{class_input_1_1_frame_input_a969ada1c4902c55c64378d766329d11f}\label{class_input_1_1_frame_input_a969ada1c4902c55c64378d766329d11f} 
+\index{Input::FrameInput@{Input::FrameInput}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{duplicate()}{duplicate()}}
+{\footnotesize\ttfamily void Input\+::\+Frame\+Input\+::duplicate (\begin{DoxyParamCaption}\item[{Custom\+Type\+Base \texorpdfstring{$\ast$}{*}}]{p\+Ret\+Val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+\Hypertarget{class_input_1_1_frame_input_a2194a3d3a2b878674d4429434df6bdb7}\label{class_input_1_1_frame_input_a2194a3d3a2b878674d4429434df6bdb7} 
+\index{Input::FrameInput@{Input::FrameInput}!operator=@{operator=}}
+\index{operator=@{operator=}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \& Input\+::\+Frame\+Input\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&}]{to\+Copy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_a5d5f92cccd84895e2dc973d9d9fe3b93}\label{class_input_1_1_frame_input_a5d5f92cccd84895e2dc973d9d9fe3b93} 
+\index{Input::FrameInput@{Input::FrameInput}!operator=@{operator=}}
+\index{operator=@{operator=}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \& Input\+::\+Frame\+Input\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&\&}]{to\+Move }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_a044f88b7b1ff7d8c6d3c5e86ec2752e4}\label{class_input_1_1_frame_input_a044f88b7b1ff7d8c6d3c5e86ec2752e4} 
+\index{Input::FrameInput@{Input::FrameInput}!operator==@{operator==}}
+\index{operator==@{operator==}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Input\+::\+Frame\+Input\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_input_1_1_frame_input}{Frame\+Input}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\Hypertarget{class_input_1_1_frame_input_a3b508ec1c427490e73a4e18d3bbf5538}\label{class_input_1_1_frame_input_a3b508ec1c427490e73a4e18d3bbf5538} 
+\index{Input::FrameInput@{Input::FrameInput}!serialize@{serialize}}
+\index{serialize@{serialize}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily short Input\+::\+Frame\+Input\+::serialize (\begin{DoxyParamCaption}\item[{n\+Byte \texorpdfstring{$\ast$}{*}}]{p\+Ret\+Val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+\Hypertarget{class_input_1_1_frame_input_a848750a4f009f972666af61f5dd245b6}\label{class_input_1_1_frame_input_a848750a4f009f972666af61f5dd245b6} 
+\index{Input::FrameInput@{Input::FrameInput}!toString@{toString}}
+\index{toString@{toString}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily Exit\+Games\+::\+Common\+::\+JString \& Input\+::\+Frame\+Input\+::to\+String (\begin{DoxyParamCaption}\item[{Exit\+Games\+::\+Common\+::\+JString \&}]{ret\+Str,  }\item[{bool}]{with\+Types }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+\Hypertarget{class_input_1_1_frame_input_a7b1fecafb99faf5d2b442bda17eba5d8}\label{class_input_1_1_frame_input_a7b1fecafb99faf5d2b442bda17eba5d8} 
+\index{Input::FrameInput@{Input::FrameInput}!UpdatePlayerInputs@{UpdatePlayerInputs}}
+\index{UpdatePlayerInputs@{UpdatePlayerInputs}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{UpdatePlayerInputs()}{UpdatePlayerInputs()}}
+{\footnotesize\ttfamily void Input\+::\+Frame\+Input\+::\+Update\+Player\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74}\label{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74} 
+\index{Input::FrameInput@{Input::FrameInput}!frame\_nbr@{frame\_nbr}}
+\index{frame\_nbr@{frame\_nbr}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{frame\_nbr}{frame\_nbr}}
+{\footnotesize\ttfamily short Input\+::\+Frame\+Input\+::frame\+\_\+nbr = 0}
+
+\Hypertarget{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc}\label{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc} 
+\index{Input::FrameInput@{Input::FrameInput}!input@{input}}
+\index{input@{input}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily std\+::uint8\+\_\+t Input\+::\+Frame\+Input\+::input}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ 0}
+
+\end{DoxyCode}
+\Hypertarget{class_input_1_1_frame_input_aeae628a9c0f8e5894def4d78c450dd6f}\label{class_input_1_1_frame_input_aeae628a9c0f8e5894def4d78c450dd6f} 
+\index{Input::FrameInput@{Input::FrameInput}!serialization\_protocol@{serialization\_protocol}}
+\index{serialization\_protocol@{serialization\_protocol}!Input::FrameInput@{Input::FrameInput}}
+\doxysubsubsection{\texorpdfstring{serialization\_protocol}{serialization\_protocol}}
+{\footnotesize\ttfamily n\+Byte Input\+::\+Frame\+Input\+::serialization\+\_\+protocol\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ExitGames::Common::SerializationProtocol::DEFAULT}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_frame_input_8h}{Frame\+Input.\+h}}\item 
+src/\mbox{\hyperlink{_frame_input_8cpp}{Frame\+Input.\+cpp}}\end{DoxyCompactItemize}

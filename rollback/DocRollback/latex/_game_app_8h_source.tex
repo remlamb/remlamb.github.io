@@ -1,0 +1,43 @@
+\doxysection{Game\+App.\+h}
+\hypertarget{_game_app_8h_source}{}\label{_game_app_8h_source}\index{include/GameApp.h@{include/GameApp.h}}
+\mbox{\hyperlink{_game_app_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_audio_manager_8h}{AudioManager.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_logic_8h}{GameLogic.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_network_logic_8h}{NetworkLogic.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_renderer_8h}{Renderer.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_rollback_manager_8h}{RollbackManager.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_app}{GameApp}}\ \{}
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{bool}\ is\_collider\_visible\_\ =}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Indicates\ whether\ collider\ shapes\ are\ visible.}}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{bool}\ is\_game\_option\_visible\_\ =}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Indicates\ whether\ the\ game\ options\ menu\ is\ visible.}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{class_rollback_manager}{RollbackManager}}\ \mbox{\hyperlink{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95}{rollback\_manager}};\ \ \textcolor{comment}{//\ Manages\ game\ state\ rollback\ for\ network\ synchronization.}}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}\ \mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}}\{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95}{rollback\_manager}}\};\ \ \textcolor{comment}{//\ Manages\ the\ game\ logic\ and\ state.}}
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{class_renderer}{Renderer}}\ \mbox{\hyperlink{class_game_app_afe53ab2f80a1c409b82500abe20b0857}{game\_renderer}}\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}},\ \&\mbox{\hyperlink{class_game_app_a232068ac22367d0512919e2f1c94392d}{network\_logic}}\};\ \ \textcolor{comment}{//\ Handles\ rendering\ of\ the\ game\ world.}}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{class_audio_manager}{AudioManager}}\ \mbox{\hyperlink{class_game_app_a1725404eb89d05b1b54cfeaf3a3f4101}{audio\_manager}}\{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}}\};\ \ \textcolor{comment}{//\ Manages\ audio\ playback\ and\ volume\ settings.}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ ExitGames::Common::JString\ \mbox{\hyperlink{class_game_app_a0d5c41b798e326e9e844bb02d657f63b}{appID}}\ =}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}d7a7fb07-\/5b89-\/4563-\/af7f-\/a83778fe14f8"{}};\ \ \textcolor{comment}{//\ The\ Photon\ application\ ID\ for\ networking\ purposes.}}
+\DoxyCodeLine{00046\ \ \ ExitGames::Common::JString\ \mbox{\hyperlink{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55}{appVersion}}\ =}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}1.0"{}};\ \ \textcolor{comment}{//\ The\ Photon\ application\ version.}}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_network_logic}{NetworkLogic}}\ \mbox{\hyperlink{class_game_app_a232068ac22367d0512919e2f1c94392d}{network\_logic}}\{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \mbox{\hyperlink{class_game_app_a0d5c41b798e326e9e844bb02d657f63b}{appID}},\ \mbox{\hyperlink{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55}{appVersion}},}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}}\};\ \ \textcolor{comment}{//\ Handles\ networking\ logic\ and\ communication.}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_app_af1947ab6484c33e742532f8ddd4abdc7}{Init}}();}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_app_adf74df312a15cc1867306973f58af394}{InitImgui}}();}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_app_aed497aa2b1b20a3bcb77c994df04624e}{DrawImgui}}();}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_app_a2961d26d9353a490004ec386d4a81e15}{Deinit}}();}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_app_a7497449978498eee4715fadc8a27bdf2}{Loop}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00073\ \};}
+
+\end{DoxyCode}

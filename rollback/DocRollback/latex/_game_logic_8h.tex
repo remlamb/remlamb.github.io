@@ -1,0 +1,29 @@
+\doxysection{include/\+Game\+Logic.h File Reference}
+\hypertarget{_game_logic_8h}{}\label{_game_logic_8h}\index{include/GameLogic.h@{include/GameLogic.h}}
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}Frame\+Input.\+h"{}}\newline
+{\ttfamily \#include "{}Player\+Manager.\+h"{}}\newline
+{\ttfamily \#include "{}Timer.\+h"{}}\newline
+{\ttfamily \#include "{}World.\+h"{}}\newline
+{\ttfamily \#include "{}event.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgame_1_1collider}{game\+::collider}}
+\begin{DoxyCompactList}\small\item\em Represents a link between a physics object and its collider. The collider struct consists of two members\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}}
+\begin{DoxyCompactList}\small\item\em Represents the game logic of the application, managing physics simulation, player interaction, and input handling. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacegame}{game}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657}{game\+::\+Game\+State}} \{ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a79437eb50a15ec91aeb6236f521d91c7}{game\+::\+Log\+Menu}}
+, \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a7f6a694e9ff14e26f8cb40f4aae029d6}{game\+::\+Game\+Launch}}
+, \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a61e603713f96a29e917459edac1a3bce}{game\+::\+Game\+Victory}}
+ \}
+\end{DoxyCompactItemize}

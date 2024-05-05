@@ -1,0 +1,26 @@
+\doxysection{event.\+h}
+\hypertarget{event_8h_source}{}\label{event_8h_source}\index{include/event.h@{include/event.h}}
+\mbox{\hyperlink{event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Common-\/cpp/inc/Containers/Hashtable.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Common-\/cpp/inc/defines.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{EventCode}}\ :\ nByte\ \{}
+\DoxyCodeLine{00010\ \ \ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ae22aedaa9915a19ef49578764f6dea64}{kInput}}\ =\ 0,\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ event\ code.}}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7ab8744ff74f862da4fd452d51e87af8df}{kFrameConfirmation}}\ \ \textcolor{comment}{//\ Frame\ confirmation\ event\ code.}}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484}{EventKey}}\ :\ nByte\ \{}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484aaf3d3e0126a203d43dfdeec50af61926}{kPlayerInput}}\ =\ 0,\ \ \textcolor{comment}{//\ Key\ for\ player\ input\ data.}}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a7bc5f88756af1080a83ac92c20e521d8}{kFrameNbr}},\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Key\ for\ frame\ number\ data.}}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a0fbcd65d1a7d6e478d2ec3ecbf41b576}{kDelay}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Key\ for\ delay\ data.}}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{event_8h_a91ddae77c529c6e3741ea8ab90004484a50772e448ada17ddfb0b5be718c8bbb4}{kCheckSum}}\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Key\ for\ checksum\ data.}}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_network_event}{NetworkEvent}}\ \{}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{EventCode}}\ \mbox{\hyperlink{struct_network_event_a5615ea8b1bf84057a75546374e852bd5}{code}}\{\};\ \ \textcolor{comment}{//\ Event\ code\ indicating\ the\ type\ of\ event.}}
+\DoxyCodeLine{00033\ \ \ ExitGames::Common::Hashtable\ \mbox{\hyperlink{struct_network_event_a0e3199716e8e53d1d2b0123385cdc3fa}{content}}\{\};\ \ \textcolor{comment}{//\ Hashtable\ containing\ event\ data.}}
+\DoxyCodeLine{00034\ \};}
+
+\end{DoxyCode}

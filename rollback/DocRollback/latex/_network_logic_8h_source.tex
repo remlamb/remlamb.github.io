@@ -1,0 +1,74 @@
+\doxysection{Network\+Logic.\+h}
+\hypertarget{_network_logic_8h_source}{}\label{_network_logic_8h_source}\index{include/NetworkLogic.h@{include/NetworkLogic.h}}
+\mbox{\hyperlink{_network_logic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Common-\/cpp/inc/Logger.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <LoadBalancing-\/cpp/inc/Client.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <LoadBalancing-\/cpp/inc/Listener.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_logic_8h}{GameLogic.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{event.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_network_logic}{NetworkLogic}}\ :\ \textcolor{keyword}{private}\ ExitGames::LoadBalancing::Listener\ \{}
+\DoxyCodeLine{00019\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_logic_abcf5b9fe38a8e2d1dba0be0f9af6af0e}{is\_connected}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{/*\ Indicates\ whether\ the\ client\ is\ currently}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connected\ to\ the\ server.\ */}}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{class_network_logic_a805acc255bfbf9cea468632b6791064f}{currentLogInfo}}\ =}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}};\ \textcolor{comment}{/*\ Information\ about\ the\ current\ network\ state.\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{class_network_logic_a952014bc9327b77be5d2d64fa6faddf8}{NetworkLogic}}(\textcolor{keyword}{const}\ ExitGames::Common::JString\&\ appID,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ ExitGames::Common::JString\&\ appVersion,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}*\ game\_logic);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_a3881a56406d1cabc27a0e26b1e099d3d}{Connect}}();\ \ \ \ \textcolor{comment}{/*\ Connects\ the\ client\ to\ the\ server.\ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_aaf3197156fc05639aa570d5f19163c2f}{Disconnect}}();\ \textcolor{comment}{/*\ Disconnects\ the\ client\ from\ the\ server.\ */}}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_aaabea75de307876ea70493d5133d06c7}{Run}}();\ \textcolor{comment}{/*\ Runs\ the\ network\ loop\ for\ handling\ events\ and\ operations.\ */}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_a7cb2dd081d6b90d21577b09a9b486e16}{CreateRoom}}(\textcolor{keyword}{const}\ ExitGames::Common::JString\&\ roomName,\ nByte\ maxPlayers);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_af46860cd135785859368d0ab404174ae}{JoinRandomRoom}}(}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ ExitGames::Common::Hashtable\ expectedCustomRoomProperties\ =}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ ExitGames::Common::Hashtable());}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_ac5181e52db5ef93249d80de12d60a896}{JoinRandomOrCreateRoom}}()\ noexcept;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_ab5db5f690bca4912d125fe22ee4e9a98}{RaiseEvent}}(\textcolor{keywordtype}{bool}\ reliable,\ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{EventCode}}\ event\_code,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::Hashtable\&\ event\_data)\ noexcept;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_logic_a0eefd352048c79d2050c8a352e6aed28}{ReceiveEvent}}(\textcolor{keywordtype}{int}\ player\_nr,\ \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{EventCode}}\ event\_code,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::Hashtable\&\ event\_content)\ noexcept;}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ private:}
+\DoxyCodeLine{00085\ \ \ ExitGames::LoadBalancing::Client}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ mLoadBalancingClient;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ LoadBalancing\ client\ instance.\ */}}
+\DoxyCodeLine{00087\ \ \ ExitGames::Common::Logger\ mLogger;\ \textcolor{comment}{/*\ Logger\ instance\ for\ debug\ messages.\ */}}
+\DoxyCodeLine{00088\ \ \ \mbox{\hyperlink{namespacegame}{game}}::GameLogic*\ game\_logic\_;\ \ \ \ \ \ \textcolor{comment}{/*\ Pointer\ to\ the\ game\ logic\ object.\ */}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{comment}{//\ Listener\ callbacks}}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ debugReturn(\textcolor{keywordtype}{int}\ debugLevel,}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::JString\&\ \textcolor{keywordtype}{string})\ override;}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ connectionErrorReturn(\textcolor{keywordtype}{int}\ errorCode)\ override;}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ clientErrorReturn(\textcolor{keywordtype}{int}\ errorCode)\ override;}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{void}\ warningReturn(\textcolor{keywordtype}{int}\ warningCode)\ override;}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{void}\ serverErrorReturn(\textcolor{keywordtype}{int}\ errorCode)\ override;}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{void}\ joinRoomEventAction(}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ playerNr,\ const\ ExitGames::Common::JVector<\textcolor{keywordtype}{int}>\&\ playernrs,}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ const\ ExitGames::LoadBalancing::\mbox{\hyperlink{struct_player}{Player}}\&\ player)\ override;}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{void}\ leaveRoomEventAction(\textcolor{keywordtype}{int}\ playerNr,\ \textcolor{keywordtype}{bool}\ isInactive)\ override;}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{void}\ customEventAction(}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ playerNr,\ nByte\ eventCode,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ const\ ExitGames::Common::Object\&\ eventContent)\ override;}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{void}\ connectReturn(\textcolor{keywordtype}{int}\ errorCode,}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::JString\&\ errorString,}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::JString\&\ region,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::JString\&\ cluster)\ override;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{void}\ disconnectReturn()\ override;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{void}\ leaveRoomReturn(\textcolor{keywordtype}{int}\ errorCode,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ ExitGames::Common::JString\&\ errorString)\ override;}
+\DoxyCodeLine{00113\ \};}
+
+\end{DoxyCode}

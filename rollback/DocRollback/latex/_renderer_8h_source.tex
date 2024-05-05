@@ -1,0 +1,65 @@
+\doxysection{Renderer.\+h}
+\hypertarget{_renderer_8h_source}{}\label{_renderer_8h_source}\index{include/Renderer.h@{include/Renderer.h}}
+\mbox{\hyperlink{_renderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_logic_8h}{GameLogic.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_image_8h}{Image.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_renderer}{Renderer}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_renderer_a3fc770ad11917ba263b3fd108c6509e5}{Renderer}}(\mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}*\ gl,\ \mbox{\hyperlink{class_network_logic}{NetworkLogic}}*\ network\_logic)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ :\ game\_logic\_(gl),\ network\_logic\_(network\_logic)\ \{\}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_renderer_a3b850769d09577e1a07d5e8f87fbabfb}{Init}}()\ noexcept;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_renderer_a983f485889b00f2bcd2e00a2ed309757}{Draw}}(\textcolor{keywordtype}{bool}\ isColliderVisible)\ noexcept;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_renderer_a8d24994c2ab4b92485d405e7fadde40d}{Deinit}}()\ noexcept;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ private:}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawColliderShape()\ noexcept;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawPlayerColliderShape()\ noexcept;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawPlatforms()\ noexcept;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawRopes()\ noexcept;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawPlayer()\ noexcept;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawProjectiles()\ noexcept;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawBackground()\ noexcept;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLimit()\ noexcept;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawUI()\ noexcept;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{namespacegame}{game}}::GameLogic*\ game\_logic\_\ =\ \textcolor{keywordtype}{nullptr};\ \textcolor{comment}{/*\ Pointer\ to\ the\ GameLogic\ object.*/}}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{class_network_logic}{NetworkLogic}}*\ network\_logic\_\ =\ \textcolor{keywordtype}{nullptr};\ \textcolor{comment}{/*\ Pointer\ to\ the\ NetworkLogic\ object.*/}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Images\ for\ rendering}}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ player\_;}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ player2\_;}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ player\_weapon\_;}
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ background\_;}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ platform\_;}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ rope\_;}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ main\_menu\_bg\_;}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ border\_bottom\_;}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ border\_left\_;}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ border\_right\_;}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ border\_top\_;}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ icon\_;}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ winner\_layer\_p1;}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ winner\_layer\_p2;}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ player1\_life\_point\_;}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{class_image_custom}{ImageCustom}}\ player2\_life\_point\_;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{namespaceraylib}{raylib}}::Vector2\ center\_pos\_\ =\ \{\ \mbox{\hyperlink{namespacegame_a8cc1891f59599116d459ac22abb3c82b}{game::screen\_width}}\ *\ 0.5f,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacegame_aaef102a4452a43d3cd08941ba6f6512b}{game::screen\_height}}\ *\ 0.5f\ \};\ \ \textcolor{comment}{/*\ Represent\ the\ center\ of\ the\ window*/}}
+\DoxyCodeLine{00111\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,418 @@
+\doxysection{game\+::Game\+Logic Class Reference}
+\hypertarget{classgame_1_1_game_logic}{}\label{classgame_1_1_game_logic}\index{game::GameLogic@{game::GameLogic}}
+
+
+Represents the game logic of the application, managing physics simulation, player interaction, and input handling.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Logic.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_logic_afc0ebcc7b1e4b7f90a15ec354ff78b28}{Game\+Logic}} (\mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}} \texorpdfstring{$\ast$}{*}rollback)
+\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_abe5d665c4d49cbde8f0354dde8bd3f98}{Rollback}} (const \mbox{\hyperlink{classgame_1_1_game_logic}{Game\+Logic}} \&game\+\_\+logic)
+\begin{DoxyCompactList}\small\item\em Rolls back the game state to match the provided {\ttfamily \doxylink{classgame_1_1_game_logic}{Game\+Logic}} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a4adf9d7d8f9a3593af3cde18ab1782d9}{Set\+Player\+Input}} (const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \&input, int player\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Sets the input for a specific player. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgame_1_1_game_logic_af90af066dd7e9caff1bbf0ba55d0655c}{Compute\+Checksum}} ()
+\begin{DoxyCompactList}\small\item\em Computes a checksum for the current game state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a5542d9141662804e3c9434b521e62f70}{Register\+Network\+Logic}} (\mbox{\hyperlink{class_network_logic}{Network\+Logic}} \texorpdfstring{$\ast$}{*}network)
+\begin{DoxyCompactList}\small\item\em Registers the network logic instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a7068093b0c1f3093eb9ba0afe1d193f6}{Send\+Frame\+Confirmation\+Event}} (const std\+::vector$<$ \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} $>$ \&remote\+\_\+frame\+\_\+inputs) noexcept
+\begin{DoxyCompactList}\small\item\em Sends frame confirmation events to the master client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a97092b978299041da01884351be40341}{On\+Frame\+Confirmation\+Received}} (const Exit\+Games\+::\+Common\+::\+Hashtable \&event\+\_\+content)
+\begin{DoxyCompactList}\small\item\em Handles frame confirmation events received from the master client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_ac65f4252c244b600faedb82e5689b64d}{Init}} () noexcept
+\begin{DoxyCompactList}\small\item\em Initializes the game environment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a00bb09ba832f13bbfb238fbee7f7a79e}{On\+Input\+Received}} (const Exit\+Games\+::\+Common\+::\+Hashtable \&content)
+\begin{DoxyCompactList}\small\item\em Handles input events received from the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a503ded0377b4068c8c31b65f038b0b1a}{Update\+Gameplay}} () noexcept
+\begin{DoxyCompactList}\small\item\em Updates the player gameplay logic based on player inputs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a93597339a998c41588a8cf6bbb0017dd}{Update}} () noexcept
+\begin{DoxyCompactList}\small\item\em Updates the game logic and physics simulation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a9406a4eb206448b17bfdd6b6df6006c0}{De\+Init}} () noexcept
+\begin{DoxyCompactList}\small\item\em Deinitializes the game environment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_ae89001443f0c0ae901dc8962e0d63071}{Manage\+Input}} () noexcept
+\begin{DoxyCompactList}\small\item\em Manages player inputs and sends input events to the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a1af53e2ebd5d600c3e7d7b2ccbc57d41}{Create\+Platform}} (Math\+::\+Vec2F position, Math\+::\+Vec2F rect\+Min\+Bound, Math\+::\+Vec2F rect\+Max\+Bound) noexcept
+\begin{DoxyCompactList}\small\item\em Creates a platform in the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a6d23524da5512211c366dc09b6422c19}{Game\+Logic\+::\+Create\+Rope}} (Math\+::\+Vec2F position, Math\+::\+Vec2F rect\+Min\+Bound, Math\+::\+Vec2F rect\+Max\+Bound) noexcept
+\begin{DoxyCompactList}\small\item\em Creates a rope in the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_1_1_game_logic_a4d4fb0cf979f9002b7917410d976dfcc}{Update\+Collider}} () noexcept
+\begin{DoxyCompactList}\small\item\em Updates the colliders in the game world. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Physics\+::\+World \mbox{\hyperlink{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}{world\+\_\+}}
+\item 
+\mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classgame_1_1_game_logic_aed1fd717f239f828a4b4450107ebbeee}{rollback\+\_\+manager}}
+\item 
+\mbox{\hyperlink{class_network_logic}{Network\+Logic}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classgame_1_1_game_logic_adf2ca36862b9781ced693b7d8db51add}{network\+\_\+logic}}
+\item 
+\mbox{\hyperlink{class_player_manager}{Player\+Manager}} \mbox{\hyperlink{classgame_1_1_game_logic_a798576380d35c43f4a0f85a9d932e39e}{player\+\_\+manager}} \{ \&\mbox{\hyperlink{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}{world\+\_\+}} \}
+\item 
+\mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \mbox{\hyperlink{classgame_1_1_game_logic_ab9f34a4fb7ff24a783d205ab1c575993}{inputs}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} $>$ \mbox{\hyperlink{classgame_1_1_game_logic_a095b4628eedca4a1a55d9bd76d81f59d}{last\+\_\+inputs}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{struct_network_event}{Network\+Event}} $>$ \mbox{\hyperlink{classgame_1_1_game_logic_a4a818d9c72d7a1f16224872bb68840e5}{network\+\_\+events}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structgame_1_1collider}{game\+::collider}} $>$ \mbox{\hyperlink{classgame_1_1_game_logic_adba28603122b82d59a2d2f3039128e51}{colliders\+\_\+}}
+\item 
+int \mbox{\hyperlink{classgame_1_1_game_logic_a33f2619015500ff732a506a5dc211ba6}{client\+\_\+player\+\_\+nbr}} = \mbox{\hyperlink{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}{invalid\+\_\+client\+\_\+player\+\_\+nbr}}
+\item 
+\mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657}{Game\+State}} \mbox{\hyperlink{classgame_1_1_game_logic_ad94e95698852e21f19105f0a8006b85a}{current\+\_\+game\+\_\+state}} = \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a79437eb50a15ec91aeb6236f521d91c7}{Game\+State\+::\+Log\+Menu}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr float \mbox{\hyperlink{classgame_1_1_game_logic_a8b58792f67fd2a0c52f5a21c6461fca4}{fixed\+Update\+Frenquency}} = 1 / 50.f
+\item 
+static constexpr int \mbox{\hyperlink{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}{invalid\+\_\+client\+\_\+player\+\_\+nbr}} = -\/1
+\item 
+static constexpr int \mbox{\hyperlink{classgame_1_1_game_logic_a74284130b7c1ecc276d61f3062c5b02c}{master\+\_\+client\+\_\+\+ID}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the game logic of the application, managing physics simulation, player interaction, and input handling. 
+
+The \doxylink{classgame_1_1_game_logic}{Game\+Logic} class initializes and updates the game world, manages player input, handles collision detection, and controls game state transitions. It also creates platforms and ropes within the game world and updates their associated colliders.
+
+Member Variables\+:
+\begin{DoxyItemize}
+\item world\+\_\+\+: The physics world for simulating game physics.
+\item rollback\+\_\+manager\+: Manages game state rollback for network synchronization.
+\item network\+\_\+logic\+: Manages networking logic and communication.
+\item player\+\_\+manager\+: Manages player entities and their interactions with the game world.
+\item inputs\+: Stores the current frame inputs for all players.
+\item last\+\_\+inputs\+: Stores the inputs from the previous frames for rollback purposes.
+\item network\+\_\+events\+: Queue to store incoming network events.
+\item colliders\+\_\+\+: Vector of collider structures representing physics objects and their colliders.
+\item client\+\_\+player\+\_\+nbr\+: ID of the local client player.
+\item current\+\_\+game\+\_\+state\+: Enum representing the current state of the game.
+\end{DoxyItemize}
+
+Member Functions\+:
+\begin{DoxyItemize}
+\item Rollback\+: Rolls back the game state to match the provided \doxylink{classgame_1_1_game_logic}{Game\+Logic} instance.
+\item Set\+Player\+Input\+: Sets the input for a specific player.
+\item Compute\+Checksum\+: Computes a checksum for the current game state.
+\item Register\+Network\+Logic\+: Registers the \doxylink{class_network_logic}{Network\+Logic} instance for networking purposes.
+\item Send\+Frame\+Confirmation\+Event\+: Sends frame confirmation events to confirm synchronized frames.
+\item On\+Frame\+Confirmation\+Received\+: Handles frame confirmation events received from the network.
+\item Init\+: Initializes the game environment, including creating platforms and ropes.
+\item On\+Input\+Received\+: Handles input events received from the network.
+\item Update\+: Updates the game logic, processes inputs, and advances the game state.
+\item De\+Init\+: Deinitializes the game environment.
+\item Manage\+Input\+: Manages player inputs and sends input events to the network.
+\item Update\+Gameplay\+: Updates player actions and game physics.
+\item Create\+Platform\+: Creates a platform in the game world.
+\item Create\+Rope\+: Creates a rope in the game world.
+\item Update\+Collider\+: Updates the colliders in the game world. 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_1_1_game_logic_afc0ebcc7b1e4b7f90a15ec354ff78b28}\label{classgame_1_1_game_logic_afc0ebcc7b1e4b7f90a15ec354ff78b28} 
+\index{game::GameLogic@{game::GameLogic}!GameLogic@{GameLogic}}
+\index{GameLogic@{GameLogic}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{GameLogic()}{GameLogic()}}
+{\footnotesize\ttfamily game\+::\+Game\+Logic\+::\+Game\+Logic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}} \texorpdfstring{$\ast$}{*}}]{rollback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1_game_logic_af90af066dd7e9caff1bbf0ba55d0655c}\label{classgame_1_1_game_logic_af90af066dd7e9caff1bbf0ba55d0655c} 
+\index{game::GameLogic@{game::GameLogic}!ComputeChecksum@{ComputeChecksum}}
+\index{ComputeChecksum@{ComputeChecksum}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{ComputeChecksum()}{ComputeChecksum()}}
+{\footnotesize\ttfamily int game\+::\+Game\+Logic\+::\+Compute\+Checksum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Computes a checksum for the current game state. 
+
+\begin{DoxyReturn}{Returns}
+The computed checksum value. 
+\end{DoxyReturn}
+\Hypertarget{classgame_1_1_game_logic_a1af53e2ebd5d600c3e7d7b2ccbc57d41}\label{classgame_1_1_game_logic_a1af53e2ebd5d600c3e7d7b2ccbc57d41} 
+\index{game::GameLogic@{game::GameLogic}!CreatePlatform@{CreatePlatform}}
+\index{CreatePlatform@{CreatePlatform}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{CreatePlatform()}{CreatePlatform()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Create\+Platform (\begin{DoxyParamCaption}\item[{Math\+::\+Vec2F}]{position,  }\item[{Math\+::\+Vec2F}]{rect\+Min\+Bound,  }\item[{Math\+::\+Vec2F}]{rect\+Max\+Bound }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Creates a platform in the game world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the platform. \\
+\hline
+{\em rect\+Min\+Bound} & The minimum bounds of the platform\textquotesingle{}s rectangle. \\
+\hline
+{\em rect\+Max\+Bound} & The maximum bounds of the platform\textquotesingle{}s rectangle. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_a9406a4eb206448b17bfdd6b6df6006c0}\label{classgame_1_1_game_logic_a9406a4eb206448b17bfdd6b6df6006c0} 
+\index{game::GameLogic@{game::GameLogic}!DeInit@{DeInit}}
+\index{DeInit@{DeInit}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{DeInit()}{DeInit()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+De\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Deinitializes the game environment. 
+
+\Hypertarget{classgame_1_1_game_logic_a6d23524da5512211c366dc09b6422c19}\label{classgame_1_1_game_logic_a6d23524da5512211c366dc09b6422c19} 
+\index{game::GameLogic@{game::GameLogic}!GameLogic::CreateRope@{GameLogic::CreateRope}}
+\index{GameLogic::CreateRope@{GameLogic::CreateRope}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{GameLogic::CreateRope()}{GameLogic::CreateRope()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Game\+Logic\+::\+Create\+Rope (\begin{DoxyParamCaption}\item[{Math\+::\+Vec2F}]{position,  }\item[{Math\+::\+Vec2F}]{rect\+Min\+Bound,  }\item[{Math\+::\+Vec2F}]{rect\+Max\+Bound }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Creates a rope in the game world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the rope. \\
+\hline
+{\em rect\+Min\+Bound} & The minimum bounds of the rope\textquotesingle{}s rectangle. \\
+\hline
+{\em rect\+Max\+Bound} & The maximum bounds of the rope\textquotesingle{}s rectangle. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_ac65f4252c244b600faedb82e5689b64d}\label{classgame_1_1_game_logic_ac65f4252c244b600faedb82e5689b64d} 
+\index{game::GameLogic@{game::GameLogic}!Init@{Init}}
+\index{Init@{Init}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Initializes the game environment. 
+
+\Hypertarget{classgame_1_1_game_logic_ae89001443f0c0ae901dc8962e0d63071}\label{classgame_1_1_game_logic_ae89001443f0c0ae901dc8962e0d63071} 
+\index{game::GameLogic@{game::GameLogic}!ManageInput@{ManageInput}}
+\index{ManageInput@{ManageInput}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{ManageInput()}{ManageInput()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Manage\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Manages player inputs and sends input events to the network. 
+
+\Hypertarget{classgame_1_1_game_logic_a97092b978299041da01884351be40341}\label{classgame_1_1_game_logic_a97092b978299041da01884351be40341} 
+\index{game::GameLogic@{game::GameLogic}!OnFrameConfirmationReceived@{OnFrameConfirmationReceived}}
+\index{OnFrameConfirmationReceived@{OnFrameConfirmationReceived}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{OnFrameConfirmationReceived()}{OnFrameConfirmationReceived()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+On\+Frame\+Confirmation\+Received (\begin{DoxyParamCaption}\item[{const Exit\+Games\+::\+Common\+::\+Hashtable \&}]{event\+\_\+content }\end{DoxyParamCaption})}
+
+
+
+Handles frame confirmation events received from the master client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+content} & The content of the received event. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_a00bb09ba832f13bbfb238fbee7f7a79e}\label{classgame_1_1_game_logic_a00bb09ba832f13bbfb238fbee7f7a79e} 
+\index{game::GameLogic@{game::GameLogic}!OnInputReceived@{OnInputReceived}}
+\index{OnInputReceived@{OnInputReceived}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{OnInputReceived()}{OnInputReceived()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+On\+Input\+Received (\begin{DoxyParamCaption}\item[{const Exit\+Games\+::\+Common\+::\+Hashtable \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Handles input events received from the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & The content of the received event. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_a5542d9141662804e3c9434b521e62f70}\label{classgame_1_1_game_logic_a5542d9141662804e3c9434b521e62f70} 
+\index{game::GameLogic@{game::GameLogic}!RegisterNetworkLogic@{RegisterNetworkLogic}}
+\index{RegisterNetworkLogic@{RegisterNetworkLogic}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{RegisterNetworkLogic()}{RegisterNetworkLogic()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Register\+Network\+Logic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_network_logic}{Network\+Logic}} \texorpdfstring{$\ast$}{*}}]{network }\end{DoxyParamCaption})}
+
+
+
+Registers the network logic instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & The {\ttfamily \doxylink{class_network_logic}{Network\+Logic}} instance to register. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_abe5d665c4d49cbde8f0354dde8bd3f98}\label{classgame_1_1_game_logic_abe5d665c4d49cbde8f0354dde8bd3f98} 
+\index{game::GameLogic@{game::GameLogic}!Rollback@{Rollback}}
+\index{Rollback@{Rollback}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{Rollback()}{Rollback()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Rollback (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgame_1_1_game_logic}{Game\+Logic}} \&}]{game\+\_\+logic }\end{DoxyParamCaption})}
+
+
+
+Rolls back the game state to match the provided {\ttfamily \doxylink{classgame_1_1_game_logic}{Game\+Logic}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+\_\+logic} & The {\ttfamily \doxylink{classgame_1_1_game_logic}{Game\+Logic}} instance to roll back to.\\
+\hline
+\end{DoxyParams}
+This function updates the current game state, physics world, and player entities to match the state of another {\ttfamily \doxylink{classgame_1_1_game_logic}{Game\+Logic}} instance. \Hypertarget{classgame_1_1_game_logic_a7068093b0c1f3093eb9ba0afe1d193f6}\label{classgame_1_1_game_logic_a7068093b0c1f3093eb9ba0afe1d193f6} 
+\index{game::GameLogic@{game::GameLogic}!SendFrameConfirmationEvent@{SendFrameConfirmationEvent}}
+\index{SendFrameConfirmationEvent@{SendFrameConfirmationEvent}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{SendFrameConfirmationEvent()}{SendFrameConfirmationEvent()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Send\+Frame\+Confirmation\+Event (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} $>$ \&}]{remote\+\_\+frame\+\_\+inputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Sends frame confirmation events to the master client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+\_\+frame\+\_\+inputs} & The remote frame inputs to confirm. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_a4adf9d7d8f9a3593af3cde18ab1782d9}\label{classgame_1_1_game_logic_a4adf9d7d8f9a3593af3cde18ab1782d9} 
+\index{game::GameLogic@{game::GameLogic}!SetPlayerInput@{SetPlayerInput}}
+\index{SetPlayerInput@{SetPlayerInput}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{SetPlayerInput()}{SetPlayerInput()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Set\+Player\+Input (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \&}]{input,  }\item[{int}]{player\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Sets the input for a specific player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input to set for the player. \\
+\hline
+{\em player\+\_\+id} & The ID of the player whose input is being set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_logic_a93597339a998c41588a8cf6bbb0017dd}\label{classgame_1_1_game_logic_a93597339a998c41588a8cf6bbb0017dd} 
+\index{game::GameLogic@{game::GameLogic}!Update@{Update}}
+\index{Update@{Update}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Updates the game logic and physics simulation. 
+
+\Hypertarget{classgame_1_1_game_logic_a4d4fb0cf979f9002b7917410d976dfcc}\label{classgame_1_1_game_logic_a4d4fb0cf979f9002b7917410d976dfcc} 
+\index{game::GameLogic@{game::GameLogic}!UpdateCollider@{UpdateCollider}}
+\index{UpdateCollider@{UpdateCollider}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{UpdateCollider()}{UpdateCollider()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Update\+Collider (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Updates the colliders in the game world. 
+
+\Hypertarget{classgame_1_1_game_logic_a503ded0377b4068c8c31b65f038b0b1a}\label{classgame_1_1_game_logic_a503ded0377b4068c8c31b65f038b0b1a} 
+\index{game::GameLogic@{game::GameLogic}!UpdateGameplay@{UpdateGameplay}}
+\index{UpdateGameplay@{UpdateGameplay}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{UpdateGameplay()}{UpdateGameplay()}}
+{\footnotesize\ttfamily void game\+::\+Game\+Logic\+::\+Update\+Gameplay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Updates the player gameplay logic based on player inputs. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgame_1_1_game_logic_a33f2619015500ff732a506a5dc211ba6}\label{classgame_1_1_game_logic_a33f2619015500ff732a506a5dc211ba6} 
+\index{game::GameLogic@{game::GameLogic}!client\_player\_nbr@{client\_player\_nbr}}
+\index{client\_player\_nbr@{client\_player\_nbr}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{client\_player\_nbr}{client\_player\_nbr}}
+{\footnotesize\ttfamily int game\+::\+Game\+Logic\+::client\+\_\+player\+\_\+nbr = \mbox{\hyperlink{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}{invalid\+\_\+client\+\_\+player\+\_\+nbr}}}
+
+\Hypertarget{classgame_1_1_game_logic_adba28603122b82d59a2d2f3039128e51}\label{classgame_1_1_game_logic_adba28603122b82d59a2d2f3039128e51} 
+\index{game::GameLogic@{game::GameLogic}!colliders\_@{colliders\_}}
+\index{colliders\_@{colliders\_}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{colliders\_}{colliders\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structgame_1_1collider}{game\+::collider}}$>$ game\+::\+Game\+Logic\+::colliders\+\_\+}
+
+\Hypertarget{classgame_1_1_game_logic_ad94e95698852e21f19105f0a8006b85a}\label{classgame_1_1_game_logic_ad94e95698852e21f19105f0a8006b85a} 
+\index{game::GameLogic@{game::GameLogic}!current\_game\_state@{current\_game\_state}}
+\index{current\_game\_state@{current\_game\_state}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{current\_game\_state}{current\_game\_state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657}{Game\+State}} game\+::\+Game\+Logic\+::current\+\_\+game\+\_\+state = \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a79437eb50a15ec91aeb6236f521d91c7}{Game\+State\+::\+Log\+Menu}}}
+
+\Hypertarget{classgame_1_1_game_logic_a8b58792f67fd2a0c52f5a21c6461fca4}\label{classgame_1_1_game_logic_a8b58792f67fd2a0c52f5a21c6461fca4} 
+\index{game::GameLogic@{game::GameLogic}!fixedUpdateFrenquency@{fixedUpdateFrenquency}}
+\index{fixedUpdateFrenquency@{fixedUpdateFrenquency}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{fixedUpdateFrenquency}{fixedUpdateFrenquency}}
+{\footnotesize\ttfamily constexpr float game\+::\+Game\+Logic\+::fixed\+Update\+Frenquency = 1 / 50.f\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classgame_1_1_game_logic_ab9f34a4fb7ff24a783d205ab1c575993}\label{classgame_1_1_game_logic_ab9f34a4fb7ff24a783d205ab1c575993} 
+\index{game::GameLogic@{game::GameLogic}!inputs@{inputs}}
+\index{inputs@{inputs}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} game\+::\+Game\+Logic\+::inputs}
+
+\Hypertarget{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}\label{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc} 
+\index{game::GameLogic@{game::GameLogic}!invalid\_client\_player\_nbr@{invalid\_client\_player\_nbr}}
+\index{invalid\_client\_player\_nbr@{invalid\_client\_player\_nbr}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{invalid\_client\_player\_nbr}{invalid\_client\_player\_nbr}}
+{\footnotesize\ttfamily constexpr int game\+::\+Game\+Logic\+::invalid\+\_\+client\+\_\+player\+\_\+nbr = -\/1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classgame_1_1_game_logic_a095b4628eedca4a1a55d9bd76d81f59d}\label{classgame_1_1_game_logic_a095b4628eedca4a1a55d9bd76d81f59d} 
+\index{game::GameLogic@{game::GameLogic}!last\_inputs@{last\_inputs}}
+\index{last\_inputs@{last\_inputs}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{last\_inputs}{last\_inputs}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}}$>$ game\+::\+Game\+Logic\+::last\+\_\+inputs}
+
+\Hypertarget{classgame_1_1_game_logic_a74284130b7c1ecc276d61f3062c5b02c}\label{classgame_1_1_game_logic_a74284130b7c1ecc276d61f3062c5b02c} 
+\index{game::GameLogic@{game::GameLogic}!master\_client\_ID@{master\_client\_ID}}
+\index{master\_client\_ID@{master\_client\_ID}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{master\_client\_ID}{master\_client\_ID}}
+{\footnotesize\ttfamily constexpr int game\+::\+Game\+Logic\+::master\+\_\+client\+\_\+\+ID = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classgame_1_1_game_logic_a4a818d9c72d7a1f16224872bb68840e5}\label{classgame_1_1_game_logic_a4a818d9c72d7a1f16224872bb68840e5} 
+\index{game::GameLogic@{game::GameLogic}!network\_events@{network\_events}}
+\index{network\_events@{network\_events}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{network\_events}{network\_events}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{struct_network_event}{Network\+Event}}$>$ game\+::\+Game\+Logic\+::network\+\_\+events}
+
+\Hypertarget{classgame_1_1_game_logic_adf2ca36862b9781ced693b7d8db51add}\label{classgame_1_1_game_logic_adf2ca36862b9781ced693b7d8db51add} 
+\index{game::GameLogic@{game::GameLogic}!network\_logic@{network\_logic}}
+\index{network\_logic@{network\_logic}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{network\_logic}{network\_logic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_network_logic}{Network\+Logic}}\texorpdfstring{$\ast$}{*} game\+::\+Game\+Logic\+::network\+\_\+logic}
+
+\Hypertarget{classgame_1_1_game_logic_a798576380d35c43f4a0f85a9d932e39e}\label{classgame_1_1_game_logic_a798576380d35c43f4a0f85a9d932e39e} 
+\index{game::GameLogic@{game::GameLogic}!player\_manager@{player\_manager}}
+\index{player\_manager@{player\_manager}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{player\_manager}{player\_manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player_manager}{Player\+Manager}} game\+::\+Game\+Logic\+::player\+\_\+manager \{ \&\mbox{\hyperlink{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}{world\+\_\+}} \}}
+
+\Hypertarget{classgame_1_1_game_logic_aed1fd717f239f828a4b4450107ebbeee}\label{classgame_1_1_game_logic_aed1fd717f239f828a4b4450107ebbeee} 
+\index{game::GameLogic@{game::GameLogic}!rollback\_manager@{rollback\_manager}}
+\index{rollback\_manager@{rollback\_manager}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{rollback\_manager}{rollback\_manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}}\texorpdfstring{$\ast$}{*} game\+::\+Game\+Logic\+::rollback\+\_\+manager}
+
+\Hypertarget{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}\label{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6} 
+\index{game::GameLogic@{game::GameLogic}!world\_@{world\_}}
+\index{world\_@{world\_}!game::GameLogic@{game::GameLogic}}
+\doxysubsubsection{\texorpdfstring{world\_}{world\_}}
+{\footnotesize\ttfamily Physics\+::\+World game\+::\+Game\+Logic\+::world\+\_\+}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_game_logic_8h}{Game\+Logic.\+h}}\item 
+src/\mbox{\hyperlink{_game_logic_8cpp}{Game\+Logic.\+cpp}}\end{DoxyCompactItemize}

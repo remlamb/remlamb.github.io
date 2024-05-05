@@ -1,0 +1,24 @@
+\doxysection{Audio\+Manager.\+h}
+\hypertarget{_audio_manager_8h_source}{}\label{_audio_manager_8h_source}\index{include/AudioManager.h@{include/AudioManager.h}}
+\mbox{\hyperlink{_audio_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_logic_8h}{GameLogic.h}}"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_audio_manager}{AudioManager}}\ \{}
+\DoxyCodeLine{00019\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_audio_manager_a6f626c5ba715d5e3506d525f2709ce1f}{is\_audio\_playing}}\ =}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Indicates\ whether\ audio\ is\ currently\ playing.}}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_audio_manager_a517985bdc9dd67745fa25b7580bff17f}{audio\_volume}}\ =\ 0.5f;\ \ \textcolor{comment}{//\ The\ volume\ level\ of\ the\ audio.}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{class_audio_manager_a61123a6defaf1770ea223844ba30ae9d}{AudioManager}}(\mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}*\ game\_logic)\ \{\ game\_logic\_\ =\ game\_logic;\ \}}
+\DoxyCodeLine{00029\ \ \ raylib::Music\ \mbox{\hyperlink{class_audio_manager_a8b279a4a183c022cc5bdce462deef78b}{music}};\ \ \textcolor{comment}{//\ The\ music\ stream\ object.}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_audio_manager_a9286f64fb57179ff45cd11ed0fc83a63}{Init}}()\ noexcept;}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_audio_manager_a1aa051c871e38dc951115099030dbd58}{Deinit}}()\ noexcept;}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_audio_manager_a8f07bcec94c6d68b3397a6c48e261b36}{Update}}()\ const\ noexcept;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ private:}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{namespacegame}{game}}::GameLogic*\ game\_logic\_\ =\ \textcolor{keywordtype}{nullptr};\ \ \textcolor{comment}{//\ Pointer\ to\ the\ GameLogic\ object.}}
+\DoxyCodeLine{00049\ \};}
+
+\end{DoxyCode}

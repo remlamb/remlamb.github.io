@@ -1,0 +1,100 @@
+
+<meta charset="utf-8" emacsmode="-*- markdown -*-">
+<link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/apidoc.css?"">
+    <title>2D Network versus game:</title>
+                          <span style="font-size:40px;">**2D Network versus game:**</span>
+
+<br>
+<div style="margin-left: 20px;">
+Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a technical presentation of my Networking project made during my 2nd years of game devellopement formation at the SAE Geneve.
+</div>
+
+## **Introduction: **
+<div style="margin-left: 20px;">
+You want to make a action based game online ? <br>
+This come with a lot of system to manage and solution to find. <br>
+How to send custently and as fast as possible data between player ? <br>
+How to keep our simulation the same between 2 clients ? <br>
+</div>
+
+## **Preview of the Game:**
+<div style="margin-left: 20px;">
+  ### Choix des libs (Technical Direction):
+  <div style="margin-left: 40px;">
+    Photon (Rapide et manage des rooms)<br>
+    raylib (crossplatform)<br>
+    Présentation du moteur physique(Mien pour repliquer)<br>
+    </div>
+  ### Game
+  <div style="margin-left: 40px;">
+    Here are the final render of my game.
+     -- ajouter gif -
+    My objective was to create a game based on versus, avec un petit scope mais un simple dynamique et fun gameplay <br>
+    J'ai opté pour un jeu 2d avec comme seul deplacement les deplacements lateraux, un saut et une attaque.<br>
+    Le jeu se demarque par cette derniere mecanique, vous pouvez seulement attaquer vers le bas.<br>
+    L'attaque est un projectile qui un fois au sol fait office d'obstacle pour reprendre le principe des platformers.
+    Le jeu melange au final platformer et versus. <br>
+  </div>
+</div>
+
+
+## **Technical Implementation:**
+<div style="margin-left: 20px;">
+<div style="margin-left: 20px;">
+### Project Management
+<div style="margin-left: 40px;">
+  Utilisaton de Trello pour gerer les taches, etc...<br>
+    image du trello, expliquation des etiquettes et des checklists<br>
+  </div>
+</div>
+
+<div style="margin-left: 20px;">
+### Gameplay Local
+<div style="margin-left: 40px;">
+  (2 joueurs en local)<br>
+  </div>
+</div>
+
+
+<div style="margin-left: 20px;">
+### Inputs Manager
+<div style="margin-left: 40px;">
+  Comment gérer les inputs player et les envoyer<br>
+  </div>
+</div>
+
+<div style="margin-left: 20px;">
+### Networking
+<div style="margin-left: 40px;">
+  Client, create join room, Send inputs, receive, → Definir achitecture pour expliquer comment on l a exploité<br>
+  </div>
+</div>
+
+
+<div style="margin-left: 20px;">
+### Rollback
+<div style="margin-left: 40px;">
+  Current frame,
+Confirm frame (last frame valid),
+resimulate world si rollback,
+Stock des inputs tant que current frame non validé,
+checksum pour l intégrité du world physique<br>
+  </div>
+</div>
+
+    ## **Conclusion**
+    <div style="margin-left: 40px;">
+      First of all, thank you for reading.  <br>
+      Also some of the methods are a bit outdated. Loading fbx models and implementing raytracing would be a good follow-up.
+
+      [Lien vers la Documentation](DocRollback/html/index.html)
+            </div>
+
+<STYLE>
+    strong {
+       color: #47478C;
+     }
+</STYLE>
+
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'medium'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>

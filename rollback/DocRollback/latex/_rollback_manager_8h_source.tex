@@ -1,0 +1,98 @@
+\doxysection{Rollback\+Manager.\+h}
+\hypertarget{_rollback_manager_8h_source}{}\label{_rollback_manager_8h_source}\index{include/RollbackManager.h@{include/RollbackManager.h}}
+\mbox{\hyperlink{_rollback_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_frame_input_8h}{FrameInput.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_logic_8h}{GameLogic.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_rollback_manager}{RollbackManager}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_af8bea69450031b9b305517dd56b5fd55}{RegisterGameManager}}(\mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}*\ current\_game\_manager)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ current\_game\_manager\_\ =\ current\_game\_manager;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_rollback_manager_ad9a490426490efce30755459aadb1117}{confirmed\_game\_manager\_}}.\mbox{\hyperlink{classgame_1_1_game_logic_ac65f4252c244b600faedb82e5689b64d}{Init}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{namespacegame_a2e8d5563a01156b72105cc313c8d0dfd}{game::max\_player}};\ i++)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ inputs\_[i].resize(kMaxFrameCount);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_a12f69458d8b945b79281c721cee24e5a}{SetLocalPlayerInput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_1_1_frame_input}{Input::FrameInput}}\&\ local\_input,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ player\_id)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_a140137782f92fa3046f0dcf2fe4e0a6f}{SetRemotePlayerInput}}(}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Input::FrameInput>\&\ new\_remote\_inputs,\ \textcolor{keywordtype}{int}\ player\_id);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_a066ee2a5684be4baaa8470d2c9c5ea5b}{SimulateUntilCurrentFrame}}()\ const\ noexcept;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_rollback_manager_ae3b62d8e072b50e7ae94a1941653e3f0}{ConfirmFrame}}()\ noexcept;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \ \ [[nodiscard]]\ const\ \mbox{\hyperlink{namespace_input}{Input}}::FrameInput\&\ \mbox{\hyperlink{class_rollback_manager_a56bea7d95854f687beddc95486b6c652}{GetLastPlayerConfirmedInput}}(}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ player\_id)\ const\ noexcept;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_rollback_manager_a0b65042482431dfa76f599a22f1f401d}{current\_frame}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ current\_frame\_;\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_a1e3a0fa46e4c9e8d776f83841bf435c2}{IncreaseCurrentFrame}}()\ noexcept\ \{\ current\_frame\_++;\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_rollback_manager_a3a47a6cfa7bc4df318318b1e35186fc9}{confirmed\_frame}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ confirmed\_frame\_;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_rollback_manager_a1626a85f266546c41e2628aba5f773d4}{last\_remote\_input\_frame}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ last\_remote\_input\_frame\_;}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00109\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_rollback_manager_a68965f92a529e8dcfd4d19a9c00773a6}{frame\_to\_confirm}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ frame\_to\_confirm\_;}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rollback_manager_ae56004246e01a3c71b992dc8d6ca1fca}{Reset}}()\ noexcept\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ current\_frame\_\ =\ -\/1;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ last\_remote\_input\_frame\_\ =\ -\/1;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ frame\_to\_confirm\_\ =\ 0;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ confirmed\_frame\_\ =\ -\/1;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ input\ :\ inputs\_)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ input.clear();}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ last\_inputs\_.fill(\{\});}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}\ \mbox{\hyperlink{class_rollback_manager_ad9a490426490efce30755459aadb1117}{confirmed\_game\_manager\_}}\{\ \textcolor{keyword}{this}\ \};\ \ \textcolor{comment}{/*\ confirmed\_player\_manager\_\ is\ a\ copy\ of\ the\ client's\ player\_manager\ at\ the\ last\ confirmed\ frame\ state.\ */}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{classgame_1_1_game_logic}{game::GameLogic}}*\ current\_game\_manager\_\ =\ \textcolor{keyword}{nullptr};\ \ \ \ \textcolor{comment}{/*\ current\_game\_manager\_\ is\ a\ pointer\ to\ local\ client's\ GameManager.}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{short}\ current\_frame\_\ =\ -\/1;\ \ \textcolor{comment}{/*\ The\ frame\ nbr\ of\ the\ local\ client.}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{short}\ last\_remote\_input\_frame\_\ =\ -\/1;\ \ \ \ \textcolor{comment}{/*\ The\ frame\ number\ of\ the\ last\ time\ a\ remote\ input\ was\ received.}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{short}\ frame\_to\_confirm\_\ =\ 0;\ \ \ \ \textcolor{comment}{/*\ The\ frame\ number\ which\ the\ master\ client\ wants\ to\ confirm.}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{short}\ confirmed\_frame\_\ =\ -\/1;\ \ \ \ \textcolor{comment}{/*\ The\ frame\ number\ of\ the\ last\ confirmed\ frame\ (frame\ verified\ with\ checksum).}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{short}\ kMaxFrameCount\ =\ 30'000;\ \ \ \ \ \textcolor{comment}{/*\ kMaxFrameCount\ is\ the\ maximum\ of\ frame\ that\ the\ game\ can\ last.\ Here\ 30'000\ corresponds\ to\ 10\ minutes\ at\ a\ fixed\ 50fps.}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ std::array<std::vector<Input::FrameInput>,\ \mbox{\hyperlink{namespacegame_a2e8d5563a01156b72105cc313c8d0dfd}{game::max\_player}}>\ inputs\_\{\};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ std::array<Input::FrameInput,\ game::max\_player>\ last\_inputs\_\{\};\ \ \ \ \ \textcolor{comment}{/*\ last\_inputs\_\ is\ an\ array\ which\ stores\ the\ last\ inputs\ received\ by\ the\ different\ players.}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00159\ \};}
+
+\end{DoxyCode}

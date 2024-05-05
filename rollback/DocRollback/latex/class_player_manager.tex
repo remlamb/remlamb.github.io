@@ -1,0 +1,453 @@
+\doxysection{Player\+Manager Class Reference}
+\hypertarget{class_player_manager}{}\label{class_player_manager}\index{PlayerManager@{PlayerManager}}
+
+
+Represents player entities in the game, including physics interactions, movement, and input handling.  
+
+
+
+
+{\ttfamily \#include $<$Player\+Manager.\+h$>$}
+
+Inheritance diagram for Player\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_manager_a629775380c8ead1b71abb3970bf0678f}{Player\+Manager}} (Physics\+::\+World \texorpdfstring{$\ast$}{*}world\+\_\+)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_player_manager}{Player\+Manager} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_aeef261dc9ba3ec83fec68d0013b02387}{Set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Create player entities within the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a52c97db81d46cf9d1da6e6cace3215fd}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Updates player entities and their interactions within the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a83170de4a8a8c13393f749fcf1b3dc26}{Reset\+State}} ()
+\begin{DoxyCompactList}\small\item\em Resets the state of the player manager, including player entities and projectiles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_afcd928a73d60d7af0565c62408192c3e}{Jump}} (int player\+Idx)
+\begin{DoxyCompactList}\small\item\em Initiates a jump action for the specified player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a26204d9ad952fd4066a2d955d591f723}{Move}} (bool right\+Direction, int player\+Idx)
+\begin{DoxyCompactList}\small\item\em Initiates a movement action for the specified player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a3adb7b0c030cb9cec25e220753763faa}{Decelerate}} (int player\+Idx)
+\begin{DoxyCompactList}\small\item\em Initiates a deceleration action for the specified player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a3419fc3843f4284392979a3abedbfb68}{Attack}} (int player\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Initiates an attack action for the specified player. \end{DoxyCompactList}\item 
+Math\+::\+Vec2F \mbox{\hyperlink{class_player_manager_a0aad056f4e56fafeffac580d35361faf}{Get\+Player\+Position}} (int idx) const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the position of the specified player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a32939aec07c16902039c5ef3ce097830}{On\+Trigger\+Enter}} (Physics\+::\+Collider colliderA, Physics\+::\+Collider colliderB) noexcept override
+\begin{DoxyCompactList}\small\item\em Handles trigger event detection when colliders enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a7957bd74d0b2f7abe01233319e4d5b89}{On\+Trigger\+Exit}} (Physics\+::\+Collider colliderA, Physics\+::\+Collider colliderB) noexcept override
+\begin{DoxyCompactList}\small\item\em Handles trigger event detection when colliders exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a1c0ed336ac50acded32919c8d0d1c3e5}{On\+Collision\+Enter}} (Physics\+::\+Collider colliderA, Physics\+::\+Collider colliderB) noexcept override
+\begin{DoxyCompactList}\small\item\em Handles collision event detection when colliders enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a8d511a09c22e515fa0a8a40f25bcca11}{On\+Collision\+Exit}} (Physics\+::\+Collider colliderA, Physics\+::\+Collider colliderB) noexcept override
+\begin{DoxyCompactList}\small\item\em Handles collision event detection when colliders exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_afad2eb0eb6c99bbf06b3c6f152ee9602}{Init\+Projectiles}} ()
+\begin{DoxyCompactList}\small\item\em Initializes projectile entities within the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_ac6d85f2c16ce87c1ec23ec6f76033446}{Get\+New\+Projectile}} (int player\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Creates a new projectile for the specified player. \end{DoxyCompactList}\item 
+Math\+::\+Vec2F \mbox{\hyperlink{class_player_manager_a32e00aecda80bc0f7ca487bfdd9a2efb}{Get\+Projectile\+Position}} (int idx) const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the position of the specified projectile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a715c92b4a249896c261711c09761a459}{Reset\+Projectiles}} ()
+\begin{DoxyCompactList}\small\item\em Resets the state of all projectiles within the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_a0bb9ec0f86cdb2784ae6697f6e5f2206}{Projectile\+Trigger\+Detection}} (Physics\+::\+Collider colliderA, Physics\+::\+Collider colliderB, \mbox{\hyperlink{struct_projectile}{Projectile}} \&projectile)
+\begin{DoxyCompactList}\small\item\em Handles projectile trigger event detection when colliders enter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ \mbox{\hyperlink{struct_projectile}{Projectile}}, \mbox{\hyperlink{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f}{max\+\_\+projectile\+\_\+}} $>$ \mbox{\hyperlink{class_player_manager_a3f3c0350cb5996671518eda7fc3722fa}{projectiles\+\_\+}} \{\}
+\item 
+std\+::array$<$ \mbox{\hyperlink{struct_player}{Player}}, nbr\+\_\+player\+\_\+ $>$ \mbox{\hyperlink{class_player_manager_a72ebf2e62e0f20d3e884d0d47ea0076e}{players}}
+\item 
+std\+::array$<$ Physics\+::\+Body\+Ref, nbr\+\_\+player\+\_\+ $>$ \mbox{\hyperlink{class_player_manager_a94b8bfc45277cded5e90864b02761768}{players\+\_\+\+Body\+Refs\+\_\+}}
+\item 
+std\+::array$<$ Physics\+::\+Collider\+Ref, nbr\+\_\+player\+\_\+ $>$ \mbox{\hyperlink{class_player_manager_ad43741261f7b053edddabba24a059b6d}{players\+\_\+\+Colliders\+Refs\+\_\+}}
+\item 
+std\+::array$<$ Physics\+::\+Body\+Ref, nbr\+\_\+player\+\_\+ $>$ \mbox{\hyperlink{class_player_manager_a14a7eb88b460eb3ae45440fab7cbaca8}{players\+\_\+grounded\+\_\+\+Body\+Refs\+\_\+}}
+\item 
+std\+::array$<$ Physics\+::\+Collider\+Ref, nbr\+\_\+player\+\_\+ $>$ \mbox{\hyperlink{class_player_manager_a05bcf46384a8cf0963c2fdc2d29dc526}{players\+\_\+grounded\+\_\+\+Colliders\+Refs\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr std\+::int16\+\_\+t \mbox{\hyperlink{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f}{max\+\_\+projectile\+\_\+}} = 80
+\item 
+static constexpr float \mbox{\hyperlink{class_player_manager_ae9cfc960bb60045516a19df070281c96}{gravity\+\_\+}} = 1000
+\item 
+static constexpr float \mbox{\hyperlink{class_player_manager_a74bd74f4543f35f4179bda138071f2ac}{rope\+\_\+gravity\+\_\+}} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents player entities in the game, including physics interactions, movement, and input handling. 
+
+The \doxylink{class_player_manager}{Player\+Manager} class handles the creation and update of player entities within the game world. It manages player physics bodies, colliders, and interactions with the game environment. This class also implements collision and trigger event handling for player entities. Manage also players projectiles.
+
+Member Variables\+:
+\begin{DoxyItemize}
+\item world\+\_\+\+: The physics world for simulating game physics.
+\item jump\+\_\+velocity\+\_\+\+: The velocity applied when a player jumps.
+\item move\+\_\+velocity\+\_\+\+: The velocity applied when a player moves.
+\item collider\+\_\+radius\+\_\+\+: The radius of the player\textquotesingle{}s collider.
+\item grounded\+\_\+collider\+\_\+pos\+\_\+y\+\_\+\+: The Y position offset of the player\textquotesingle{}s grounded collider.
+\item grounded\+\_\+collider\+\_\+dimension\+\_\+\+: The dimensions of the player\textquotesingle{}s grounded collider.
+\item acceleration\+\_\+time\+\_\+\+: The time it takes for a player to reach full velocity when accelerating.
+\item deceleration\+\_\+time\+\_\+\+: The time it takes for a player to come to a stop when decelerating.
+\item nbr\+\_\+player\+\_\+\+: The number of players.
+\item player1\+\_\+collider\+\_\+id\+\_\+\+: The collider ID for player 1.
+\item player2\+\_\+collider\+\_\+id\+\_\+\+: The collider ID for player 2.
+\item player1\+\_\+groundedcollider\+\_\+id\+\_\+\+: The collider ID for player 1\textquotesingle{}s grounded collider.
+\item player2\+\_\+groundedcollider\+\_\+id\+\_\+\+: The collider ID for player 2\textquotesingle{}s grounded collider.
+\item player1\+\_\+spawn\+\_\+pos\+\_\+\+: The spawn position for player 1.
+\item player2\+\_\+spawn\+\_\+pos\+\_\+\+: The spawn position for player 2.
+\item projectile\+\_\+radius\+\_\+\+: The radius of the projectile collider.
+\item projectile\+\_\+id\+\_\+\+: The ID of the projectile collider.
+\item neutral\+\_\+projectile\+\_\+id\+\_\+\+: The ID of neutral projectiles collider.
+\item projectile\+\_\+speed\+\_\+\+: The speed of the projectile.
+\item time\+\_\+between\+\_\+attack\+: The time between each attack action.
+\item current\+\_\+projectile\+\_\+collider\+\_\+id\+\_\+\+: The ID of the current projectile collider, current projectile collider ID is increased for each collider created so each projectile are unique before being neutral
+\item max\+\_\+projectile\+\_\+\+: The maximum number of projectiles allowed in the game.
+\item gravity\+\_\+\+: The gravity force applied to players.
+\item rope\+\_\+gravity\+\_\+\+: The gravity force applied to player on ropes.
+\item players\+: Array of \doxylink{struct_player}{Player} structs representing player entities.
+\item players\+\_\+\+Body\+Refs\+\_\+\+: Array of player body references.
+\item players\+\_\+\+Colliders\+Refs\+\_\+\+: Array of player collider references.
+\item players\+\_\+grounded\+\_\+\+Body\+Refs\+\_\+\+: Array of grounded player body references.
+\item players\+\_\+grounded\+\_\+\+Colliders\+Refs\+\_\+\+: Array of grounded player collider references.
+\item projectiles\+\_\+\+: Array of \doxylink{struct_projectile}{Projectile} structs representing projectiles. 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_manager_a629775380c8ead1b71abb3970bf0678f}\label{class_player_manager_a629775380c8ead1b71abb3970bf0678f} 
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{PlayerManager()}{PlayerManager()}}
+{\footnotesize\ttfamily Player\+Manager\+::\+Player\+Manager (\begin{DoxyParamCaption}\item[{Physics\+::\+World \texorpdfstring{$\ast$}{*}}]{world\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_player_manager}{Player\+Manager} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+\_\+} & Pointer to the physics world for simulating game physics. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_manager_a3419fc3843f4284392979a3abedbfb68}\label{class_player_manager_a3419fc3843f4284392979a3abedbfb68} 
+\index{PlayerManager@{PlayerManager}!Attack@{Attack}}
+\index{Attack@{Attack}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Attack (\begin{DoxyParamCaption}\item[{int}]{player\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+Initiates an attack action for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+\_\+idx} & Index of the player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a3adb7b0c030cb9cec25e220753763faa}\label{class_player_manager_a3adb7b0c030cb9cec25e220753763faa} 
+\index{PlayerManager@{PlayerManager}!Decelerate@{Decelerate}}
+\index{Decelerate@{Decelerate}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{Decelerate()}{Decelerate()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Decelerate (\begin{DoxyParamCaption}\item[{int}]{player\+Idx }\end{DoxyParamCaption})}
+
+
+
+Initiates a deceleration action for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Idx} & Index of the player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_ac6d85f2c16ce87c1ec23ec6f76033446}\label{class_player_manager_ac6d85f2c16ce87c1ec23ec6f76033446} 
+\index{PlayerManager@{PlayerManager}!GetNewProjectile@{GetNewProjectile}}
+\index{GetNewProjectile@{GetNewProjectile}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{GetNewProjectile()}{GetNewProjectile()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Get\+New\+Projectile (\begin{DoxyParamCaption}\item[{int}]{player\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+Creates a new projectile for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+\_\+idx} & Index of the player launching the projectile. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a0aad056f4e56fafeffac580d35361faf}\label{class_player_manager_a0aad056f4e56fafeffac580d35361faf} 
+\index{PlayerManager@{PlayerManager}!GetPlayerPosition@{GetPlayerPosition}}
+\index{GetPlayerPosition@{GetPlayerPosition}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{GetPlayerPosition()}{GetPlayerPosition()}}
+{\footnotesize\ttfamily Math\+::\+Vec2F Player\+Manager\+::\+Get\+Player\+Position (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Retrieves the position of the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & Index of the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Math\+::\+Vec2F Position of the player. 
+\end{DoxyReturn}
+\Hypertarget{class_player_manager_a32e00aecda80bc0f7ca487bfdd9a2efb}\label{class_player_manager_a32e00aecda80bc0f7ca487bfdd9a2efb} 
+\index{PlayerManager@{PlayerManager}!GetProjectilePosition@{GetProjectilePosition}}
+\index{GetProjectilePosition@{GetProjectilePosition}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{GetProjectilePosition()}{GetProjectilePosition()}}
+{\footnotesize\ttfamily Math\+::\+Vec2F Player\+Manager\+::\+Get\+Projectile\+Position (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Retrieves the position of the specified projectile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & Index of the projectile. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Math\+::\+Vec2F Position of the projectile. 
+\end{DoxyReturn}
+\Hypertarget{class_player_manager_afad2eb0eb6c99bbf06b3c6f152ee9602}\label{class_player_manager_afad2eb0eb6c99bbf06b3c6f152ee9602} 
+\index{PlayerManager@{PlayerManager}!InitProjectiles@{InitProjectiles}}
+\index{InitProjectiles@{InitProjectiles}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{InitProjectiles()}{InitProjectiles()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Init\+Projectiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes projectile entities within the game world. 
+
+\Hypertarget{class_player_manager_afcd928a73d60d7af0565c62408192c3e}\label{class_player_manager_afcd928a73d60d7af0565c62408192c3e} 
+\index{PlayerManager@{PlayerManager}!Jump@{Jump}}
+\index{Jump@{Jump}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{Jump()}{Jump()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Jump (\begin{DoxyParamCaption}\item[{int}]{player\+Idx }\end{DoxyParamCaption})}
+
+
+
+Initiates a jump action for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Idx} & Index of the player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a26204d9ad952fd4066a2d955d591f723}\label{class_player_manager_a26204d9ad952fd4066a2d955d591f723} 
+\index{PlayerManager@{PlayerManager}!Move@{Move}}
+\index{Move@{Move}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Move (\begin{DoxyParamCaption}\item[{bool}]{right\+Direction,  }\item[{int}]{player\+Idx }\end{DoxyParamCaption})}
+
+
+
+Initiates a movement action for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em right\+Direction} & Flag indicating the movement direction (true for right, false for left). \\
+\hline
+{\em player\+Idx} & Index of the player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a1c0ed336ac50acded32919c8d0d1c3e5}\label{class_player_manager_a1c0ed336ac50acded32919c8d0d1c3e5} 
+\index{PlayerManager@{PlayerManager}!OnCollisionEnter@{OnCollisionEnter}}
+\index{OnCollisionEnter@{OnCollisionEnter}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{OnCollisionEnter()}{OnCollisionEnter()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+On\+Collision\+Enter (\begin{DoxyParamCaption}\item[{Physics\+::\+Collider}]{colliderA,  }\item[{Physics\+::\+Collider}]{colliderB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+Handles collision event detection when colliders enter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em colliderA} & Collider of the first object. \\
+\hline
+{\em colliderB} & Collider of the second object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a8d511a09c22e515fa0a8a40f25bcca11}\label{class_player_manager_a8d511a09c22e515fa0a8a40f25bcca11} 
+\index{PlayerManager@{PlayerManager}!OnCollisionExit@{OnCollisionExit}}
+\index{OnCollisionExit@{OnCollisionExit}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{OnCollisionExit()}{OnCollisionExit()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+On\+Collision\+Exit (\begin{DoxyParamCaption}\item[{Physics\+::\+Collider}]{colliderA,  }\item[{Physics\+::\+Collider}]{colliderB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+Handles collision event detection when colliders exit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em colliderA} & Collider of the first object. \\
+\hline
+{\em colliderB} & Collider of the second object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a32939aec07c16902039c5ef3ce097830}\label{class_player_manager_a32939aec07c16902039c5ef3ce097830} 
+\index{PlayerManager@{PlayerManager}!OnTriggerEnter@{OnTriggerEnter}}
+\index{OnTriggerEnter@{OnTriggerEnter}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{OnTriggerEnter()}{OnTriggerEnter()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+On\+Trigger\+Enter (\begin{DoxyParamCaption}\item[{Physics\+::\+Collider}]{colliderA,  }\item[{Physics\+::\+Collider}]{colliderB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+Handles trigger event detection when colliders enter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em colliderA} & Collider of the first object. \\
+\hline
+{\em colliderB} & Collider of the second object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a7957bd74d0b2f7abe01233319e4d5b89}\label{class_player_manager_a7957bd74d0b2f7abe01233319e4d5b89} 
+\index{PlayerManager@{PlayerManager}!OnTriggerExit@{OnTriggerExit}}
+\index{OnTriggerExit@{OnTriggerExit}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{OnTriggerExit()}{OnTriggerExit()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+On\+Trigger\+Exit (\begin{DoxyParamCaption}\item[{Physics\+::\+Collider}]{colliderA,  }\item[{Physics\+::\+Collider}]{colliderB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+Handles trigger event detection when colliders exit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em colliderA} & Collider of the first object. \\
+\hline
+{\em colliderB} & Collider of the second object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a0bb9ec0f86cdb2784ae6697f6e5f2206}\label{class_player_manager_a0bb9ec0f86cdb2784ae6697f6e5f2206} 
+\index{PlayerManager@{PlayerManager}!ProjectileTriggerDetection@{ProjectileTriggerDetection}}
+\index{ProjectileTriggerDetection@{ProjectileTriggerDetection}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{ProjectileTriggerDetection()}{ProjectileTriggerDetection()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Projectile\+Trigger\+Detection (\begin{DoxyParamCaption}\item[{Physics\+::\+Collider}]{colliderA,  }\item[{Physics\+::\+Collider}]{colliderB,  }\item[{\mbox{\hyperlink{struct_projectile}{Projectile}} \&}]{projectile }\end{DoxyParamCaption})}
+
+
+
+Handles projectile trigger event detection when colliders enter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em colliderA} & Collider of the first object. \\
+\hline
+{\em colliderB} & Collider of the second object. \\
+\hline
+{\em projectile} & Reference to the projectile involved in the trigger event. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_manager_a715c92b4a249896c261711c09761a459}\label{class_player_manager_a715c92b4a249896c261711c09761a459} 
+\index{PlayerManager@{PlayerManager}!ResetProjectiles@{ResetProjectiles}}
+\index{ResetProjectiles@{ResetProjectiles}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{ResetProjectiles()}{ResetProjectiles()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Reset\+Projectiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets the state of all projectiles within the game world. 
+
+\Hypertarget{class_player_manager_a83170de4a8a8c13393f749fcf1b3dc26}\label{class_player_manager_a83170de4a8a8c13393f749fcf1b3dc26} 
+\index{PlayerManager@{PlayerManager}!ResetState@{ResetState}}
+\index{ResetState@{ResetState}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{ResetState()}{ResetState()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Reset\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets the state of the player manager, including player entities and projectiles. 
+
+\Hypertarget{class_player_manager_aeef261dc9ba3ec83fec68d0013b02387}\label{class_player_manager_aeef261dc9ba3ec83fec68d0013b02387} 
+\index{PlayerManager@{PlayerManager}!SetUp@{SetUp}}
+\index{SetUp@{SetUp}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{SetUp()}{SetUp()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Set\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create player entities within the game world. 
+
+\Hypertarget{class_player_manager_a52c97db81d46cf9d1da6e6cace3215fd}\label{class_player_manager_a52c97db81d46cf9d1da6e6cace3215fd} 
+\index{PlayerManager@{PlayerManager}!Update@{Update}}
+\index{Update@{Update}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Player\+Manager\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates player entities and their interactions within the game world. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_player_manager_ae9cfc960bb60045516a19df070281c96}\label{class_player_manager_ae9cfc960bb60045516a19df070281c96} 
+\index{PlayerManager@{PlayerManager}!gravity\_@{gravity\_}}
+\index{gravity\_@{gravity\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{gravity\_}{gravity\_}}
+{\footnotesize\ttfamily constexpr float Player\+Manager\+::gravity\+\_\+ = 1000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f}\label{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f} 
+\index{PlayerManager@{PlayerManager}!max\_projectile\_@{max\_projectile\_}}
+\index{max\_projectile\_@{max\_projectile\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{max\_projectile\_}{max\_projectile\_}}
+{\footnotesize\ttfamily constexpr std\+::int16\+\_\+t Player\+Manager\+::max\+\_\+projectile\+\_\+ = 80\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{class_player_manager_a72ebf2e62e0f20d3e884d0d47ea0076e}\label{class_player_manager_a72ebf2e62e0f20d3e884d0d47ea0076e} 
+\index{PlayerManager@{PlayerManager}!players@{players}}
+\index{players@{players}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{players}{players}}
+{\footnotesize\ttfamily std\+::array$<$\mbox{\hyperlink{struct_player}{Player}}, nbr\+\_\+player\+\_\+$>$ Player\+Manager\+::players}
+
+\Hypertarget{class_player_manager_a94b8bfc45277cded5e90864b02761768}\label{class_player_manager_a94b8bfc45277cded5e90864b02761768} 
+\index{PlayerManager@{PlayerManager}!players\_BodyRefs\_@{players\_BodyRefs\_}}
+\index{players\_BodyRefs\_@{players\_BodyRefs\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{players\_BodyRefs\_}{players\_BodyRefs\_}}
+{\footnotesize\ttfamily std\+::array$<$Physics\+::\+Body\+Ref, nbr\+\_\+player\+\_\+$>$ Player\+Manager\+::players\+\_\+\+Body\+Refs\+\_\+}
+
+\Hypertarget{class_player_manager_ad43741261f7b053edddabba24a059b6d}\label{class_player_manager_ad43741261f7b053edddabba24a059b6d} 
+\index{PlayerManager@{PlayerManager}!players\_CollidersRefs\_@{players\_CollidersRefs\_}}
+\index{players\_CollidersRefs\_@{players\_CollidersRefs\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{players\_CollidersRefs\_}{players\_CollidersRefs\_}}
+{\footnotesize\ttfamily std\+::array$<$Physics\+::\+Collider\+Ref, nbr\+\_\+player\+\_\+$>$ Player\+Manager\+::players\+\_\+\+Colliders\+Refs\+\_\+}
+
+\Hypertarget{class_player_manager_a14a7eb88b460eb3ae45440fab7cbaca8}\label{class_player_manager_a14a7eb88b460eb3ae45440fab7cbaca8} 
+\index{PlayerManager@{PlayerManager}!players\_grounded\_BodyRefs\_@{players\_grounded\_BodyRefs\_}}
+\index{players\_grounded\_BodyRefs\_@{players\_grounded\_BodyRefs\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{players\_grounded\_BodyRefs\_}{players\_grounded\_BodyRefs\_}}
+{\footnotesize\ttfamily std\+::array$<$Physics\+::\+Body\+Ref, nbr\+\_\+player\+\_\+$>$ Player\+Manager\+::players\+\_\+grounded\+\_\+\+Body\+Refs\+\_\+}
+
+\Hypertarget{class_player_manager_a05bcf46384a8cf0963c2fdc2d29dc526}\label{class_player_manager_a05bcf46384a8cf0963c2fdc2d29dc526} 
+\index{PlayerManager@{PlayerManager}!players\_grounded\_CollidersRefs\_@{players\_grounded\_CollidersRefs\_}}
+\index{players\_grounded\_CollidersRefs\_@{players\_grounded\_CollidersRefs\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{players\_grounded\_CollidersRefs\_}{players\_grounded\_CollidersRefs\_}}
+{\footnotesize\ttfamily std\+::array$<$Physics\+::\+Collider\+Ref, nbr\+\_\+player\+\_\+$>$ Player\+Manager\+::players\+\_\+grounded\+\_\+\+Colliders\+Refs\+\_\+}
+
+\Hypertarget{class_player_manager_a3f3c0350cb5996671518eda7fc3722fa}\label{class_player_manager_a3f3c0350cb5996671518eda7fc3722fa} 
+\index{PlayerManager@{PlayerManager}!projectiles\_@{projectiles\_}}
+\index{projectiles\_@{projectiles\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{projectiles\_}{projectiles\_}}
+{\footnotesize\ttfamily std\+::array$<$\mbox{\hyperlink{struct_projectile}{Projectile}}, \mbox{\hyperlink{class_player_manager_abc4f5bb38665acea1b38e9ca58713c2f}{max\+\_\+projectile\+\_\+}}$>$ Player\+Manager\+::projectiles\+\_\+ \{\}}
+
+\Hypertarget{class_player_manager_a74bd74f4543f35f4179bda138071f2ac}\label{class_player_manager_a74bd74f4543f35f4179bda138071f2ac} 
+\index{PlayerManager@{PlayerManager}!rope\_gravity\_@{rope\_gravity\_}}
+\index{rope\_gravity\_@{rope\_gravity\_}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{rope\_gravity\_}{rope\_gravity\_}}
+{\footnotesize\ttfamily constexpr float Player\+Manager\+::rope\+\_\+gravity\+\_\+ = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_player_manager_8h}{Player\+Manager.\+h}}\item 
+src/\mbox{\hyperlink{_player_manager_8cpp}{Player\+Manager.\+cpp}}\end{DoxyCompactItemize}

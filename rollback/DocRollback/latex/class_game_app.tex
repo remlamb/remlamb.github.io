@@ -1,0 +1,200 @@
+\doxysection{Game\+App Class Reference}
+\hypertarget{class_game_app}{}\label{class_game_app}\index{GameApp@{GameApp}}
+
+
+Represents the main game application.  
+
+
+
+
+{\ttfamily \#include $<$Game\+App.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_app_af1947ab6484c33e742532f8ddd4abdc7}{Init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game application, create Window, init logic, manager and renderer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_app_adf74df312a15cc1867306973f58af394}{Init\+Imgui}} ()
+\begin{DoxyCompactList}\small\item\em Initializes Dear Im\+Gui for the game interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_app_aed497aa2b1b20a3bcb77c994df04624e}{Draw\+Imgui}} ()
+\begin{DoxyCompactList}\small\item\em Draws the Dear Im\+Gui interface according to the current game state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_app_a2961d26d9353a490004ec386d4a81e15}{Deinit}} ()
+\begin{DoxyCompactList}\small\item\em Deinitializes the game application. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_app_a7497449978498eee4715fadc8a27bdf2}{Loop}} (void)
+\begin{DoxyCompactList}\small\item\em Runs the main game loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}} \mbox{\hyperlink{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95}{rollback\+\_\+manager}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\+\_\+logic}}
+\item 
+\mbox{\hyperlink{class_renderer}{Renderer}} \mbox{\hyperlink{class_game_app_afe53ab2f80a1c409b82500abe20b0857}{game\+\_\+renderer}}
+\item 
+\mbox{\hyperlink{class_audio_manager}{Audio\+Manager}} \mbox{\hyperlink{class_game_app_a1725404eb89d05b1b54cfeaf3a3f4101}{audio\+\_\+manager}}
+\item 
+Exit\+Games\+::\+Common\+::\+JString \mbox{\hyperlink{class_game_app_a0d5c41b798e326e9e844bb02d657f63b}{app\+ID}}
+\item 
+Exit\+Games\+::\+Common\+::\+JString \mbox{\hyperlink{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55}{app\+Version}}
+\item 
+\mbox{\hyperlink{class_network_logic}{Network\+Logic}} \mbox{\hyperlink{class_game_app_a232068ac22367d0512919e2f1c94392d}{network\+\_\+logic}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the main game application. 
+
+The \doxylink{class_game_app}{Game\+App} class manages the main game loop, initialization, and deinitialization of various game components including game logic, rendering, audio, and networking. It also handles user interface interactions using Dear Im\+Gui for displaying menus and game options.
+
+Variables\+:
+\begin{DoxyItemize}
+\item is\+\_\+collider\+\_\+visible\+\_\+\+: Indicates whether collider shapes are visible.
+\item is\+\_\+game\+\_\+option\+\_\+visible\+\_\+ \+: Indicates whether the game options menu is visible.
+\item app\+ID\+: The application ID for networking purposes.
+\item app\+Version\+: The application version for networking purposes.
+\item rollback\+\_\+manager\+: Manages game state rollback for network synchronization.
+\item game\+\_\+logic\+: Manages the game logic and state.
+\item game\+\_\+renderer\+: Handles rendering of the game world.
+\item audio\+\_\+manager\+: Manages audio playback and volume settings.
+\item network\+Logic\+\_\+\+: Handles networking logic and communication. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_app_a2961d26d9353a490004ec386d4a81e15}\label{class_game_app_a2961d26d9353a490004ec386d4a81e15} 
+\index{GameApp@{GameApp}!Deinit@{Deinit}}
+\index{Deinit@{Deinit}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{Deinit()}{Deinit()}}
+{\footnotesize\ttfamily void Game\+App\+::\+Deinit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deinitializes the game application. 
+
+\Hypertarget{class_game_app_aed497aa2b1b20a3bcb77c994df04624e}\label{class_game_app_aed497aa2b1b20a3bcb77c994df04624e} 
+\index{GameApp@{GameApp}!DrawImgui@{DrawImgui}}
+\index{DrawImgui@{DrawImgui}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{DrawImgui()}{DrawImgui()}}
+{\footnotesize\ttfamily void Game\+App\+::\+Draw\+Imgui (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the Dear Im\+Gui interface according to the current game state. 
+
+\Hypertarget{class_game_app_af1947ab6484c33e742532f8ddd4abdc7}\label{class_game_app_af1947ab6484c33e742532f8ddd4abdc7} 
+\index{GameApp@{GameApp}!Init@{Init}}
+\index{Init@{Init}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Game\+App\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the game application, create Window, init logic, manager and renderer. 
+
+\Hypertarget{class_game_app_adf74df312a15cc1867306973f58af394}\label{class_game_app_adf74df312a15cc1867306973f58af394} 
+\index{GameApp@{GameApp}!InitImgui@{InitImgui}}
+\index{InitImgui@{InitImgui}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{InitImgui()}{InitImgui()}}
+{\footnotesize\ttfamily void Game\+App\+::\+Init\+Imgui (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes Dear Im\+Gui for the game interface. 
+
+\Hypertarget{class_game_app_a7497449978498eee4715fadc8a27bdf2}\label{class_game_app_a7497449978498eee4715fadc8a27bdf2} 
+\index{GameApp@{GameApp}!Loop@{Loop}}
+\index{Loop@{Loop}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{Loop()}{Loop()}}
+{\footnotesize\ttfamily void Game\+App\+::\+Loop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Runs the main game loop. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_app_a0d5c41b798e326e9e844bb02d657f63b}\label{class_game_app_a0d5c41b798e326e9e844bb02d657f63b} 
+\index{GameApp@{GameApp}!appID@{appID}}
+\index{appID@{appID}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{appID}{appID}}
+{\footnotesize\ttfamily Exit\+Games\+::\+Common\+::\+JString Game\+App\+::app\+ID}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ L\textcolor{stringliteral}{"{}d7a7fb07-\/5b89-\/4563-\/af7f-\/a83778fe14f8"{}}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55}\label{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55} 
+\index{GameApp@{GameApp}!appVersion@{appVersion}}
+\index{appVersion@{appVersion}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{appVersion}{appVersion}}
+{\footnotesize\ttfamily Exit\+Games\+::\+Common\+::\+JString Game\+App\+::app\+Version}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ L\textcolor{stringliteral}{"{}1.0"{}}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_a1725404eb89d05b1b54cfeaf3a3f4101}\label{class_game_app_a1725404eb89d05b1b54cfeaf3a3f4101} 
+\index{GameApp@{GameApp}!audio\_manager@{audio\_manager}}
+\index{audio\_manager@{audio\_manager}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{audio\_manager}{audio\_manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}} Game\+App\+::audio\+\_\+manager}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}}\}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_a3f174c95689b1298ca56238a4e434624}\label{class_game_app_a3f174c95689b1298ca56238a4e434624} 
+\index{GameApp@{GameApp}!game\_logic@{game\_logic}}
+\index{game\_logic@{game\_logic}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{game\_logic}{game\_logic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} Game\+App\+::game\+\_\+logic}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95}{rollback\_manager}}\}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_afe53ab2f80a1c409b82500abe20b0857}\label{class_game_app_afe53ab2f80a1c409b82500abe20b0857} 
+\index{GameApp@{GameApp}!game\_renderer@{game\_renderer}}
+\index{game\_renderer@{game\_renderer}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{game\_renderer}{game\_renderer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_renderer}{Renderer}} Game\+App\+::game\+\_\+renderer}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}},\ \&\mbox{\hyperlink{class_game_app_a232068ac22367d0512919e2f1c94392d}{network\_logic}}\}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_a232068ac22367d0512919e2f1c94392d}\label{class_game_app_a232068ac22367d0512919e2f1c94392d} 
+\index{GameApp@{GameApp}!network\_logic@{network\_logic}}
+\index{network\_logic@{network\_logic}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{network\_logic}{network\_logic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_network_logic}{Network\+Logic}} Game\+App\+::network\+\_\+logic}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{class_game_app_a0d5c41b798e326e9e844bb02d657f63b}{appID}},\ \mbox{\hyperlink{class_game_app_aeb64c688945acc1e0f2d7c6d7ee86f55}{appVersion}},}
+\DoxyCodeLine{\ \ \ \ \ \ \&\mbox{\hyperlink{class_game_app_a3f174c95689b1298ca56238a4e434624}{game\_logic}}\}}
+
+\end{DoxyCode}
+\Hypertarget{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95}\label{class_game_app_ae1e5c64e867cefeaf0a4598ba01dcb95} 
+\index{GameApp@{GameApp}!rollback\_manager@{rollback\_manager}}
+\index{rollback\_manager@{rollback\_manager}!GameApp@{GameApp}}
+\doxysubsubsection{\texorpdfstring{rollback\_manager}{rollback\_manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_rollback_manager}{Rollback\+Manager}} Game\+App\+::rollback\+\_\+manager}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_game_app_8h}{Game\+App.\+h}}\item 
+src/\mbox{\hyperlink{_game_app_8cpp}{Game\+App.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\doxysection{Renderer Class Reference}
+\hypertarget{class_renderer}{}\label{class_renderer}\index{Renderer@{Renderer}}
+
+
+Manages rendering operations for the game.  
+
+
+
+
+{\ttfamily \#include $<$Renderer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_renderer_a3fc770ad11917ba263b3fd108c6509e5}{Renderer}} (\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}gl, \mbox{\hyperlink{class_network_logic}{Network\+Logic}} \texorpdfstring{$\ast$}{*}network\+\_\+logic)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_renderer}{Renderer} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a3b850769d09577e1a07d5e8f87fbabfb}{Init}} () noexcept
+\begin{DoxyCompactList}\small\item\em Initializes the renderer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a983f485889b00f2bcd2e00a2ed309757}{Draw}} (bool is\+Collider\+Visible) noexcept
+\begin{DoxyCompactList}\small\item\em Draws the game scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a8d24994c2ab4b92485d405e7fadde40d}{Deinit}} () noexcept
+\begin{DoxyCompactList}\small\item\em Deinitializes the renderer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages rendering operations for the game. 
+
+This class handles rendering tasks such as drawing player entities, projectiles, platforms, background, UI elements, and debug collider shapes. It provides methods to initialize and deinitialize the renderer, as well as to draw the game scene with optional collider visibility for debugging purposes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_renderer_a3fc770ad11917ba263b3fd108c6509e5}\label{class_renderer_a3fc770ad11917ba263b3fd108c6509e5} 
+\index{Renderer@{Renderer}!Renderer@{Renderer}}
+\index{Renderer@{Renderer}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Renderer()}{Renderer()}}
+{\footnotesize\ttfamily Renderer\+::\+Renderer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}}]{gl,  }\item[{\mbox{\hyperlink{class_network_logic}{Network\+Logic}} \texorpdfstring{$\ast$}{*}}]{network\+\_\+logic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \doxylink{class_renderer}{Renderer} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gl} & Pointer to the Game\+Logic object. \\
+\hline
+{\em network\+\_\+logic} & Pointer to the \doxylink{class_network_logic}{Network\+Logic} object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_renderer_a8d24994c2ab4b92485d405e7fadde40d}\label{class_renderer_a8d24994c2ab4b92485d405e7fadde40d} 
+\index{Renderer@{Renderer}!Deinit@{Deinit}}
+\index{Deinit@{Deinit}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Deinit()}{Deinit()}}
+{\footnotesize\ttfamily void Renderer\+::\+Deinit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Deinitializes the renderer. 
+
+\Hypertarget{class_renderer_a983f485889b00f2bcd2e00a2ed309757}\label{class_renderer_a983f485889b00f2bcd2e00a2ed309757} 
+\index{Renderer@{Renderer}!Draw@{Draw}}
+\index{Draw@{Draw}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Renderer\+::\+Draw (\begin{DoxyParamCaption}\item[{bool}]{is\+Collider\+Visible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Draws the game scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Collider\+Visible} & Flag indicating whether collider shapes should be visible for debugging. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_renderer_a3b850769d09577e1a07d5e8f87fbabfb}\label{class_renderer_a3b850769d09577e1a07d5e8f87fbabfb} 
+\index{Renderer@{Renderer}!Init@{Init}}
+\index{Init@{Init}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Renderer\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Initializes the renderer. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_renderer_8h}{Renderer.\+h}}\item 
+src/\mbox{\hyperlink{_renderer_8cpp}{Renderer.\+cpp}}\end{DoxyCompactItemize}

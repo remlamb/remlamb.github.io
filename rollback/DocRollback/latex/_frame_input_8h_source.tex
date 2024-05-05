@@ -1,0 +1,58 @@
+\doxysection{Frame\+Input.\+h}
+\hypertarget{_frame_input_8h_source}{}\label{_frame_input_8h_source}\index{include/FrameInput.h@{include/FrameInput.h}}
+\mbox{\hyperlink{_frame_input_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Common-\/cpp/inc/CustomType.h>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Vec2.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_input}{Input}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{constexpr}\ std::uint8\_t\ \mbox{\hyperlink{namespace_input_a1b80600a5678721b403bfbf526192f2d}{kJump}}\ =\ 1\ <<\ 0;\ \ \ \ \textcolor{comment}{//\ Flag\ for\ jump\ action.}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{constexpr}\ std::uint8\_t\ \mbox{\hyperlink{namespace_input_a282bc449833080778c8d839484ace2df}{kRight}}\ =\ 1\ <<\ 1;\ \ \ \textcolor{comment}{//\ Flag\ for\ moving\ right.}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{constexpr}\ std::uint8\_t\ \mbox{\hyperlink{namespace_input_a5a914453fe24b7ce1cfbeaf3e7b80baf}{kLeft}}\ =\ 1\ <<\ 2;\ \ \ \ \textcolor{comment}{//\ Flag\ for\ moving\ left.}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{constexpr}\ std::uint8\_t\ \mbox{\hyperlink{namespace_input_a2b3cbc217f747ac57ea98a1181d6a34b}{kAttack}}\ =\ 1\ <<\ 3;\ \ \textcolor{comment}{//\ Flag\ for\ attacking.}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\ final\ :\ \textcolor{keyword}{public}\ ExitGames::Common::CustomType<FrameInput,\ 1>\ \{}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{typedef}\ CustomType<FrameInput,\ 1>\ super;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input_aee7849ee473de452c50bc7802657a913}{FrameInput}}()\ noexcept\ =\ default;\ \ \textcolor{comment}{//\ Default\ constructor.}}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}(Math::Vec2F\ dir\_to\_mouse,\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74}{frame\_nbr}},}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ std::uint8\_t\ \mbox{\hyperlink{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc}{input}})\ noexcept;\ \ \textcolor{comment}{//\ Constructor\ with\ parameters.}}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}(\mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\&\ toMove)\ noexcept\ =\ default;\ \ \textcolor{comment}{//\ Move\ constructor.}}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\ operator=(\mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\&\ toMove)\ noexcept\ =}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ default;\ \ \textcolor{comment}{//\ Move\ assignment\ operator.}}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}(const\ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\ toCopy)\ noexcept\ =\ default;\ \ \textcolor{comment}{//\ Copy\ constructor.}}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\ operator=(const\ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\ toCopy)\ noexcept\ =}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ assignment\ operator.}}
+\DoxyCodeLine{00040\ \ \ \string~\mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}()\ override\ =\ default;\ \ \textcolor{comment}{//\ Destructor.}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//\ Methods\ for\ CustomType\ implementation}}
+\DoxyCodeLine{00043\ \ \ ExitGames::Common::JString\&\ \mbox{\hyperlink{class_input_1_1_frame_input_a848750a4f009f972666af61f5dd245b6}{toString}}(}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ ExitGames::Common::JString\&\ retStr,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ withTypes)\ const\ override;\ \ \textcolor{comment}{//\ Converts\ object\ to\ string.}}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_input_1_1_frame_input_a411ee75494d0f0edd9f98edbc12987f9}{compare}}(const\ CustomTypeBase\&\ other)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ const\ override;\ \ \textcolor{comment}{//\ Compares\ with\ another\ object.}}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_1_1_frame_input_ab2d8c35ac813f54dac85c3f61db5cfbf}{deserialize}}(const\ nByte*\ pData,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{short}\ length)\ override;\ \ \textcolor{comment}{//\ Deserializes\ object\ from\ data.}}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_input_1_1_frame_input_a3b508ec1c427490e73a4e18d3bbf5538}{serialize}}(nByte*\ pRetVal)\ const\ override;\ \ \textcolor{comment}{//\ Serializes\ object\ to\ data.}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_1_1_frame_input_a969ada1c4902c55c64378d766329d11f}{duplicate}}(CustomTypeBase*\ pRetVal)\ const\ override;\ \ \textcolor{comment}{//\ Duplicates\ object.}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{bool}\ operator==(}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ const\ \mbox{\hyperlink{class_input_1_1_frame_input}{FrameInput}}\&\ other)\ const\ noexcept;\ \ \textcolor{comment}{//\ Equality\ comparison\ operator.}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_1_1_frame_input_a7b1fecafb99faf5d2b442bda17eba5d8}{UpdatePlayerInputs}}();\ \ \textcolor{comment}{//\ Updates\ player\ inputs\ based\ on\ keyboard\ and\ gamepad\ states.}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{class_input_1_1_frame_input_af73a26bb52f9a7ad0ad1fb8a28efdd74}{frame\_nbr}}\ =\ 0;\ \ \textcolor{comment}{//\ The\ frame\ number\ associated\ with\ the\ input.}}
+\DoxyCodeLine{00059\ \ \ std::uint8\_t\ \mbox{\hyperlink{class_input_1_1_frame_input_a1f8b43b711d4d4ee2efc9ec47b482dfc}{input}}\ =}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ 0;\ \ \textcolor{comment}{//\ Flags\ representing\ player\ input\ actions\ for\ the\ frame.}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ static\ nByte}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \mbox{\hyperlink{class_input_1_1_frame_input_aeae628a9c0f8e5894def4d78c450dd6f}{serialization\_protocol}};\ \ \textcolor{comment}{//\ Serialization\ protocol\ for\ FrameInput\ objects.}}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ \}\ \ \textcolor{comment}{//\ namespace\ Input}}
+
+\end{DoxyCode}

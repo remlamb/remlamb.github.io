@@ -1,0 +1,83 @@
+\doxysection{Player Struct Reference}
+\hypertarget{struct_player}{}\label{struct_player}\index{Player@{Player}}
+
+
+Represents value shared with other clients of player entity in the game.  
+
+
+
+
+{\ttfamily \#include $<$Player\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{struct_player_a21273287bcfee53c6f184ce960c0bdd6}{is\+\_\+grounded}} = false
+\item 
+bool \mbox{\hyperlink{struct_player_ab3a944ce0708310e7bbb843c0f774c50}{is\+\_\+projectile\+\_\+ready}} = true
+\item 
+int \mbox{\hyperlink{struct_player_abfb1ad9af051376b05f400d5ceef159e}{trigger\+\_\+nbr}} = 0
+\item 
+int \mbox{\hyperlink{struct_player_a72ca093505ec16fba4c4990d4696b0a7}{life\+\_\+point}} = 5
+\item 
+float \mbox{\hyperlink{struct_player_a680bd6ae92d16514c515ac8d169457cc}{attack\+\_\+timer}} = 0.\+0f
+\item 
+std\+::uint8\+\_\+t \mbox{\hyperlink{struct_player_a232e3b118c7aaeed6358a43201d1daa1}{input}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents value shared with other clients of player entity in the game. 
+
+Member Variables\+:
+\begin{DoxyItemize}
+\item is\+\_\+grounded\+: Flag indicating whether the player is grounded or not.
+\item is\+\_\+projectile\+\_\+ready\+: Flag indicating whether the player is ready to launch a projectile.
+\item trigger\+\_\+nbr\+: Number of trigger events detected by the player.
+\item life\+\_\+point\+: Remaining life points of the player.
+\item attack\+\_\+timer\+: Time remaining until the player can perform another attack.
+\item input\+: \doxylink{namespace_input}{Input} data for the player. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_player_a680bd6ae92d16514c515ac8d169457cc}\label{struct_player_a680bd6ae92d16514c515ac8d169457cc} 
+\index{Player@{Player}!attack\_timer@{attack\_timer}}
+\index{attack\_timer@{attack\_timer}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{attack\_timer}{attack\_timer}}
+{\footnotesize\ttfamily float Player\+::attack\+\_\+timer = 0.\+0f}
+
+\Hypertarget{struct_player_a232e3b118c7aaeed6358a43201d1daa1}\label{struct_player_a232e3b118c7aaeed6358a43201d1daa1} 
+\index{Player@{Player}!input@{input}}
+\index{input@{input}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily std\+::uint8\+\_\+t Player\+::input}
+
+\Hypertarget{struct_player_a21273287bcfee53c6f184ce960c0bdd6}\label{struct_player_a21273287bcfee53c6f184ce960c0bdd6} 
+\index{Player@{Player}!is\_grounded@{is\_grounded}}
+\index{is\_grounded@{is\_grounded}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{is\_grounded}{is\_grounded}}
+{\footnotesize\ttfamily bool Player\+::is\+\_\+grounded = false}
+
+\Hypertarget{struct_player_ab3a944ce0708310e7bbb843c0f774c50}\label{struct_player_ab3a944ce0708310e7bbb843c0f774c50} 
+\index{Player@{Player}!is\_projectile\_ready@{is\_projectile\_ready}}
+\index{is\_projectile\_ready@{is\_projectile\_ready}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{is\_projectile\_ready}{is\_projectile\_ready}}
+{\footnotesize\ttfamily bool Player\+::is\+\_\+projectile\+\_\+ready = true}
+
+\Hypertarget{struct_player_a72ca093505ec16fba4c4990d4696b0a7}\label{struct_player_a72ca093505ec16fba4c4990d4696b0a7} 
+\index{Player@{Player}!life\_point@{life\_point}}
+\index{life\_point@{life\_point}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{life\_point}{life\_point}}
+{\footnotesize\ttfamily int Player\+::life\+\_\+point = 5}
+
+\Hypertarget{struct_player_abfb1ad9af051376b05f400d5ceef159e}\label{struct_player_abfb1ad9af051376b05f400d5ceef159e} 
+\index{Player@{Player}!trigger\_nbr@{trigger\_nbr}}
+\index{trigger\_nbr@{trigger\_nbr}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{trigger\_nbr}{trigger\_nbr}}
+{\footnotesize\ttfamily int Player\+::trigger\+\_\+nbr = 0}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_player_manager_8h}{Player\+Manager.\+h}}\end{DoxyCompactItemize}

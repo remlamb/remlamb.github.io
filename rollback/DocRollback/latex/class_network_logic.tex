@@ -1,0 +1,200 @@
+\doxysection{Network\+Logic Class Reference}
+\hypertarget{class_network_logic}{}\label{class_network_logic}\index{NetworkLogic@{NetworkLogic}}
+
+
+\doxylink{class_network_logic}{Network\+Logic} is a class responsible for managing network operations and interactions.  
+
+
+
+
+{\ttfamily \#include $<$Network\+Logic.\+h$>$}
+
+Inheritance diagram for Network\+Logic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_network_logic}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_network_logic_a952014bc9327b77be5d2d64fa6faddf8}{Network\+Logic}} (const Exit\+Games\+::\+Common\+::\+JString \&app\+ID, const Exit\+Games\+::\+Common\+::\+JString \&app\+Version, \mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}game\+\_\+logic)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_network_logic}{Network\+Logic} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_logic_a3881a56406d1cabc27a0e26b1e099d3d}{Connect}} ()
+\item 
+void \mbox{\hyperlink{class_network_logic_aaf3197156fc05639aa570d5f19163c2f}{Disconnect}} ()
+\item 
+void \mbox{\hyperlink{class_network_logic_aaabea75de307876ea70493d5133d06c7}{Run}} ()
+\item 
+void \mbox{\hyperlink{class_network_logic_a7cb2dd081d6b90d21577b09a9b486e16}{Create\+Room}} (const Exit\+Games\+::\+Common\+::\+JString \&room\+Name, n\+Byte max\+Players)
+\begin{DoxyCompactList}\small\item\em Creates a room on the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_logic_af46860cd135785859368d0ab404174ae}{Join\+Random\+Room}} (Exit\+Games\+::\+Common\+::\+Hashtable expected\+Custom\+Room\+Properties=Exit\+Games\+::\+Common\+::\+Hashtable())
+\begin{DoxyCompactList}\small\item\em Joins a random room on the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_logic_ac5181e52db5ef93249d80de12d60a896}{Join\+Random\+Or\+Create\+Room}} () noexcept
+\begin{DoxyCompactList}\small\item\em Joins a random room if available, otherwise creates a new room. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_logic_ab5db5f690bca4912d125fe22ee4e9a98}{Raise\+Event}} (bool reliable, \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}} event\+\_\+code, const Exit\+Games\+::\+Common\+::\+Hashtable \&event\+\_\+data) noexcept
+\begin{DoxyCompactList}\small\item\em Raises an event to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_logic_a0eefd352048c79d2050c8a352e6aed28}{Receive\+Event}} (int player\+\_\+nr, \mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}} event\+\_\+code, const Exit\+Games\+::\+Common\+::\+Hashtable \&event\+\_\+content) noexcept
+\begin{DoxyCompactList}\small\item\em Receives an event from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_network_logic_abcf5b9fe38a8e2d1dba0be0f9af6af0e}{is\+\_\+connected}} = false
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_network_logic_a805acc255bfbf9cea468632b6791064f}{current\+Log\+Info}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_network_logic}{Network\+Logic} is a class responsible for managing network operations and interactions. 
+
+It facilitates communication between the game client and server, handling tasks such as connecting to the server, creating and joining rooms, sending and receiving events, and managing network errors using Photon services. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_network_logic_a952014bc9327b77be5d2d64fa6faddf8}\label{class_network_logic_a952014bc9327b77be5d2d64fa6faddf8} 
+\index{NetworkLogic@{NetworkLogic}!NetworkLogic@{NetworkLogic}}
+\index{NetworkLogic@{NetworkLogic}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{NetworkLogic()}{NetworkLogic()}}
+{\footnotesize\ttfamily Network\+Logic\+::\+Network\+Logic (\begin{DoxyParamCaption}\item[{const Exit\+Games\+::\+Common\+::\+JString \&}]{app\+ID,  }\item[{const Exit\+Games\+::\+Common\+::\+JString \&}]{app\+Version,  }\item[{\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+logic }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_network_logic}{Network\+Logic} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+ID} & The application ID used for connection. \\
+\hline
+{\em app\+Version} & The application version used for connection. \\
+\hline
+{\em game\+\_\+logic} & Pointer to the game logic object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_network_logic_a3881a56406d1cabc27a0e26b1e099d3d}\label{class_network_logic_a3881a56406d1cabc27a0e26b1e099d3d} 
+\index{NetworkLogic@{NetworkLogic}!Connect@{Connect}}
+\index{Connect@{Connect}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_network_logic_a7cb2dd081d6b90d21577b09a9b486e16}\label{class_network_logic_a7cb2dd081d6b90d21577b09a9b486e16} 
+\index{NetworkLogic@{NetworkLogic}!CreateRoom@{CreateRoom}}
+\index{CreateRoom@{CreateRoom}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{CreateRoom()}{CreateRoom()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Create\+Room (\begin{DoxyParamCaption}\item[{const Exit\+Games\+::\+Common\+::\+JString \&}]{room\+Name,  }\item[{n\+Byte}]{max\+Players }\end{DoxyParamCaption})}
+
+
+
+Creates a room on the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em room\+Name} & The name of the room to be created. \\
+\hline
+{\em max\+Players} & The maximum number of players allowed in the room. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_logic_aaf3197156fc05639aa570d5f19163c2f}\label{class_network_logic_aaf3197156fc05639aa570d5f19163c2f} 
+\index{NetworkLogic@{NetworkLogic}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_network_logic_ac5181e52db5ef93249d80de12d60a896}\label{class_network_logic_ac5181e52db5ef93249d80de12d60a896} 
+\index{NetworkLogic@{NetworkLogic}!JoinRandomOrCreateRoom@{JoinRandomOrCreateRoom}}
+\index{JoinRandomOrCreateRoom@{JoinRandomOrCreateRoom}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{JoinRandomOrCreateRoom()}{JoinRandomOrCreateRoom()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Join\+Random\+Or\+Create\+Room (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Joins a random room if available, otherwise creates a new room. 
+
+\Hypertarget{class_network_logic_af46860cd135785859368d0ab404174ae}\label{class_network_logic_af46860cd135785859368d0ab404174ae} 
+\index{NetworkLogic@{NetworkLogic}!JoinRandomRoom@{JoinRandomRoom}}
+\index{JoinRandomRoom@{JoinRandomRoom}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{JoinRandomRoom()}{JoinRandomRoom()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Join\+Random\+Room (\begin{DoxyParamCaption}\item[{Exit\+Games\+::\+Common\+::\+Hashtable}]{expected\+Custom\+Room\+Properties = {\ttfamily ExitGames\+:\+:Common\+:\+:Hashtable()} }\end{DoxyParamCaption})}
+
+
+
+Joins a random room on the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expected\+Custom\+Room\+Properties} & Expected custom room properties for room matching. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_logic_ab5db5f690bca4912d125fe22ee4e9a98}\label{class_network_logic_ab5db5f690bca4912d125fe22ee4e9a98} 
+\index{NetworkLogic@{NetworkLogic}!RaiseEvent@{RaiseEvent}}
+\index{RaiseEvent@{RaiseEvent}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{RaiseEvent()}{RaiseEvent()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Raise\+Event (\begin{DoxyParamCaption}\item[{bool}]{reliable,  }\item[{\mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}}}]{event\+\_\+code,  }\item[{const Exit\+Games\+::\+Common\+::\+Hashtable \&}]{event\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Raises an event to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reliable} & Indicates whether the event transmission should be reliable. \\
+\hline
+{\em event\+\_\+code} & The code associated with the event. \\
+\hline
+{\em event\+\_\+data} & The data associated with the event. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_logic_a0eefd352048c79d2050c8a352e6aed28}\label{class_network_logic_a0eefd352048c79d2050c8a352e6aed28} 
+\index{NetworkLogic@{NetworkLogic}!ReceiveEvent@{ReceiveEvent}}
+\index{ReceiveEvent@{ReceiveEvent}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{ReceiveEvent()}{ReceiveEvent()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Receive\+Event (\begin{DoxyParamCaption}\item[{int}]{player\+\_\+nr,  }\item[{\mbox{\hyperlink{event_8h_ac16ec1decbf74315cfb4944c0561a5c7}{Event\+Code}}}]{event\+\_\+code,  }\item[{const Exit\+Games\+::\+Common\+::\+Hashtable \&}]{event\+\_\+content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Receives an event from the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+\_\+nr} & The player number associated with the event. \\
+\hline
+{\em event\+\_\+code} & The code associated with the received event. \\
+\hline
+{\em event\+\_\+content} & The content of the received event. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_logic_aaabea75de307876ea70493d5133d06c7}\label{class_network_logic_aaabea75de307876ea70493d5133d06c7} 
+\index{NetworkLogic@{NetworkLogic}!Run@{Run}}
+\index{Run@{Run}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Network\+Logic\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_network_logic_a805acc255bfbf9cea468632b6791064f}\label{class_network_logic_a805acc255bfbf9cea468632b6791064f} 
+\index{NetworkLogic@{NetworkLogic}!currentLogInfo@{currentLogInfo}}
+\index{currentLogInfo@{currentLogInfo}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{currentLogInfo}{currentLogInfo}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} Network\+Logic\+::current\+Log\+Info}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{class_network_logic_abcf5b9fe38a8e2d1dba0be0f9af6af0e}\label{class_network_logic_abcf5b9fe38a8e2d1dba0be0f9af6af0e} 
+\index{NetworkLogic@{NetworkLogic}!is\_connected@{is\_connected}}
+\index{is\_connected@{is\_connected}!NetworkLogic@{NetworkLogic}}
+\doxysubsubsection{\texorpdfstring{is\_connected}{is\_connected}}
+{\footnotesize\ttfamily bool Network\+Logic\+::is\+\_\+connected = false}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_network_logic_8h}{Network\+Logic.\+h}}\item 
+src/\mbox{\hyperlink{_network_logic_8cpp}{Network\+Logic.\+cpp}}\end{DoxyCompactItemize}

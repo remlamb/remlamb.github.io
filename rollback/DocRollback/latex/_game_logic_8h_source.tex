@@ -1,0 +1,83 @@
+\doxysection{Game\+Logic.\+h}
+\hypertarget{_game_logic_8h_source}{}\label{_game_logic_8h_source}\index{include/GameLogic.h@{include/GameLogic.h}}
+\mbox{\hyperlink{_game_logic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_frame_input_8h}{FrameInput.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_manager_8h}{PlayerManager.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Timer.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}World.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{event.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_rollback_manager}{RollbackManager}};}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_network_logic}{NetworkLogic}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacegame}{game}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657}{GameState}}\ \{\ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a79437eb50a15ec91aeb6236f521d91c7}{LogMenu}},\ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a7f6a694e9ff14e26f8cb40f4aae029d6}{GameLaunch}},\ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a61e603713f96a29e917459edac1a3bce}{GameVictory}}\ \};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structgame_1_1collider}{collider}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ Physics::BodyRef\ \mbox{\hyperlink{structgame_1_1collider_afc649980270cf73196af881abb15e396}{bodyRef}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ Physics::ColliderRef\ \mbox{\hyperlink{structgame_1_1collider_a4b2ff71bdfb3618e4b465aad06643692}{colliderRef}};}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgame_1_1_game_logic}{GameLogic}}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgame_1_1_game_logic_afc0ebcc7b1e4b7f90a15ec354ff78b28}{GameLogic}}(\mbox{\hyperlink{class_rollback_manager}{RollbackManager}}*\ rollback)\ \{\ \mbox{\hyperlink{classgame_1_1_game_logic_aed1fd717f239f828a4b4450107ebbeee}{rollback\_manager}}\ =\ rollback;\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ Physics::World\ \mbox{\hyperlink{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}{world\_}};\textcolor{comment}{//\ The\ physics\ world\ for\ simulating\ game\ physics.}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_rollback_manager}{RollbackManager}}*\ \mbox{\hyperlink{classgame_1_1_game_logic_aed1fd717f239f828a4b4450107ebbeee}{rollback\_manager}};\textcolor{comment}{//\ Manages\ game\ state\ rollback\ for\ network\ synchronization.}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_network_logic}{NetworkLogic}}*\ \mbox{\hyperlink{classgame_1_1_game_logic_adf2ca36862b9781ced693b7d8db51add}{network\_logic}};\ \textcolor{comment}{//\ Manages\ networking\ logic\ and\ communication.}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_manager}{PlayerManager}}\ \mbox{\hyperlink{classgame_1_1_game_logic_a798576380d35c43f4a0f85a9d932e39e}{player\_manager}}\{\ \&\mbox{\hyperlink{classgame_1_1_game_logic_adb529b20920857b42eeddf3fc332d2b6}{world\_}}\ \};\ \textcolor{comment}{//\ Manages\ player\ entities\ and\ their\ interactions.}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_input_1_1_frame_input}{Input::FrameInput}}\ \mbox{\hyperlink{classgame_1_1_game_logic_ab9f34a4fb7ff24a783d205ab1c575993}{inputs}};\ \textcolor{comment}{//Stores\ the\ current\ frame\ inputs\ for\ all\ players.}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::vector<Input::FrameInput>\ \mbox{\hyperlink{classgame_1_1_game_logic_a095b4628eedca4a1a55d9bd76d81f59d}{last\_inputs}};\ \textcolor{comment}{//\ Stores\ inputs\ from\ previous\ frames\ for\ rollback.}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::queue<NetworkEvent>\ \mbox{\hyperlink{classgame_1_1_game_logic_a4a818d9c72d7a1f16224872bb68840e5}{network\_events}};\ \textcolor{comment}{//\ Queue\ to\ store\ incoming\ network\ events.}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::vector<game::collider>\ \mbox{\hyperlink{classgame_1_1_game_logic_adba28603122b82d59a2d2f3039128e51}{colliders\_}};\ \textcolor{comment}{//\ Vector\ of\ collider\ structures\ representing\ physics\ objects\ and\ their\ colliders.}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classgame_1_1_game_logic_a8b58792f67fd2a0c52f5a21c6461fca4}{fixedUpdateFrenquency}}\ =\ 1\ /\ 50.f;\ \textcolor{comment}{//Frenquency\ of\ the\ world\ Update\ fixed\ for\ 50hz}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}{invalid\_client\_player\_nbr}}\ =\ -\/1;\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgame_1_1_game_logic_a33f2619015500ff732a506a5dc211ba6}{client\_player\_nbr}}\ =\ \mbox{\hyperlink{classgame_1_1_game_logic_afb6f193ff2057e884432082251f4c6cc}{invalid\_client\_player\_nbr}};\ \textcolor{comment}{//\ ID\ of\ the\ local\ client\ player.}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgame_1_1_game_logic_a74284130b7c1ecc276d61f3062c5b02c}{master\_client\_ID}}\ =\ 0;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657}{GameState}}\ \mbox{\hyperlink{classgame_1_1_game_logic_ad94e95698852e21f19105f0a8006b85a}{current\_game\_state}}\ =\ \mbox{\hyperlink{namespacegame_ade18e0427d43400c7539d36c85c87657a79437eb50a15ec91aeb6236f521d91c7}{GameState::LogMenu}};\ \textcolor{comment}{//\ Enum\ representing\ the\ current\ state\ of\ the\ game.}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_abe5d665c4d49cbde8f0354dde8bd3f98}{Rollback}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classgame_1_1_game_logic}{GameLogic}}\&\ game\_logic);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a4adf9d7d8f9a3593af3cde18ab1782d9}{SetPlayerInput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_1_1_frame_input}{Input::FrameInput}}\&\ input,\ \textcolor{keywordtype}{int}\ player\_id);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgame_1_1_game_logic_af90af066dd7e9caff1bbf0ba55d0655c}{ComputeChecksum}}();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a5542d9141662804e3c9434b521e62f70}{RegisterNetworkLogic}}(\mbox{\hyperlink{class_network_logic}{NetworkLogic}}*\ network);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a7068093b0c1f3093eb9ba0afe1d193f6}{SendFrameConfirmationEvent}}(}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Input::FrameInput>\&\ remote\_frame\_inputs)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a97092b978299041da01884351be40341}{OnFrameConfirmationReceived}}(}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ ExitGames::Common::Hashtable\&\ event\_content);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_ac65f4252c244b600faedb82e5689b64d}{Init}}()\ noexcept;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a00bb09ba832f13bbfb238fbee7f7a79e}{OnInputReceived}}(const\ ExitGames::Common::Hashtable\&\ content);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a503ded0377b4068c8c31b65f038b0b1a}{UpdateGameplay}}()\ noexcept;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a93597339a998c41588a8cf6bbb0017dd}{Update}}()\ noexcept;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a9406a4eb206448b17bfdd6b6df6006c0}{DeInit}}()\ noexcept;}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_ae89001443f0c0ae901dc8962e0d63071}{ManageInput}}()\ noexcept;}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a1af53e2ebd5d600c3e7d7b2ccbc57d41}{CreatePlatform}}(Math::Vec2F\ position,\ Math::Vec2F\ rectMinBound,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ Math::Vec2F\ rectMaxBound)\ noexcept;}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic}{GameLogic}}::\mbox{\hyperlink{classgame_1_1_game_logic_a6d23524da5512211c366dc09b6422c19}{CreateRope}}(Math::Vec2F\ position,\ Math::Vec2F\ rectMinBound,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ Math::Vec2F\ rectMaxBound)\ noexcept;}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_1_1_game_logic_a4d4fb0cf979f9002b7917410d976dfcc}{UpdateCollider}}()\ noexcept;}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ private:}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ static\ constexpr\ \textcolor{keywordtype}{int}\ platform\_collider\_id\_\ =\ 10;\ \textcolor{comment}{//ID\ for\ platform\ collider}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ static\ constexpr\ \textcolor{keywordtype}{int}\ rope\_collider\_id\_\ =\ 11;\ \textcolor{comment}{//ID\ for\ rope\ collider}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ const\ \textcolor{keywordtype}{float}\ border\_size\_\ =\ 20.0f;\ \textcolor{comment}{//Size\ for\ border\ Collider}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ const\ Math::Vec2F\ platform\_size\_\{\ 220.0f,\ 40.0f\ \};\ \ \textcolor{comment}{//Size\ for\ platform\ Collider}}
+\DoxyCodeLine{00180\ \ \ \ \ \};}
+\DoxyCodeLine{00181\ \}\ \ \textcolor{comment}{//\ namespace\ game}}
+
+\end{DoxyCode}

@@ -1,0 +1,233 @@
+\doxysection{Rollback\+Manager Class Reference}
+\hypertarget{class_rollback_manager}{}\label{class_rollback_manager}\index{RollbackManager@{RollbackManager}}
+
+
+\doxylink{class_rollback_manager}{Rollback\+Manager} is a class responsible for maintaining the integrity of the game simulation.  
+
+
+
+
+{\ttfamily \#include $<$Rollback\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_rollback_manager_af8bea69450031b9b305517dd56b5fd55}{Register\+Game\+Manager}} (\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}current\+\_\+game\+\_\+manager) noexcept
+\begin{DoxyCompactList}\small\item\em Registers the Game\+Manager for the \doxylink{class_rollback_manager}{Rollback\+Manager}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rollback_manager_a12f69458d8b945b79281c721cee24e5a}{Set\+Local\+Player\+Input}} (const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \&local\+\_\+input, int player\+\_\+id) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the local player\textquotesingle{}s input for a specific frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rollback_manager_a140137782f92fa3046f0dcf2fe4e0a6f}{Set\+Remote\+Player\+Input}} (const std\+::vector$<$ \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} $>$ \&new\+\_\+remote\+\_\+inputs, int player\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Sets the remote player\textquotesingle{}s input for a specific frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rollback_manager_a066ee2a5684be4baaa8470d2c9c5ea5b}{Simulate\+Until\+Current\+Frame}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Simulates the game until the current frame. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_rollback_manager_ae3b62d8e072b50e7ae94a1941653e3f0}{Confirm\+Frame}} () noexcept
+\begin{DoxyCompactList}\small\item\em Confirms the current frame and advances to the next frame. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \& \mbox{\hyperlink{class_rollback_manager_a56bea7d95854f687beddc95486b6c652}{Get\+Last\+Player\+Confirmed\+Input}} (int player\+\_\+id) const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the last confirmed input for a specific player. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{class_rollback_manager_a0b65042482431dfa76f599a22f1f401d}{current\+\_\+frame}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the current frame number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rollback_manager_a1e3a0fa46e4c9e8d776f83841bf435c2}{Increase\+Current\+Frame}} () noexcept
+\begin{DoxyCompactList}\small\item\em Increments the current frame number. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{class_rollback_manager_a3a47a6cfa7bc4df318318b1e35186fc9}{confirmed\+\_\+frame}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the last confirmed frame number. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{class_rollback_manager_a1626a85f266546c41e2628aba5f773d4}{last\+\_\+remote\+\_\+input\+\_\+frame}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the frame number of the last received remote input. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{class_rollback_manager_a68965f92a529e8dcfd4d19a9c00773a6}{frame\+\_\+to\+\_\+confirm}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Retrieves the frame number to be confirmed by the master client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rollback_manager_ae56004246e01a3c71b992dc8d6ca1fca}{Reset}} () noexcept
+\begin{DoxyCompactList}\small\item\em Resets the \doxylink{class_rollback_manager}{Rollback\+Manager} to its initial state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \mbox{\hyperlink{class_rollback_manager_ad9a490426490efce30755459aadb1117}{confirmed\+\_\+game\+\_\+manager\+\_\+}} \{ this \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_rollback_manager}{Rollback\+Manager} is a class responsible for maintaining the integrity of the game simulation. 
+
+It manages three game states with different temporalities\+:
+\begin{DoxyItemize}
+\item The current game state represents the local client\textquotesingle{}s real-\/time game.
+\item The confirmed state is the last game state confirmed by the client (verified through checksum).
+\item The state to be confirmed is the game state calculated by the master client once all inputs for a frame have been received. Other clients receive the checksum of this game state and verify its integrity against their own checksum for the same state. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_rollback_manager_a3a47a6cfa7bc4df318318b1e35186fc9}\label{class_rollback_manager_a3a47a6cfa7bc4df318318b1e35186fc9} 
+\index{RollbackManager@{RollbackManager}!confirmed\_frame@{confirmed\_frame}}
+\index{confirmed\_frame@{confirmed\_frame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{confirmed\_frame()}{confirmed\_frame()}}
+{\footnotesize\ttfamily short Rollback\+Manager\+::confirmed\+\_\+frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Retrieves the last confirmed frame number. 
+
+\begin{DoxyReturn}{Returns}
+The last confirmed frame number. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_ae3b62d8e072b50e7ae94a1941653e3f0}\label{class_rollback_manager_ae3b62d8e072b50e7ae94a1941653e3f0} 
+\index{RollbackManager@{RollbackManager}!ConfirmFrame@{ConfirmFrame}}
+\index{ConfirmFrame@{ConfirmFrame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{ConfirmFrame()}{ConfirmFrame()}}
+{\footnotesize\ttfamily int Rollback\+Manager\+::\+Confirm\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Confirms the current frame and advances to the next frame. 
+
+\begin{DoxyReturn}{Returns}
+The frame number that has been confirmed. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_a0b65042482431dfa76f599a22f1f401d}\label{class_rollback_manager_a0b65042482431dfa76f599a22f1f401d} 
+\index{RollbackManager@{RollbackManager}!current\_frame@{current\_frame}}
+\index{current\_frame@{current\_frame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{current\_frame()}{current\_frame()}}
+{\footnotesize\ttfamily short Rollback\+Manager\+::current\+\_\+frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Retrieves the current frame number. 
+
+\begin{DoxyReturn}{Returns}
+The current frame number. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_a68965f92a529e8dcfd4d19a9c00773a6}\label{class_rollback_manager_a68965f92a529e8dcfd4d19a9c00773a6} 
+\index{RollbackManager@{RollbackManager}!frame\_to\_confirm@{frame\_to\_confirm}}
+\index{frame\_to\_confirm@{frame\_to\_confirm}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{frame\_to\_confirm()}{frame\_to\_confirm()}}
+{\footnotesize\ttfamily short Rollback\+Manager\+::frame\+\_\+to\+\_\+confirm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Retrieves the frame number to be confirmed by the master client. 
+
+\begin{DoxyReturn}{Returns}
+The frame number to be confirmed. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_a56bea7d95854f687beddc95486b6c652}\label{class_rollback_manager_a56bea7d95854f687beddc95486b6c652} 
+\index{RollbackManager@{RollbackManager}!GetLastPlayerConfirmedInput@{GetLastPlayerConfirmedInput}}
+\index{GetLastPlayerConfirmedInput@{GetLastPlayerConfirmedInput}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{GetLastPlayerConfirmedInput()}{GetLastPlayerConfirmedInput()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \& Rollback\+Manager\+::\+Get\+Last\+Player\+Confirmed\+Input (\begin{DoxyParamCaption}\item[{int}]{player\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Retrieves the last confirmed input for a specific player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+\_\+id} & The ID of the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The last confirmed input for the player. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_a1e3a0fa46e4c9e8d776f83841bf435c2}\label{class_rollback_manager_a1e3a0fa46e4c9e8d776f83841bf435c2} 
+\index{RollbackManager@{RollbackManager}!IncreaseCurrentFrame@{IncreaseCurrentFrame}}
+\index{IncreaseCurrentFrame@{IncreaseCurrentFrame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{IncreaseCurrentFrame()}{IncreaseCurrentFrame()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Increase\+Current\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Increments the current frame number. 
+
+\Hypertarget{class_rollback_manager_a1626a85f266546c41e2628aba5f773d4}\label{class_rollback_manager_a1626a85f266546c41e2628aba5f773d4} 
+\index{RollbackManager@{RollbackManager}!last\_remote\_input\_frame@{last\_remote\_input\_frame}}
+\index{last\_remote\_input\_frame@{last\_remote\_input\_frame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{last\_remote\_input\_frame()}{last\_remote\_input\_frame()}}
+{\footnotesize\ttfamily short Rollback\+Manager\+::last\+\_\+remote\+\_\+input\+\_\+frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Retrieves the frame number of the last received remote input. 
+
+\begin{DoxyReturn}{Returns}
+The frame number of the last received remote input. 
+\end{DoxyReturn}
+\Hypertarget{class_rollback_manager_af8bea69450031b9b305517dd56b5fd55}\label{class_rollback_manager_af8bea69450031b9b305517dd56b5fd55} 
+\index{RollbackManager@{RollbackManager}!RegisterGameManager@{RegisterGameManager}}
+\index{RegisterGameManager@{RegisterGameManager}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{RegisterGameManager()}{RegisterGameManager()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Register\+Game\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} \texorpdfstring{$\ast$}{*}}]{current\+\_\+game\+\_\+manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Registers the Game\+Manager for the \doxylink{class_rollback_manager}{Rollback\+Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+game\+\_\+manager} & Pointer to the local client\textquotesingle{}s Game\+Manager. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_rollback_manager_ae56004246e01a3c71b992dc8d6ca1fca}\label{class_rollback_manager_ae56004246e01a3c71b992dc8d6ca1fca} 
+\index{RollbackManager@{RollbackManager}!Reset@{Reset}}
+\index{Reset@{Reset}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Resets the \doxylink{class_rollback_manager}{Rollback\+Manager} to its initial state. 
+
+\Hypertarget{class_rollback_manager_a12f69458d8b945b79281c721cee24e5a}\label{class_rollback_manager_a12f69458d8b945b79281c721cee24e5a} 
+\index{RollbackManager@{RollbackManager}!SetLocalPlayerInput@{SetLocalPlayerInput}}
+\index{SetLocalPlayerInput@{SetLocalPlayerInput}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{SetLocalPlayerInput()}{SetLocalPlayerInput()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Set\+Local\+Player\+Input (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} \&}]{local\+\_\+input,  }\item[{int}]{player\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Sets the local player\textquotesingle{}s input for a specific frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+\_\+input} & The input for the local player. \\
+\hline
+{\em player\+\_\+id} & The ID of the local player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_rollback_manager_a140137782f92fa3046f0dcf2fe4e0a6f}\label{class_rollback_manager_a140137782f92fa3046f0dcf2fe4e0a6f} 
+\index{RollbackManager@{RollbackManager}!SetRemotePlayerInput@{SetRemotePlayerInput}}
+\index{SetRemotePlayerInput@{SetRemotePlayerInput}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{SetRemotePlayerInput()}{SetRemotePlayerInput()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Set\+Remote\+Player\+Input (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_input_1_1_frame_input}{Input\+::\+Frame\+Input}} $>$ \&}]{new\+\_\+remote\+\_\+inputs,  }\item[{int}]{player\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Sets the remote player\textquotesingle{}s input for a specific frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+remote\+\_\+inputs} & The inputs for the remote player. \\
+\hline
+{\em player\+\_\+id} & The ID of the remote player. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_rollback_manager_a066ee2a5684be4baaa8470d2c9c5ea5b}\label{class_rollback_manager_a066ee2a5684be4baaa8470d2c9c5ea5b} 
+\index{RollbackManager@{RollbackManager}!SimulateUntilCurrentFrame@{SimulateUntilCurrentFrame}}
+\index{SimulateUntilCurrentFrame@{SimulateUntilCurrentFrame}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{SimulateUntilCurrentFrame()}{SimulateUntilCurrentFrame()}}
+{\footnotesize\ttfamily void Rollback\+Manager\+::\+Simulate\+Until\+Current\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Simulates the game until the current frame. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_rollback_manager_ad9a490426490efce30755459aadb1117}\label{class_rollback_manager_ad9a490426490efce30755459aadb1117} 
+\index{RollbackManager@{RollbackManager}!confirmed\_game\_manager\_@{confirmed\_game\_manager\_}}
+\index{confirmed\_game\_manager\_@{confirmed\_game\_manager\_}!RollbackManager@{RollbackManager}}
+\doxysubsubsection{\texorpdfstring{confirmed\_game\_manager\_}{confirmed\_game\_manager\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgame_1_1_game_logic}{game\+::\+Game\+Logic}} Rollback\+Manager\+::confirmed\+\_\+game\+\_\+manager\+\_\+ \{ this \}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_rollback_manager_8h}{Rollback\+Manager.\+h}}\item 
+src/\mbox{\hyperlink{_rollback_manager_8cpp}{Rollback\+Manager.\+cpp}}\end{DoxyCompactItemize}
