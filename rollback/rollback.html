@@ -1,39 +1,49 @@
-
 <meta charset="utf-8" emacsmode="-*- markdown -*-">
 <link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/apidoc.css?"">
-    <title>2D Network versus game:</title>
-                          <span style="font-size:40px;">**2D Network versus game:**</span>
+    <title>Managing Network for a real time game:</title>
+                          <span style="font-size:40px;">**Managing Network for a real time game:**</span>
 
 <br>
 <div style="margin-left: 20px;">
-Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a technical presentation of my Networking project made during my 2nd years of game devellopement formation at the SAE Geneve.
+Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a technical presentation of my Networking project made during my 2nd years of the game devellopement Bachelor at the SAE Geneve.<br>
+The aim was to create a real time online game in a month, using a rollback system to keep the simulation identical for each client. <br>
 </div>
 
 ## **Introduction: **
 <div style="margin-left: 20px;">
-You want to make a action based game online ? <br>
+The aim of this project was to create a <B>real time online game</B> in a month.<br>
 This come with a lot of system to manage and solution to find. <br>
-How to send custently and as fast as possible data between player ? <br>
-How to keep our simulation the same between 2 clients ? <br>
+Like how to send custently and as <B>fast</B> as possible data between player? Here <B>thanks to UDP</B> for clients communications.<br>
+Or even how to keep our <B>simulation the same between 2 clients</B> with data lost? By implementing a <B>rollback system</B> for our world.<br>
 </div>
 
 ## **Preview of the Game:**
 <div style="margin-left: 20px;">
-  ### Choix des libs (Technical Direction):
-  <div style="margin-left: 40px;">
-    Photon (Rapide et manage des rooms)<br>
-    raylib (crossplatform)<br>
-    Présentation du moteur physique(Mien pour repliquer)<br>
+  ### <B>Technical Direction:</B>
+  <div style="margin-left: 20px;">
+
+
+    To create a <B>window</B> and manage the <B>graphics</B> and <B>audio</B>, I chose the <B>[Raylib library](https://www.raylib.com/).</B>  <br>
+    I chose it partially because it's fairly popular, so you can find help and resources quite easily, and the documentation is well detailed.<br>
+    But above all for its <B>cross-platform</B> advantage, my ultimate goal being to be able to port the game to the web using emscripten. <br>
+
+
+For the <B>Network</B> part of my game I use the <B>[Photon library](https://www.photonengine.com/)</B>  .<br>
+It provides <B>free servers</B>, an integrated <B>lobby</B> system and internal management of data transfers between clients.<br>
+
+For the <B>physics</B> and collision management, I used <B>my own engine</B>. <B>[the Miaou Engine](https://github.com/remlamb/MiaouEngine)</B> <br>
+It's <B>easier to manage the physics</B> on my minimalist engine, but it's more than enough for a 2D game of this scale. <br>
+This simplicity is a strong point for <B>being able to replicate the world in the rollback system</B>.<br>
     </div>
-  ### Game
-  <div style="margin-left: 40px;">
-    Here are the final render of my game.
-     -- ajouter gif -
-    My objective was to create a game based on versus, avec un petit scope mais un simple dynamique et fun gameplay <br>
-    J'ai opté pour un jeu 2d avec comme seul deplacement les deplacements lateraux, un saut et une attaque.<br>
-    Le jeu se demarque par cette derniere mecanique, vous pouvez seulement attaquer vers le bas.<br>
-    L'attaque est un projectile qui un fois au sol fait office d'obstacle pour reprendre le principe des platformers.
-    Le jeu melange au final platformer et versus. <br>
+  ### <B>Game:</B>
+  <div style="margin-left: 20px;">
+Here are the final render of my game.<br>
+     - add gif -  <br>
+My objective was to create a game based on versus, with a small scope but a<B> simple dynamic and fun gameplay</B>.<br>
+I went for a 2d game with only lateral movement, a jump and an attack.<br>
+The game distinguishes itself by this last mechanism, you can only attack downwards.<br>
+The attack is a projectile which, once on the ground, acts as a killing obstacle in the same way as in classic platformer game.<br>
+In the end, the game is a <B>mix of platformer and versus.</B><br>
   </div>
 </div>
 
@@ -41,39 +51,39 @@ How to keep our simulation the same between 2 clients ? <br>
 ## **Technical Implementation:**
 <div style="margin-left: 20px;">
 <div style="margin-left: 20px;">
-### Project Management
-<div style="margin-left: 40px;">
+### <B>Project Management:</B>
+<div style="margin-left: 20px;">
   Utilisaton de Trello pour gerer les taches, etc...<br>
     image du trello, expliquation des etiquettes et des checklists<br>
   </div>
 </div>
 
 <div style="margin-left: 20px;">
-### Gameplay Local
-<div style="margin-left: 40px;">
+### <B>Gameplay Local:</B>
+<div style="margin-left: 20px;">
   (2 joueurs en local)<br>
   </div>
 </div>
 
 
 <div style="margin-left: 20px;">
-### Inputs Manager
-<div style="margin-left: 40px;">
+### <B>Inputs Manager:</B>
+<div style="margin-left: 20px;">
   Comment gérer les inputs player et les envoyer<br>
   </div>
 </div>
 
 <div style="margin-left: 20px;">
-### Networking
-<div style="margin-left: 40px;">
+### <B>Networking: </B>
+<div style="margin-left: 20px;">
   Client, create join room, Send inputs, receive, → Definir achitecture pour expliquer comment on l a exploité<br>
   </div>
 </div>
 
 
 <div style="margin-left: 20px;">
-### Rollback
-<div style="margin-left: 40px;">
+### <B>Rollback: </B>
+<div style="margin-left: 20px;">
   Current frame,
 Confirm frame (last frame valid),
 resimulate world si rollback,
@@ -81,13 +91,16 @@ Stock des inputs tant que current frame non validé,
 checksum pour l intégrité du world physique<br>
   </div>
 </div>
+</div>
+    ## **Conclusion:**
+    <div style="margin-left: 20px;">
+      First of all, <B>thank you</B> for reading.  <br>
 
-    ## **Conclusion**
-    <div style="margin-left: 40px;">
-      First of all, thank you for reading.  <br>
-      Also some of the methods are a bit outdated. Loading fbx models and implementing raytracing would be a good follow-up.
+      As mentioned earlier, the next stage of the project is the<B> web port</B>, to make the game easier to play. <br>
+      Otherwise the <B>rollback system</B> is a very powerful tool for keeping the <B>simulation identical</B> in the event of data loss. It's a good solution for <B>a project of this scale</B>, but may be too <B>expensive for larger projects</B>. <br>
 
-      [Lien vers la Documentation](DocRollback/html/index.html)
+ <br> <br>
+      [Link to the Project Documentation](DocRollback/html/index.html)
             </div>
 
 <STYLE>
