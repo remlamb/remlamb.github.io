@@ -6,15 +6,17 @@
 <br>
 <div style="margin-left: 20px;">
 Hi, I'm [Remy Lambert](https://github.com/remlamb?tab=repositories) and this is a technical presentation of my Networking project made during my 2nd years of the game devellopement Bachelor at the SAE Geneve.<br>
-The aim was to create a real time online game in a month with an inplementation of a rollback system. <br>
 </div>
+
 
 ## **Introduction: **
 <div style="margin-left: 20px;">
+
 The aim of this project was to create a <B>real time online game</B> in a month.<br>
 This come with a lot of system to manage and solution to find. <br>
-Like how to send custently and as <B>fast</B> as possible data between player? Here <B>thanks to UDP</B> for clients communications.<br>
-Or even how to keep our <B>simulation the same between 2 clients</B> with data lost? By implementing a <B>rollback system</B> for our world.<br>
+Like how to send custently and as <B>fast</B> as possible inputs between player.<br>
+Or even how to keep our <B>simulation the same between 2 clients</B> when we have data lost?<br>
+The solution was the big part of this projet, by implementing a <B>rollback system</B> for our world.<br>
 </div>
 
 ## **Preview of the Game:**
@@ -68,31 +70,153 @@ In the end, the game is a <B>mix of platformer and versus.</B><br>
 
   I use trello's <B>tagging system</B> to separate my tasks, just as I separate the <B>different parts of my code</B>.<br>
   I've also used the <B>checkbox</B> system to be <B>more precise</B> and make <B>fewer tickets</B>.<br>
-  To finish with time management, I set <B>target date</B>s for the completion of certain tasks.<br>
+  To finish with time management, I set <B>target dates</B> for the completion of certain tasks.<br>
   </div>
 
 
 ### <B>Project Architecture:</B>
 <div style="margin-left: 20px;">
-   TODO <br>
-   <B>TODO</B><br>
+To implement a roll-back system, you need a <B>well-separated code structure</B>. <br>
+The rollback must resimulate the game logic and only that logic, while the rendering must depend on the player's current state, but must not be re simulated. <br>
+<br>
+To achieve this, I have this architecture: <br>
+A <B>player manager</B>, which manages <B>player logic, gameplay and physics</B>. <br>
+A <B>game logic</B>, which owns the player manager, and manages all the game's physics outside the players, <B>updating gameplay and collisions</B>. <br>
+<br>
+In parallel, a <B>Network class</B> that manages connections and <B>data transmission with Photon</B>.<br>
+An <B>InputFrame class</B> to manage inputs, <B>frame and gameplay information</B>, to be sent to the client and managed by the rollback manager.<br>
+A <B>Rollback Manager</B> to manage <B>confirmed frames and resimulate</B> the world with inputs.<br>
+<br>
+There are also renderers, one for displaying game features and another for managing audio.<br>
+<br>
+All these <B>elements are grouped together in the GameApp</B>, which creates the window and updates all the logic.<br>
   </div>
 ### <B>Gameplay Local:</B>
 <div style="margin-left: 20px;">
-  (2 joueurs en local)<br>
+  I started by implementing the <B> gameplay basics</B>  just to see how the game would feel.
+I started with the movements and positions of the platforms, the level seemed a bit empty so I added the ropes.
+
+Once the player manager was coherent, I implemented the <B>2 players playable on a single application</B> so I could <B>find the first gameplay or logic bugs</B> that would have been <B>harder to debug with two online clients</B> .
+
+Then I managed the input system.<br>
   </div>
 
 
 ### <B>Inputs Manager:</B>
 <div style="margin-left: 20px;">
-  Comment gérer les inputs player et les envoyer<br>
+To manage inputs and send them, I use a custom class: <br>
+I <B>store inputs with flags</B> using bitwise left shift, <br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+namespace Input {
+/**
+ * @brief Represents input flags for various actions in the game.
+ */
+constexpr std::uint8_t kJump = 1 << 0;    // Flag for jump action.
+constexpr std::uint8_t kRight = 1 << 1;   // Flag for moving right.
+constexpr std::uint8_t kLeft = 1 << 2;    // Flag for moving left.
+constexpr std::uint8_t kAttack = 1 << 3;  // Flag for attacking.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br>
+
+And I update the inputs for each frame with this function <br>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Input::FrameInput::UpdatePlayerInputs() {
+	input = 0;
+	if (IsKeyDown(KEY_SPACE) ||
+		IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN) ||
+		IsKeyDown(KEY_W) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_UP)) {
+		input |= static_cast<std::uint8_t>(Input::kJump);
+	}
+	if (IsKeyDown(KEY_D) ||
+		IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) {
+		input |= static_cast<std::uint8_t>(Input::kRight);
+	}
+	if (IsKeyDown(KEY_A) ||
+		IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) {
+		input |= static_cast<std::uint8_t>(Input::kLeft);
+	}
+	if (IsKeyDown(KEY_S) ||
+		IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_LEFT) ||
+		IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN) || IsKeyDown(KEY_LEFT_ALT)) {
+		input |= static_cast<std::uint8_t>(Input::kAttack);
+	}
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br>
+I use the <B>bitwise OR operator</B> to define the correspondence <B>between actions and keyboard or joystick inputs</B>. <br>
+this method <B>reduces the size of packet</B> to be sent to communicate inputs <br>
   </div>
 
 
 
 ### <B>Networking: </B>
 <div style="margin-left: 20px;">
-  Client, create join room, Send inputs, receive, → Definir achitecture pour expliquer comment on l a exploité<br>
+
+  For the network side, I use the classes and listener events given by photon.
+<br>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  class NetworkLogic : private ExitGames::LoadBalancing::Listener {
+   public:
+    NetworkLogic(const ExitGames::Common::JString& appID,
+                 const ExitGames::Common::JString& appVersion,
+                 game::GameLogic* game_logic);
+
+    void Connect();    /* Connects the client to the server. */
+    void Disconnect(); /* Disconnects the client from the server. */
+    void Run(); /* Runs the network loop for handling events and operations. */
+
+    void CreateRoom(const ExitGames::Common::JString& roomName, nByte maxPlayers);
+
+    void JoinRandomRoom(
+        ExitGames::Common::Hashtable expectedCustomRoomProperties =
+            ExitGames::Common::Hashtable());
+
+    void JoinRandomOrCreateRoom() noexcept;
+
+    void RaiseEvent(bool reliable, EventCode event_code,
+                    const ExitGames::Common::Hashtable& event_data) noexcept;
+
+    void ReceiveEvent(int player_nr, EventCode event_code,
+                      const ExitGames::Common::Hashtable& event_content) noexcept;
+
+   private:
+    ExitGames::LoadBalancing::Client
+        mLoadBalancingClient;          /* The LoadBalancing client instance. */
+    ExitGames::Common::Logger mLogger; /* Logger instance for debug messages. */
+    game::GameLogic* game_logic_;      /* Pointer to the game logic object. */
+
+    // Listener callbacks
+    void debugReturn(int debugLevel,
+                     const ExitGames::Common::JString& string) override;
+    void connectionErrorReturn(int errorCode) override;
+    void clientErrorReturn(int errorCode) override;
+    void warningReturn(int warningCode) override;
+    void serverErrorReturn(int errorCode) override;
+    void joinRoomEventAction(
+        int playerNr, const ExitGames::Common::JVector<int>& playernrs,
+        const ExitGames::LoadBalancing::Player& player) override;
+    void leaveRoomEventAction(int playerNr, bool isInactive) override;
+    void customEventAction(
+        int playerNr, nByte eventCode,
+        const ExitGames::Common::Object& eventContent) override;
+    void connectReturn(int errorCode,
+                       const ExitGames::Common::JString& errorString,
+                       const ExitGames::Common::JString& region,
+                       const ExitGames::Common::JString& cluster) override;
+
+    void disconnectReturn() override;
+
+    void leaveRoomReturn(int errorCode,
+                         const ExitGames::Common::JString& errorString) override;
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <br>
+  Thanks to the <B>JoinRandomOrCreateRoom</B> class, Photon joins the current client to a <B>pre-existing room or creates a new one</B>, giving you control over the maximum number of players per room. <br>
+  That's how I manage my games. <br><br>
+
+  <B>Raise and ReceiveEvent</B> are the classes that<B> handle data transfer</B> between clients. They need to be serialized as photon needs them, here using event code and<B> Hashtable</B>.<br>
   </div>
 
 
@@ -100,11 +224,93 @@ In the end, the game is a <B>mix of platformer and versus.</B><br>
 
 ### <B>Rollback: </B>
 <div style="margin-left: 20px;">
-  Current frame,
-Confirm frame (last frame valid),
-resimulate world si rollback,
-Stock des inputs tant que current frame non validé,
-checksum pour l intégrité du world physique<br>
+  For <B>rollback</B>, we need a current frame, that's the <B>current game frame of your client</B>, And a confirm frame.<br>
+  The <B>confirm frame</B> is the <B>last frame</B> validated by the manager as being <B>identical on the 2 clients</B>.<br>
+   By default, I set it to -1 because the first game frame must not be a confirmed frame.<br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   int RollbackManager::ConfirmFrame() noexcept {
+       for (int player_id = 0; player_id < game::max_player;
+           player_id++) {
+           const auto input = inputs_[player_id][frame_to_confirm_];
+           confirmed_game_manager_.SetPlayerInput(input, player_id);
+       }
+
+       confirmed_game_manager_.UpdateGameplay();
+       const auto checksum = confirmed_game_manager_.ComputeChecksum();
+
+       confirmed_frame_++;
+       frame_to_confirm_++;
+
+       return checksum;
+   }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   <br>
+  When the <B>inputs are sent</B>, if there are any <B>losses</B>, the <B>current frame cannot become a confirm frame</B>, as the two simulations are no longer identical.<br>
+   The game must then be<B> resimulated for the number of lost frames</B>, to do this, the <B>inputs are stored</B> until the next input is sent and validated.<br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  void RollbackManager::SimulateUntilCurrentFrame() const noexcept {
+  #ifdef TRACY_ENABLE
+      ZoneScoped;
+  #endif
+      current_game_manager_->Rollback(confirmed_game_manager_);
+
+      for (short frame = static_cast<short>(confirmed_frame_ + 1);
+          frame < current_frame_; frame++) {
+          for (int player_id = 0; player_id < game::max_player;
+              player_id++) {
+              const auto input = inputs_[player_id][frame];
+              current_game_manager_->SetPlayerInput(input, player_id);
+          }
+          current_game_manager_->UpdateGameplay();
+      }
+  }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+  <br>
+  To compare the synchronisation of  the two instances of the world, we use a <B>checksum</B>.
+  <br>
+  In this case, we <B>add</B> together players values, in particular their <B>position and velocity</B>. I also add the current <B>input</B>.
+  <br>
+  If the <B>checksum is not equal on the 2 clients, this means that the simulation is no longer identical</B>.
+  <br>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    int GameLogic::ComputeChecksum() {
+      int checksum = 0;
+
+      int it = 0;
+      for (const auto& player : player_manager.players) {
+        auto& body = world_.GetBody(player_manager.players_BodyRefs_[it]);
+        auto& pos = body.Position();
+        const auto* pos_ptr = reinterpret_cast<const int*>(&pos);
+
+        // Add position
+        for (size_t i = 0; i < sizeof(Math::Vec2F) / sizeof(int); i++) {
+          checksum += pos_ptr[i];
+        }
+
+        // Add velocity
+        const auto& velocity = body.Velocity();
+        const auto* velocity_ptr = reinterpret_cast<const int*>(&velocity);
+        for (size_t i = 0; i < sizeof(Math::Vec2F) / sizeof(int); i++) {
+          checksum += velocity_ptr[i];
+        }
+
+        // Add input.
+        checksum += player.input;
+        it++;
+      }
+      return checksum;
+    }
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<br>
   </div>
 </div>
 
@@ -116,7 +322,7 @@ checksum pour l intégrité du world physique<br>
       Otherwise the <B>rollback system</B> is a very powerful tool for keeping the <B>simulation identical</B> in the event of data loss. It's a good solution for <B>a project of this scale</B>, but may be too <B>expensive for larger projects</B>. <br>
 
  <br> <br>
-      [Link to the Project Documentation](DocRollback/html/index.html)
+      <B>[Link to the Project Documentation](DocRollback/html/index.html)</B>
             </div>
 
 <STYLE>
