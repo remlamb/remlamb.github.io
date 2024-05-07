@@ -96,6 +96,88 @@ $(function() {
   - Raylib Wrapper, a wrapper for the raylib library which had redefinition conflicts with the Photon library.<br>
   - Renderer, to draw the different elements of the game in the raylib window.<br>
   - Rollback Manager, for rollback management, copying the validated physical world, resimulating the logic after a rollback.<br>
+
+<br>
+
+<div class="header">
+    <div class="headertitle"><div class="title">Build Instructions:</div></div>
+</div>
+1. Clone the repository: `git clone https://github.com/remlamb/MiaouRollback.git`<br>
+2. Build the project:<br>
+   Using CMake-GUI:<br>
+    - give the clone Repo document in "Where is the source code"<br>
+    - build the binairies in a build folder<br>
+    - Generate using the cross platform option<br>
+    - Then Open Project in VS<br>
+    - In VS use Main as Starting Folder<br>
+    <br>
+
+<div class="header">
+    <div class="headertitle"><div class="title">Network Logic:</div></div>
+</div>
+
+<pre>
+class NetworkLogic : private ExitGames::LoadBalancing::Listener {
+ public:
+  NetworkLogic(const ExitGames::Common::JString& appID,
+               const ExitGames::Common::JString& appVersion,
+               game::GameLogic* game_logic);
+
+  void Connect();    /* Connects the client to the server. */
+  void Disconnect(); /* Disconnects the client from the server. */
+  void Run(); /* Runs the network loop for handling events and operations. */
+
+  void CreateRoom(const ExitGames::Common::JString& roomName, nByte maxPlayers);
+
+  void JoinRandomRoom(
+      ExitGames::Common::Hashtable expectedCustomRoomProperties =
+          ExitGames::Common::Hashtable());
+
+  void JoinRandomOrCreateRoom() noexcept;
+
+  void RaiseEvent(bool reliable, EventCode event_code,
+                  const ExitGames::Common::Hashtable& event_data) noexcept;
+
+  void ReceiveEvent(int player_nr, EventCode event_code,
+                    const ExitGames::Common::Hashtable& event_content) noexcept;
+
+ private:
+  ExitGames::LoadBalancing::Client
+      mLoadBalancingClient;          /* The LoadBalancing client instance. */
+  ExitGames::Common::Logger mLogger; /* Logger instance for debug messages. */
+  game::GameLogic* game_logic_;      /* Pointer to the game logic object. */
+
+  // Listener callbacks
+  void debugReturn(int debugLevel,
+                   const ExitGames::Common::JString& string) override;
+  void connectionErrorReturn(int errorCode) override;
+  void clientErrorReturn(int errorCode) override;
+  void warningReturn(int warningCode) override;
+  void serverErrorReturn(int errorCode) override;
+  void joinRoomEventAction(
+      int playerNr, const ExitGames::Common::JVector<int>& playernrs,
+      const ExitGames::LoadBalancing::Player& player) override;
+  void leaveRoomEventAction(int playerNr, bool isInactive) override;
+  void customEventAction(
+      int playerNr, nByte eventCode,
+      const ExitGames::Common::Object& eventContent) override;
+  void connectReturn(int errorCode,
+                     const ExitGames::Common::JString& errorString,
+                     const ExitGames::Common::JString& region,
+                     const ExitGames::Common::JString& cluster) override;
+
+  void disconnectReturn() override;
+
+  void leaveRoomReturn(int errorCode,
+                       const ExitGames::Common::JString& errorString) override;
+</pre>
+<br>
+
+For the network part, here are the photon functions I've implemented.<br>
+You can modify them to change the number of players per lobby or create special rooms, for example. <br>
+Link to the [Photon Doc](https://doc.photonengine.com/realtime/current/getting-started/realtime-intro)<br>
+
+
 <a href="doxygen_crawl.html"/>
 </div><!-- contents -->
 <!-- start footer part -->
