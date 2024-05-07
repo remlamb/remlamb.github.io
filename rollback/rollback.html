@@ -274,7 +274,16 @@ this method <B>reduces the size of packet</B> to be sent to communicate inputs <
   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+<div style="text-align:center;">
+<img src="img/tracy_resimulate.png" style="width:800px;">
+<br><i>profiling example of the function that resimulates the world, we can see that it already takes 2.16ms which is already quite expensive for a game of this scope.</i><br>
+</div>
 
+<div style="text-align:center;">
+<img src="img/tracy_resimulate_stats.png" style="width:800px;">
+<br><i>The statistics of the same function during a test. Not a real game, but a shorter situation.<br>
+Resimulation takes around 2ms over a 2-3 minute session with a low rate of change</i><br>
+</div>
 
   <br>
   To compare the synchronisation of  the two instances of the world, we use a <B>checksum</B>.
